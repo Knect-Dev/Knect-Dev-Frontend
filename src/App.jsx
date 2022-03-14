@@ -10,10 +10,11 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { homeOutline, personCircleOutline, statsChartOutline } from 'ionicons/icons';
 import Home from './pages/Home/Home';
 import Stats from './pages/Stats/Stats';
 import Profile from './pages/Profile/Profile';
+import Header from './components/Header/Header';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,6 +39,7 @@ setupIonicReact();
 
 const App = () => (
   <IonApp>
+    <Header />
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
@@ -56,15 +58,15 @@ const App = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
-            <IonIcon icon={triangle} />
+            <IonIcon icon={homeOutline} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
           <IonTabButton tab="stats" href="/stats">
-            <IonIcon icon={ellipse} />
+            <IonIcon icon={statsChartOutline} />
             <IonLabel>Stats</IonLabel>
           </IonTabButton>
           <IonTabButton tab="profile" href="/profile">
-            <IonIcon icon={square} />
+            <IonIcon icon={personCircleOutline} />
             <IonLabel>Profile</IonLabel>
           </IonTabButton>
         </IonTabBar>
