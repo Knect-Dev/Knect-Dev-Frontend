@@ -1,0 +1,7 @@
+{
+  "name": "knect-dev-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
