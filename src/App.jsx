@@ -7,7 +7,8 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
-  setupIonicReact
+  setupIonicReact,
+  IonContent
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { homeOutline, personCircleOutline, statsChartOutline } from 'ionicons/icons';
@@ -42,6 +43,7 @@ setupIonicReact();
 const App = () => (
   <IonApp>
     <Header />
+    <IonContent>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
@@ -74,6 +76,7 @@ const App = () => (
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
+    </IonContent>
   </IonApp>
 );
 
