@@ -1,10 +1,10 @@
 import { IonFab, IonFabButton, IonIcon } from '@ionic/react';
 import { addOutline } from 'ionicons/icons';
 
-const AddFAB = () => {
+const AddFAB = ({ showForm, setShowForm }) => {
 
   const handleClick = (e) => {
-    alert("You've got mayo.");
+    setShowForm(!showForm);
   };
   
   return (
