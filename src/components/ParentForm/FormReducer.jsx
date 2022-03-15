@@ -6,16 +6,12 @@ export const initialState = {
 
 export function reducer(state, action) {
   switch (action.type) {
-    case 'SET_DATA':
-      return { ...state, data: action.data };
-    case 'SET_RQST_PARAMS':
-      return { ...state, rqstParams: action.rqstParams };
-    case 'SET_LOADING':
-      return { ...state, loading: action.loading };
-    case 'SET_ERROR':
-      return { ...state, error: action.error };
-    case 'SET_HISTORY':
-      return { ...state, history: [...state.history, action.history] };
+    case 'SET_JOB':
+      return { ...state, job: { ...state.job, [action.data[0]]: action.data[1] } };
+    case 'SET_COMPANY':
+      return { ...state, company: { ...state.company, [action.data[0]]: action.data[1] } };
+    case 'SET_CONTACT':
+      return { ...state, contact: { ...state.contact, [action.data[0]]: action.data[1] } };
     default:
       return state;
   }
