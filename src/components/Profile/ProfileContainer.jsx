@@ -1,10 +1,8 @@
-import './ProfileContainer.css';
-import { IonAvatar, IonButton, IonIcon, IonToggle } from '@ionic/react';
-// import EditProfileModal
+import './profileContainer.css';
+import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider} from '@ionic/react';
+import {lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 import { useState } from 'react';
-import { createOutline, lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList, IonItemDivider } from '@ionic/react';
 
 
 const ProfileContainer = () => {
