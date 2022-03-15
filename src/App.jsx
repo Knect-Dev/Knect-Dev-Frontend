@@ -60,7 +60,9 @@ const App = () => (
             <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+
+        {/* Surprisingly, in order to avoid infinite-scroll pushing the tab-bar off the page, the tab-bar should NOT have `slot="fixed bottom"` */}
+        <IonTabBar slot="bottom"> 
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={homeOutline} />
             <IonLabel>Home</IonLabel>

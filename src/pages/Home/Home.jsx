@@ -1,23 +1,18 @@
 import { IonContent, IonPage } from '@ionic/react';
-// import ExploreContainer from '../../components/ExploreContainer';
 
 import './home.scss';
-import AddFAB from '../../components/AddFab/AddFAB.jsx'; // BUG This works, but is linter still angry about this?
+import AddFAB from '../../components/AddFab/AddFAB.jsx'; 
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
-import InfiniteJobs from '../../components/InfiniteJobs/InfiniteJobs';
 
 const Home = () => {
 
   return (
     <IonPage>
       <PageHeader title={'Jerbs'}/>
-
       <IonContent>
-        
         <AddFAB />
-        <InfiniteJobs />
-        {/* <JobsList /> */}
+        <JobsList />
       </IonContent>
     </IonPage>
   );
