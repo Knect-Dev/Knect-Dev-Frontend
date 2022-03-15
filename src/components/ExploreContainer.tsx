@@ -1,4 +1,5 @@
 import './ExploreContainer.css';
+import { IonAvatar } from '@ionic/react';
 
 interface ContainerProps {
   name: string;

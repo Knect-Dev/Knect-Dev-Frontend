@@ -1,5 +1,5 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../../components/ExploreContainer';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonAvatar } from '@ionic/react';
+import ProfileContainer from '../../components/Profile/ProfileContainer';
 import './Profile.css';
 
 const Profile = () => {
@@ -11,15 +11,21 @@ const Profile = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
+        <IonHeader >
           <IonToolbar>
             <IonTitle size="large">Profile</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Profile page" />
+        <ProfileContainer name="Profile page" />
       </IonContent>
     </IonPage>
   );
 };
 
 export default Profile;
+
+// Image
+// Name:
+// Email:
+// Organization:
+// Edit
