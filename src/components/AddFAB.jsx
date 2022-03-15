@@ -9,7 +9,7 @@ const AddFAB = () => {
   
   return (
     <IonFab vertical="top" horizontal="end" slot="fixed">
-      <IonFabButton onClick={handleClick}>
+      <IonFabButton onClick={handleClick} color="danger">
         <IonIcon icon={addOutline} />
       </IonFabButton>
     </IonFab>
