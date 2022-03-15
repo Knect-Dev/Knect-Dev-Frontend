@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { IonHeader, IonTitle, IonToolbar, IonSearchbar, IonMenuButton, IonButton, IonButtons, IonToggle, IonIcon } from '@ionic/react';
+import { sunnyOutline, moonOutline } from 'ionicons/icons';
 import { accessibilityOutline, contrastOutline } from 'ionicons/icons';
 import './header.scss'
 
@@ -7,8 +8,12 @@ const Header = () => {
   const [searchText, setSearchText] = useState('');
   console.log('SEARCHTEXT', searchText);
 
+  const [darkTheme, setDarkTheme] = useState(false);
 
-  const themeToggleHandler = () => document.body.classList.toggle('dark');
+  const themeToggleHandler = () => {
+    document.body.classList.toggle('dark');
+    darkTheme ? setDarkTheme(false) : setDarkTheme(true);
+  };
 
   return (
 
@@ -18,10 +23,16 @@ const Header = () => {
           <IonButton>
             <IonIcon slot="icon-only" icon={accessibilityOutline}></IonIcon>
           </IonButton>
-          <IonToggle
+          {
+            darkTheme ?
+              <IonIcon icon={moonOutline} onClick={themeToggleHandler}></IonIcon>
+              :
+              <IonIcon icon={sunnyOutline} onClick={themeToggleHandler}></IonIcon>
+          }
+          {/* <IonToggle
             slot="icon-only" icon={contrastOutline} class="themeToggle"
             onIonChange={themeToggleHandler}
-          />
+          /> */}
         </IonButtons>
         <IonTitle>Knect.Dev</IonTitle>
         <IonButtons slot="secondary">
