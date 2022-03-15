@@ -1,7 +1,7 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonAvatar } from '@ionic/react';
+import {IonPage} from '@ionic/react';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import ProfileContainer from '../../components/Profile/ProfileContainer';
-import './Profile.css';
+import './profile.css';
 
 const Profile = () => {
   return (

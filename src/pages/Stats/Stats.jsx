@@ -1,8 +1,7 @@
 import { IonContent, IonPage } from '@ionic/react';
-import ExploreContainer from '../../components/ExploreContainer';
 import PageHeader from '../../components/PageHeader/PageHeader.jsx';
 import XYGrid from '../../components/XYGrid/XYGrid'
-import './Stats.scss';
+import './stats.scss';
 
 
 const exampleData = [
@@ -16,7 +15,6 @@ const Stats = () => {
     <IonPage>
       <IonContent fullscreen>
         <PageHeader title={'Stats'} />
-        <ExploreContainer name='Stats page' />
         <XYGrid data={exampleData} />
       </IonContent>
     </IonPage>
