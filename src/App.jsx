@@ -42,7 +42,7 @@ setupIonicReact();
 
 const App = () => (
   <IonApp>
-    <Header />
+    <Header slot="fixed top"/>
     <IonContent>
     <IonReactRouter>
       <IonTabs>
