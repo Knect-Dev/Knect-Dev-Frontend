@@ -9,8 +9,8 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem
 
 const ProfileContainer = () => {
 
-  // const [text, setText] = useState();
-  const [editEnabled, setEditEnabled] = useState(false); // this 
+
+  const [editEnabled, setEditEnabled] = useState(false);
 
   console.log('editEnabled, ', editEnabled);
 
@@ -21,17 +21,6 @@ const ProfileContainer = () => {
 
 
   return (
-    // <div className="container">
-    //   <IonAvatar class="avatar">
-    //     <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
-    //   </IonAvatar>
-    //   <div className="container-text">
-    //     <p>Name: Spencer{ }</p>
-    //     <p>Email: spencerjtower1@gmail.com{ }</p>
-    //     <p>Organization: Code Fellows{ }</p>
-
-    //   <IonButton id="edit-profile-btn" size="small" color="secondary">Edit Profile</IonButton>
-    // </div>
     <IonContent >
       <IonAvatar class="avatar">
         <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
