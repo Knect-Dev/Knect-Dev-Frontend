@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { IonHeader, IonTitle, IonToolbar, IonSearchbar, IonMenuButton, IonButton, IonButtons, IonToggle, IonIcon } from '@ionic/react';
 import { accessibilityOutline, contrastOutline } from 'ionicons/icons';
+import './Header.scss'
 
 const Header = () => {
   const [searchText, setSearchText] = useState('');
@@ -42,7 +43,7 @@ const Header = () => {
         </IonButtons>
         <IonTitle>Knect.Dev</IonTitle>
         <IonButtons slot="secondary">
-          <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value)}></IonSearchbar>
+          <IonSearchbar id="search-bar" value={searchText} onIonChange={e => setSearchText(e.detail.value)}></IonSearchbar>
         </ IonButtons>
         <IonButtons slot="end">
           Filters
