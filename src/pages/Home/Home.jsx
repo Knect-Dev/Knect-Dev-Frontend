@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 import './home.scss';
-import Form from '../../components/ParentForm/Form.jsx';
+import Form from '../../components/ParentForm/ParentForm.jsx';
 import AddFAB from '../../components/AddFab/AddFAB.jsx'; // BUG This works, but is linter still angry about this?
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
