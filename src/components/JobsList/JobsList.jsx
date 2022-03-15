@@ -1,3 +1,5 @@
+import './jobsList.scss';
+
 const JobsList = () => {
 
   return (
