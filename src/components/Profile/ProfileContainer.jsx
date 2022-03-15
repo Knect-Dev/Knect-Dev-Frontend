@@ -2,7 +2,7 @@ import './ProfileContainer.css';
 import { IonAvatar, IonButton, IonIcon, IonToggle } from '@ionic/react';
 // import EditProfileModal
 import { useState } from 'react';
-import { createOutline } from 'ionicons/icons';
+import { createOutline, lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList, IonItemDivider } from '@ionic/react';
 
@@ -10,11 +10,15 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem
 const ProfileContainer = () => {
 
   // const [text, setText] = useState();
-  const [editEnabled, setEditEnabled] = useState(false);
+  const [editEnabled, setEditEnabled] = useState(false); // this 
 
-  const editProfileHandler = () => {
-    editEnabled === false ? setEditEnabled(true) : setEditEnabled(false);
+  console.log('editEnabled, ', editEnabled);
+
+  const toggleEditHandler = () => {
+    console.log('edit Handler triggered')
+    editEnabled ? setEditEnabled(false) : setEditEnabled(true);
   }
+
 
   return (
     // <div className="container">
@@ -35,21 +39,27 @@ const ProfileContainer = () => {
       <section id="profile-form">
         <IonItemDivider>Name</IonItemDivider>
         <IonItem>
-          <IonInput value="" placeholder="First Name, Last Name" disabled={editEnabled}></IonInput>
+          <IonInput value="" placeholder="First Name, Last Name" disabled={!editEnabled}></IonInput>
         </IonItem>
 
         <IonItemDivider>Email</IonItemDivider>
         <IonItem>
-          <IonInput value="" placeholder="Email" disabled={editEnabled}></IonInput>
+          <IonInput value="" placeholder="Email" disabled={!editEnabled}></IonInput>
         </IonItem>
 
         <IonItemDivider>Organization</IonItemDivider>
         <IonItem>
-          <IonInput value="" placeholder="Code Fellows" disabled={editEnabled}></IonInput>
+          <IonInput value="" placeholder="Code Fellows" disabled={!editEnabled}></IonInput>
         </IonItem>
       </section>
 
-      <IonIcon id="edit-profile-icon" icon={createOutline} onClick={editProfileHandler}></IonIcon>
+      {/* <IonIcon class="edit-profile-icon" icon={createOutline} onClick={editProfileHandler}></IonIcon> */}
+      {console.log('editEnabled: ', editEnabled)}
+      {editEnabled ?
+        <IonIcon class="edit-profile-icon" icon={lockOpenOutline} onClick={toggleEditHandler}></IonIcon>
+        :
+        <IonIcon class="edit-profile-icon" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>}
+
     </IonContent >
   );
 };
