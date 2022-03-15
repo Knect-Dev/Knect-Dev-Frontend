@@ -1,7 +1,7 @@
 import {IonPage} from '@ionic/react';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import ProfileContainer from '../../components/Profile/ProfileContainer';
-import './profile.css';
+import './profile.scss';
 
 const Profile = () => {
   return (
