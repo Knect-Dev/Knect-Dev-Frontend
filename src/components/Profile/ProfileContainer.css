@@ -1,6 +1,5 @@
 .container {
   text-align: center;
-  align-content: left;
   position: absolute;
   left: 0;
   right: 0;
@@ -23,3 +22,30 @@
 .container a {
   text-decoration: none;
 }
+
+.avatar {
+  margin: auto;
+  height: 100px;
+  width: 100px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.profile-form {
+  margin: auto;
+  max-width: 50%;
+}
+
+#profile-edit-btn {
+  margin-top: 20px;
+  margin: auto;
+}
+
+#edit-profile-icon {
+  height:30px;
+  width: 30px;
+  margin: auto;
+}
+
+
+

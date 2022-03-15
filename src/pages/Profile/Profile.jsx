@@ -7,14 +7,13 @@ const Profile = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Profile 1</IonTitle>
+          <IonTitle>Profile</IonTitle>
         </IonToolbar>
       </IonHeader>
-
       <IonContent fullscreen>
         <IonHeader >
           <IonToolbar>
-            <IonTitle size="large">Profile 2</IonTitle>
+            <IonTitle size="large">Profile</IonTitle>
           </IonToolbar>
         </IonHeader>
         <ProfileContainer name="Profile page" />
