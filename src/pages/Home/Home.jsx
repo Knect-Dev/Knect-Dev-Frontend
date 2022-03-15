@@ -1,14 +1,10 @@
-import { IonContent, IonFab, IonFabButton, IonIcon, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 // import ExploreContainer from '../../components/ExploreContainer';
-import { addOutline } from 'ionicons/icons';
 
 import './Home.css';
+import AddFAB from '../../components/AddFAB.jsx'; // BUG This works, but is linter still angry about this?
 
 const Home = () => {
-
-  const handleClick = (e) => {
-    alert("You've got mayo.");
-  };
 
   return (
     <IonPage>
@@ -24,16 +20,10 @@ const Home = () => {
             <IonTitle size="large">Home</IonTitle>
           </IonToolbar>
         </IonHeader>
-        {/* New content goes here */}
-        {/* <ExploreContainer name="Home page" /> */}
-         {/*-- fab placed to the top end --*/}
-         <IonFab vertical="top" horizontal="end" slot="fixed">
-          <IonFabButton onClick={handleClick}>
-            <IonIcon icon={addOutline} />
-          </IonFabButton>
-        </IonFab>
-      </IonContent>
+        
+        <AddFAB />
 
+      </IonContent>
     </IonPage>
   );
 };
