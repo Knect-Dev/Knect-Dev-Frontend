@@ -1,9 +1,11 @@
-import { IonModal, IonContent, IonButton } from '@ionic/react';
+import { IonModal, IonContent, IonButton, IonItem, IonInput } from '@ionic/react';
 import { useState } from 'react';
 
 import './Form.scss';
 
 const Form = ({ showForm, setShowForm }) => {
+
+  const [locked, setLocked] = useState(true);
 
   return (
     <>
@@ -14,6 +16,9 @@ const Form = ({ showForm, setShowForm }) => {
         backdropDismiss={false}
       >
         <IonContent>
+          <IonItem>
+            <IonInput value={'woop'} placeholder="Enter Input" clearInput></IonInput>
+          </IonItem>
           <IonButton onClick={() => setShowForm(!showForm)}>Close</IonButton>
         </IonContent>
       </IonModal>

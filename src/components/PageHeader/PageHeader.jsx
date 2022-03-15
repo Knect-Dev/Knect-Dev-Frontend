@@ -1,6 +1,6 @@
 import {IonHeader, IonTitle, IonToolbar } from '@ionic/react';
 
-import './pageHeader.css';
+import './pageHeader.scss';
 
 const PageHeader = ({title}) => {
   return (
