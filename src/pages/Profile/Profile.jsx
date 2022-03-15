@@ -1,23 +1,13 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonAvatar } from '@ionic/react';
+import PageHeader from '../../components/PageHeader/PageHeader';
 import ProfileContainer from '../../components/Profile/ProfileContainer';
 import './Profile.css';
 
 const Profile = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Profile</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader >
-          <IonToolbar>
-            <IonTitle size="large">Profile</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+        <PageHeader title={'Profile'} />
         <ProfileContainer name="Profile page" />
-      </IonContent>
     </IonPage>
   );
 };
