@@ -12,7 +12,7 @@ const JobsList = ({jobs}) => {
   return (
     <IonContent>
       <IonList class="ion-margin">
-        {jobState.map((job, key) => <JobItem data={job} key={key} />)}
+        {jobState.map((job, key) => <JobItem job={job} key={key} />)}
       </IonList>
     </IonContent>
   );
