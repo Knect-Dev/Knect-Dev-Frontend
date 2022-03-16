@@ -1,4 +1,4 @@
-import { IonModal, IonContent, IonButton, IonIcon, IonItem, IonInput, IonItemGroup } from '@ionic/react';
+import { IonModal, IonButton } from '@ionic/react';
 import { useState, useReducer } from 'react';
 import { When } from 'react-if';
 
@@ -32,9 +32,9 @@ const Form = ({ showForm, setShowForm }) => {
           <ContactForm state={state} dispatch={dispatch} showForm={showForm} setShowForm={setShowForm} />
         </When>
         <div className='button-group'>
-          <IonButton size='large' onClick={() => setActiveForm('Job')}>Job</IonButton>
-          <IonButton size='large' onClick={() => setActiveForm('Company')}>Company</IonButton>
-          <IonButton size='large' onClick={() => setActiveForm('Contact')}>Contact</IonButton>
+          <IonButton class='tab-button job-button' id={activeForm === 'Job' && 'active'} onClick={() => setActiveForm('Job')}>Job</IonButton>
+          <IonButton class='tab-button company-button' id={activeForm === 'Company' && 'active'} onClick={() => setActiveForm('Company')}>Company</IonButton>
+          <IonButton class='tab-button contact-button' id={activeForm === 'Contact' && 'active'} onClick={() => setActiveForm('Contact')}>Contacts</IonButton>
         </div>
       </IonModal>
     </>
