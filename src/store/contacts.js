@@ -36,16 +36,14 @@ const contactsReducer = ( state = initialState, action) => {
 
     case 'SET_CONTACTS':
       //-- First we find the contact we need to update, and make the changes --//
+      let updatedContactIdx = state.contacts.indexOf(state.contacts.find(e => e.id === payload.id));
       let updatedContact = state.contacts.find(e => e.id === payload.id);
       updatedContact[payload.name] = payload.value;
 
       //-- Second this filters the array to remove the contact we have updated, to prevent dupes --//
-      let noChanges = state.contacts.filter(e => e.id !== payload.id);
+      state.contacts.splice(updatedContactIdx, 1, updatedContact);
 
-      //-- Finally, we concat those two arrays together, resulting in our updated array --//
-      let updatedContacts = noChanges.concat(updatedContact);
-
-      return { contacts: updatedContacts };
+      return { contacts: state.contacts };
 
     case 'REMOVE_CONTACTS':
       return { contacts: [] };
