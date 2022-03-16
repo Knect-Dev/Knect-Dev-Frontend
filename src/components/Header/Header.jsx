@@ -7,11 +7,10 @@ import {
   IonMenuButton,
   IonButton,
   IonButtons,
-  IonToggle,
-  IonIcon,
+  IonIcon
 } from '@ionic/react';
 import { sunnyOutline, moonOutline } from 'ionicons/icons';
-import { accessibilityOutline, contrastOutline } from 'ionicons/icons';
+import { accessibilityOutline } from 'ionicons/icons';
 import { useSelector } from 'react-redux';
 import './header.scss';
 

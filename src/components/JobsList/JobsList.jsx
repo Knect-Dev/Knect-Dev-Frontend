@@ -1,15 +1,20 @@
-import { useSelector } from 'react-redux';
+import './jobsList.scss';
+import {
+  IonContent,
+  IonList
+} from '@ionic/react';
+import JobItem from '../JobItems/JobItem';
 
-const JobsList = () => {
-  let jobState = useSelector((state) => state.jobs.jobs);
+const JobsList = ({jobs}) => {
+  // let jobState = useSelector((state) => state.jobs.jobs); // This should replace the line below vvv
+  let jobState = jobs; // TEMP placeholder data until redux initial state created 
   console.log('JOBSTATE: ', jobState);
-
   return (
-    <ul>
-      {jobState.map((job, key) => (
-        <li key={key}>{job.title}</li>
-      ))}
-    </ul>
+    <IonContent>
+      <IonList class="ion-margin">
+        {jobState.map((job, key) => <JobItem data={job} key={key} />)}
+      </IonList>
+    </IonContent>
   );
 };
 

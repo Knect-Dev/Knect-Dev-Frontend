@@ -10,7 +10,7 @@ import {
   IonTabButton,
   IonTabs,
   setupIonicReact,
-  IonContent
+  IonContent, IonMenu, IonList, IonItem
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { homeOutline, personCircleOutline, statsChartOutline } from 'ionicons/icons';
@@ -45,11 +45,19 @@ const store = createReduxStore();
 
 const App = () => (
 
-
   <Provider store={store}>
   <IonApp>
-    <Header />
+    <Header slot="fixed top"/>
+    {/* <Header /> */}
+  <IonMenu side="end" menuId="first" contentId="main">
     <IonContent>
+      {/* Add a filter menu here  */}
+        <IonList>
+          <IonItem>Menu Item</IonItem>
+        </IonList>
+      </IonContent>
+  </IonMenu>
+    <IonContent id="main">
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
@@ -66,7 +74,9 @@ const App = () => (
             <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
+
+        {/* Surprisingly, in order to avoid infinite-scroll pushing the tab-bar off the page, the tab-bar should NOT have `slot="fixed bottom"` */}
+        <IonTabBar slot="bottom"> 
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={homeOutline} />
             <IonLabel>Home</IonLabel>
