@@ -1,7 +1,7 @@
 import { IonContent, IonPage } from '@ionic/react';
+
 import { useState } from 'react';
 // import ExploreContainer from '../../components/ExploreContainer';
-
 
 import './home.scss';
 import Form from '../../components/ParentForm/ParentForm.jsx';
