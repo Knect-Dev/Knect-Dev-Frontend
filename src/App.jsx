@@ -18,7 +18,7 @@ import Home from './pages/Home/Home';
 import Stats from './pages/Stats/Stats';
 import Profile from './pages/Profile/Profile';
 import Header from './components/Header/Header';
-
+import Filter from './components/Filter';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -46,51 +46,44 @@ const store = createReduxStore();
 const App = () => (
 
   <Provider store={store}>
-  <IonApp>
-    <Header />
-  <IonMenu side="end" menuId="first" contentId="main">
-    <IonContent>
-      {/* Add a filter menu here  */}
-        <IonList>
-          <IonItem>Menu Item</IonItem>
-        </IonList>
+    <IonApp>
+      <Header />
+      <Filter />
+      <IonContent id="main">
+        <IonReactRouter>
+          <IonTabs>
+            <IonRouterOutlet>
+              <Route exact path="/home">
+                <Home />
+              </Route>
+              <Route exact path="/stats">
+                <Stats />
+              </Route>
+              <Route path="/profile">
+                <Profile />
+              </Route>
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+            </IonRouterOutlet>
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="home" href="/home">
+                <IonIcon icon={homeOutline} />
+                <IonLabel>Home</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="stats" href="/stats">
+                <IonIcon icon={statsChartOutline} />
+                <IonLabel>Stats</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="profile" href="/profile">
+                <IonIcon icon={personCircleOutline} />
+                <IonLabel>Profile</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
+        </IonReactRouter>
       </IonContent>
-  </IonMenu>
-    <IonContent id="main">
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/home">
-            <Home />
-          </Route>
-          <Route exact path="/stats">
-            <Stats />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={homeOutline} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="stats" href="/stats">
-            <IonIcon icon={statsChartOutline} />
-            <IonLabel>Stats</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="profile" href="/profile">
-            <IonIcon icon={personCircleOutline} />
-            <IonLabel>Profile</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-    </IonContent>
-  </IonApp>
+    </IonApp>
   </Provider>
 );
 
