@@ -7,13 +7,16 @@ import CompanyForm from './Company/CompanyForm';
 import ContactForm from './Contact/ContactForm';
 import { initialState, reducer } from './FormReducer.jsx';
 
+import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
+
 import './ParentForm.scss';
 
 const Form = ({ showForm, setShowForm }) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   const [activeForm, setActiveForm] = useState('Job');
-
+  console.log(activeForm);
+  console.log(activeForm === 'Job' && 'active')
   return (
     <>
       <IonModal
@@ -32,9 +35,9 @@ const Form = ({ showForm, setShowForm }) => {
           <ContactForm state={state} dispatch={dispatch} showForm={showForm} setShowForm={setShowForm} />
         </When>
         <div className='button-group'>
-          <IonButton size='large' onClick={() => setActiveForm('Job')}>Job</IonButton>
-          <IonButton size='large' onClick={() => setActiveForm('Company')}>Company</IonButton>
-          <IonButton size='large' onClick={() => setActiveForm('Contact')}>Contact</IonButton>
+          <IonButton size='large' class={`tab-button job-button ${activeForm === 'Job' && 'active'}`} onClick={() => setActiveForm('Job')}>Job</IonButton>
+          <IonButton size='large' class={`tab-button company-button ${(activeForm === 'Company' && 'active')}`} onClick={() => setActiveForm('Company')}>Company</IonButton>
+          <IonButton size='large' class={`tab-button contact-button ${(activeForm === 'Contact' && 'active')}`} onClick={() => setActiveForm('Contact')}>Contact</IonButton>
         </div>
       </IonModal>
     </>

@@ -41,9 +41,9 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
             </IonRow>
 
             <IonRow>
-              <IonCol size='4'>Job:<h4>{state.job.jobTitle}</h4></IonCol>
-              <IonCol size='4'>ID:<h4>{state.job.jobId}</h4></IonCol>
-              <IonCol size='4'>Date Applied: <h4>{state.job.dateApplied}</h4></IonCol>
+              <IonCol size='4'>Job:<h5>{state.job.jobTitle}</h5></IonCol>
+              <IonCol size='4'>ID:<h5>{state.job.jobId}</h5></IonCol>
+              <IonCol size='4'>Date Applied: <h5>{state.job.dateApplied}</h5></IonCol>
             </IonRow>
 
             <IonRow>
@@ -53,12 +53,12 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
                   :
                   <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="danger"><IonLabel color="danger">INACTIVE</IonLabel></IonChip>}
               </IonCol>
-              <IonCol size='4'>Positions Open: <h4>{state.job.positions}</h4></IonCol>
-              <IonCol size='4'>Stage: <h4>{state.job.interviewStage}</h4></IonCol>
+              <IonCol size='4'>Positions Open: <h5>{state.job.positions}</h5></IonCol>
+              <IonCol size='4'>Stage: <h5>{state.job.interviewStage}</h5></IonCol>
             </IonRow>
 
             <IonRow>
-              <IonCol>Technologies: <h4 style={{ display: 'inline' }}>{state.job.technologies}</h4></IonCol>
+              <IonCol>Technologies: <h5 style={{ display: 'inline' }}>{state.job.technologies}</h5></IonCol>
             </IonRow>
 
             <IonRow>
@@ -132,11 +132,10 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
             </IonRow >
 
           </When >
-          {
-            lock ?
-              <IonIcon class="edit-profile-icon" icon={lockOpenOutline} onClick={toggleEditHandler} ></IonIcon>
+          {lock ?
+            <IonIcon class="edit-form-icon" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>
               :
-              <IonIcon class="edit-profile-icon" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>}
+            <IonIcon class="edit-form-icon" icon={lockOpenOutline} onClick={toggleEditHandler} ></IonIcon>}
         </IonGrid >
       </IonContent>
     </>

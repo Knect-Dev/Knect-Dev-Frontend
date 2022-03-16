@@ -9,4 +9,39 @@
   margin-right: 10%; 
   margin-left: 10%; 
   justify-content: space-between;
+  .job-button {
+    --background: #A4F976;
+    --opacity: .75;
+  }
+  .company-button {
+    --background: #FEBB5D;
+    --opacity: .75;
+  }
+  .contact-button {
+    --background: #54D0F2;
+    --opacity: .75;
+  }
+  .tab-button {
+    width: 10rem;
+    color: black;
+    font-weight: 600;
+    --border-color: #0E4749;
+    --border-width: 1px;
+    --border-radius: 10px;
+    --border-style: solid;
+    --background-hover-opacity: .5;
+  }
+  .active {
+    --opacity: 1;
+    --border-width: 2px;
+  }
+}
+
+.edit-form-icon {
+  height:25px;
+  width: 25px;
+  margin: auto;
+  position: fixed;
+  left: 1.5rem;
+  bottom: 9rem;
 }
