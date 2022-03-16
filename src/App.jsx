@@ -50,7 +50,7 @@ const App = () => (
     <Header />
   <IonMenu side="end" menuId="first" contentId="main">
     <IonContent>
-      {/* Add a filter menu here */}
+      {/* Add a filter menu here  */}
         <IonList>
           <IonItem>Menu Item</IonItem>
         </IonList>
