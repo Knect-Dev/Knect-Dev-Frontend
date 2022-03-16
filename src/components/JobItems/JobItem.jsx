@@ -6,13 +6,11 @@ import {
 } from '@ionic/react';
 import { magnetOutline } from 'ionicons/icons'; // placeholder for company logo
 
-function handleClick({ target }) {
-  console.log(`The index of this object in the jobs array is ${JSON.stringify(target.value)}`);
-}
 
-const JobItem = ({job, key}) => {
+const JobItem = ({job}) => {
+
   return (
-    <IonItem key={key} onClick={handleClick}>
+    <IonItem>
       {/* vvv placeholder for company logo */}
       <IonIcon icon={magnetOutline} slot="start" />
       <IonLabel slot=''>{job.company}</IonLabel>
