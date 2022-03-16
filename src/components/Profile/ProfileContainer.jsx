@@ -1,4 +1,5 @@
 import './profileContainer.scss';
+
 import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider } from '@ionic/react';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 import { useState } from 'react';
