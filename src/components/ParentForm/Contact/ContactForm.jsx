@@ -1,25 +1,47 @@
-import { IonModal, IonLabel, IonContent, IonButton, IonItem, IonInput, IonTextarea } from '@ionic/react';
+import { IonModal, IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea } from '@ionic/react';
 import { useState } from 'react';
 import { When } from 'react-if';
+
+import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
 const ContactForm = ({ state, dispatch }) => {
   const [lock, setLock] = useState(true);
 
   function handleChange(e) {
-    console.log('tag', e.target.name, 'value', e.detail.value);
     dispatch({ type: 'SET_CONTACT', data: [e.target.name, e.detail.value] });
   }
 
-  console.log(state);
+  function toggleEditHandler() {
+    setLock(!lock);
+  }
+
   return (  
     <>
-      <When condition={lock}>
-        <IonContent>
-          <p>sup</p>
-        </IonContent>
-      </When>
-      <When condition={!lock}>
-        <IonContent>
+      <IonContent>
+        <When condition={lock}>
+          <IonItem>
+            Name:  {state.contact.contactName}
+          </IonItem>
+          <IonItem>
+            Company:  {state.contact.contactCompany}
+          </IonItem>
+          <IonItem>
+            Role: {state.contact.contactRole}
+          </IonItem>
+          <IonItem>
+            Email: {state.contact.contactEmail}
+          </IonItem>
+          <IonItem>
+            LinkedIn: {state.contact.contactLinkedIn}
+          </IonItem>
+          <IonItem>
+            Phone Number: {state.contact.contactPhone}
+          </IonItem>
+          <IonItem>
+            Notes: {state.contact.contactNotes}
+          </IonItem>
+        </When>
+        <When condition={!lock}>
           <IonItem>
             <IonLabel>Name: </IonLabel>
             <IonInput value={state.contact.contactName} onIonChange={e => handleChange(e)} name='contactName' placeholder="Enter Input" clearInput></IonInput>
@@ -48,8 +70,12 @@ const ContactForm = ({ state, dispatch }) => {
             <IonLabel>Notes: </IonLabel>
             <IonTextarea value={state.contact.contactNotes} onIonChange={e => handleChange(e)} name='contactNotes' placeholder="Enter Input" clearInput></IonTextarea >
           </IonItem>
-        </IonContent>
-      </When>
+        </When>
+        {lock ?
+          <IonIcon class="edit-profile-icon" icon={lockOpenOutline} onClick={toggleEditHandler}></IonIcon>
+          :
+          <IonIcon class="edit-profile-icon" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>}
+      </IonContent>
     </>
   )
 }
