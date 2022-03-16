@@ -10,7 +10,7 @@ import {
 import { magnetOutline } from 'ionicons/icons';
 import { useSelector } from 'react-redux';
 
-export const JobItem = ({ job, key }) => {
+export const JobItem = ( job, key ) => {
   return (
     <IonItem key={key} onClick={handleClick}>
       <IonIcon icon={magnetOutline} slot="start" />
@@ -27,8 +27,9 @@ function handleClick({ target }) {
   console.log(`The index of this object in the jobs array is ${JSON.stringify(target.value)}`);
 }
 
-const JobsList = () => { // TODO connect `jobs` to Redux state.jobs
-  let jobState = useSelector((state) => state.jobs.jobs);
+const JobsList = ({jobs}) => {
+  // let jobState = useSelector((state) => state.jobs.jobs);
+  let jobState = jobs;
   console.log('JOBSTATE: ', jobState);
   return (
     <IonContent>
