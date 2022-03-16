@@ -1,4 +1,6 @@
 import { Redirect, Route } from 'react-router-dom';
+import { Provider } from 'react-redux'; // redux
+import createReduxStore from './store';
 import {
   IonApp,
   IonIcon,
@@ -39,8 +41,12 @@ import './theme/font.scss';
 
 
 setupIonicReact();
+const store = createReduxStore();
 
 const App = () => (
+
+
+  <Provider store={store}>
   <IonApp>
     <Header />
     <IonContent>
@@ -78,6 +84,7 @@ const App = () => (
     </IonReactRouter>
     </IonContent>
   </IonApp>
+  </Provider>
 );
 
 export default App;
