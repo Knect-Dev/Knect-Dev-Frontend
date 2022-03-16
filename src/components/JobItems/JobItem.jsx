@@ -10,7 +10,7 @@ function handleClick({ target }) {
   console.log(`The index of this object in the jobs array is ${JSON.stringify(target.value)}`);
 }
 
-const JobItem = (job, key) => {
+const JobItem = ({job, key}) => {
   return (
     <IonItem key={key} onClick={handleClick}>
       {/* vvv placeholder for company logo */}
