@@ -4,6 +4,7 @@ import { useState } from 'react';
 // import ExploreContainer from '../../components/ExploreContainer';
 
 import './home.scss';
+
 import Form from '../../components/ParentForm/ParentForm.jsx';
 import AddFAB from '../../components/AddFab/AddFAB.jsx'; // BUG This works, but is linter still angry about this?
 import PageHeader from '../../components/PageHeader/PageHeader';
@@ -15,10 +16,10 @@ const Home = () => {
 
   return (
     <IonPage>
-      <PageHeader title={'Jorbs'}/>
+      <PageHeader title={'Jorbs'} />
 
       <IonContent fullscreen>
-        
+
         <Form showForm={showForm} setShowForm={setShowForm} />
         <AddFAB showForm={showForm} setShowForm={setShowForm} />
         <JobsList />
