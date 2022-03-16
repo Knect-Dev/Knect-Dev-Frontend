@@ -9,7 +9,7 @@ import AddFAB from '../../components/AddFab/AddFAB.jsx';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
 
-const jobs = [
+const jobs = [ // TEMP
   {company: 'Amazon'},
   {company:'Boogie Woogie'},
   {company:'Charlie\'s Chocolates'},
@@ -29,7 +29,7 @@ const Home = () => {
        <IonContent fullscreen> {/* TEST does this mess up header/footer on scroll? */}
         <Form showForm={showForm} setShowForm={setShowForm} />
         <AddFAB showForm={showForm} setShowForm={setShowForm} />
-        <JobsList jobs={jobs} />
+        <JobsList jobs={jobs} /> {/* jobs prop is TEMP */}
       </IonContent>
     </IonPage>
   );
