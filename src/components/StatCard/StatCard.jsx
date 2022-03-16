@@ -3,7 +3,6 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonPage,
   IonGrid,
   IonRow,
   IonCol,
