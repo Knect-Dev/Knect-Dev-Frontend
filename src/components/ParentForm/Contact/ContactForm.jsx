@@ -48,7 +48,7 @@ const ContactForm = ({ state, showForm, setShowForm }) => {
             <IonAccordionGroup>
               {contactState.map(contact => {
                 return (
-                  <IonAccordion>
+                  <IonAccordion key={contact.id}>
                     <IonItem slot="header">
                       <IonLabel><h1 style={{ display: 'inline' }}>{contact.name}</h1> <h5 style={{ display: 'inline' }}>&nbsp;     {contact.role}</h5></IonLabel>
                     </IonItem>
@@ -85,7 +85,7 @@ const ContactForm = ({ state, showForm, setShowForm }) => {
             <IonAccordionGroup>
               {contactState.map(contact => {
                 return (
-                  <IonAccordion value={contact.id}>
+                  <IonAccordion key={contact.id}>
                     <IonItem slot="header">
                       <IonLabel><h1 style={{ display: 'inline' }}>{contact.name}</h1> <h5 style={{ display: 'inline' }}>&nbsp;     {contact.role}</h5></IonLabel>
                     </IonItem>
