@@ -1,4 +1,4 @@
-import {IonPage} from '@ionic/react';
+import { IonPage } from '@ionic/react';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import ProfileContainer from '../../components/Profile/ProfileContainer';
 import './profile.scss';
@@ -6,8 +6,8 @@ import './profile.scss';
 const Profile = () => {
   return (
     <IonPage>
-        <PageHeader title={'Profile'} />
-        <ProfileContainer name="Profile page" />
+      <PageHeader title={'Profile'} />
+      <ProfileContainer name="Profile page" />
     </IonPage>
   );
 };

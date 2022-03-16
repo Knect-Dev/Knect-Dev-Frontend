@@ -1,7 +1,11 @@
 import { IonContent, IonPage } from '@ionic/react';
 
+import { useState } from 'react';
+
 import './home.scss';
-import AddFAB from '../../components/AddFab/AddFAB.jsx'; 
+
+import Form from '../../components/ParentForm/ParentForm.jsx';
+import AddFAB from '../../components/AddFab/AddFAB.jsx';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
 
@@ -17,11 +21,14 @@ const jobs = [
 ]
 const Home = () => {
 
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <IonPage>
-      <PageHeader title={'Jerbs'}/>
-      <IonContent>
-        <AddFAB />
+      <PageHeader title={'Jorbs'} />
+       <IonContent fullscreen> {/* TEST does this mess up header/footer on scroll? */}
+        <Form showForm={showForm} setShowForm={setShowForm} />
+        <AddFAB showForm={showForm} setShowForm={setShowForm} />
         <JobsList jobs={jobs} />
       </IonContent>
     </IonPage>

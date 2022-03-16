@@ -5,52 +5,38 @@ import {
   IonIcon,
   IonItem,
   IonLabel,
-  IonList,
-  // IonNote
+  IonList
 } from '@ionic/react';
 import { magnetOutline } from 'ionicons/icons';
-// import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-function handleClick({target}) {
-  console.log(`The index of this object in the jobs array is ${JSON.stringify(target.value)}`);
-}
-
-export const JobItem = ({ data, key }) => {
+export const JobItem = ({ job, key }) => {
   return (
     <IonItem key={key} onClick={handleClick}>
-      <IonIcon icon={magnetOutline} slot="start"/>
-      <IonLabel slot=''>{data.company}</IonLabel>
+      <IonIcon icon={magnetOutline} slot="start" />
+      <IonLabel slot=''>{job.company}</IonLabel>
       <IonLabel slot=''>Some job info here</IonLabel>
       <IonLabel slot=''>Salary</IonLabel>
       <IonLabel slot=''>Status</IonLabel>
       <IonChip slot="end" >99</IonChip>
     </IonItem>
-
   );
 }
 
-const JobsList = ({ jobs }) => { // TODO connect `jobs` to Redux state.jobs
+function handleClick({ target }) {
+  console.log(`The index of this object in the jobs array is ${JSON.stringify(target.value)}`);
+}
 
+const JobsList = () => { // TODO connect `jobs` to Redux state.jobs
+  let jobState = useSelector((state) => state.jobs.jobs);
+  console.log('JOBSTATE: ', jobState);
   return (
     <IonContent>
       <IonList class="ion-margin">
-        {jobs.map((job, index) => <JobItem data={job} key={index} />)}
+        {jobState.map((job, key) => <JobItem data={job} key={key} />)}
       </IonList>
     </IonContent>
   );
 };
 
 export default JobsList;
-
-// const jobSchema = (sequelize, DataTypes) => sequelize.define('Jobs', {
-//   company: { type: DataTypes.STRING, required: true },
-//   title: { type: DataTypes.STRING, required: true },
-//   location: { type: DataTypes.STRING, defaltValue: '', required: false },
-//   appliedDate: { type: DataTypes.DATE, defaltValue: null, required: false },
-//   applied: { type: DataTypes.BOOLEAN, defaltValue: false, required: false },
-//   technologies: { type: DataTypes.ARRAY(DataTypes.STRING), required: false },
-//   openPositions: { type: DataTypes.INTEGER, defaultValue: null, required: false },
-//   interview: { type: DataTypes.BOOLEAN, defaultValue: false, required: false },
-//   contacts: { type: DataTypes.STRING, defaultValue: '', required: false },
-//   notes: { type: DataTypes.STRING, defaultValue: '', required: false },
-// });
