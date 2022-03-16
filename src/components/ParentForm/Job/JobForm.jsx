@@ -1,8 +1,8 @@
-import { IonModal, IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
+import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
 import { useState } from 'react';
 import { When } from 'react-if';
 
-import { closeOutline, options } from 'ionicons/icons';
+import { closeOutline } from 'ionicons/icons';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
 const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
@@ -33,7 +33,7 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
             </IonRow>
 
             <IonRow>
-              <IonCol size='5'>{'Company Name'}</IonCol>
+              <IonCol size='5'>{state.job.company || 'Company Name'}</IonCol>
               <IonCol size='5'>Career Page</IonCol>
               <IonCol size='2'>
                 <IonButton color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
@@ -41,9 +41,9 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
             </IonRow>
 
             <IonRow>
-              <IonCol size='4'>Job:<h5>{state.job.jobTitle}</h5></IonCol>
-              <IonCol size='4'>ID:<h5>{state.job.jobId}</h5></IonCol>
-              <IonCol size='4'>Date Applied: <h5>{state.job.dateApplied}</h5></IonCol>
+              <IonCol size='4'>Job:<h5>{state.job.title}</h5></IonCol>
+              <IonCol size='4'>ID:<h5>{state.job.id}</h5></IonCol>
+              <IonCol size='4'>Date Applied: <h5>{state.job.appliedDate}</h5></IonCol>
             </IonRow>
 
             <IonRow>
@@ -53,8 +53,12 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
                   :
                   <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="danger"><IonLabel color="danger">INACTIVE</IonLabel></IonChip>}
               </IonCol>
-              <IonCol size='4'>Positions Open: <h5>{state.job.positions}</h5></IonCol>
+              <IonCol size='4'>Positions Open: <h5>{state.job.openPositions}</h5></IonCol>
               <IonCol size='4'>Stage: <h5>{state.job.interviewStage}</h5></IonCol>
+            </IonRow>
+
+            <IonRow>
+              <IonCol>Location: <h5 style={{ display: 'inline' }}>{state.job.location}</h5></IonCol>
             </IonRow>
 
             <IonRow>
@@ -62,7 +66,7 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
             </IonRow>
 
             <IonRow>
-              <IonCol>Notes: <h5>{state.job.jobNotes}</h5></IonCol>
+              <IonCol>Notes: <h5>{state.job.notes}</h5></IonCol>
             </IonRow >
 
           </When >
@@ -72,7 +76,7 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
             </IonRow>
 
             <IonRow>
-              <IonCol size='5'>{'Company Name'}</IonCol>
+              <IonCol size='5'>{state.job.company}</IonCol>
               <IonCol size='5'>Career Page</IonCol>
               <IonCol size='2'>
                 <IonButton color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
@@ -82,17 +86,17 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
             <IonRow>
               <IonCol size='4'>
                 <IonLabel>Job: </IonLabel>
-                <IonInput value={state.job.jobTitle} onIonChange={e => handleChange(e)} placeholder='Job Title' name='jobTitle' clearInput></IonInput>
+                <IonInput value={state.job.title} onIonChange={e => handleChange(e)} placeholder='Job Title' name='title' clearInput></IonInput>
               </IonCol>
 
               <IonCol size='4'>
                 <IonLabel>ID: </IonLabel>
-                <IonInput value={state.job.jobId} onIonChange={e => handleChange(e)} placeholder='Job ID' name='jobId' clearInput></IonInput>
+                <IonInput value={state.job.id} onIonChange={e => handleChange(e)} placeholder='Job ID' name='id' clearInput></IonInput>
               </IonCol>
 
               <IonCol size='4'>
                 <IonLabel>Date Applied: </IonLabel>
-                <IonInput value={state.job.dateApplied} onIonChange={e => handleChange(e)} placeholder='mm/dd/yyyy' name='dateApplied' clearInput></IonInput>
+                <IonInput value={state.job.appliedDate} onIonChange={e => handleChange(e)} placeholder='mm/dd/yyyy' name='appliedDate' clearInput></IonInput>
               </IonCol >
             </IonRow >
 
@@ -106,16 +110,23 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
               </IonCol>
 
               <IonCol size='4'><IonLabel>Positions Open: </IonLabel>
-                <IonInput value={state.job.positions} type='number' min={0} onIonChange={e => handleChange(e)} placeholder='number' name='positions' clearInput></IonInput>
+                <IonInput value={state.job.openPositions} type='number' min={0} onIonChange={e => handleChange(e)} placeholder='number' name='openPositions' clearInput></IonInput>
               </IonCol>
 
               <IonCol size='4'>
                 <IonLabel>Stage: </IonLabel>
                 <IonSelect value={state.job.interviewStage} multiple={false} cancelText="Cancel" okText="Okay" onIonChange={e => handleChange(e)} name='interviewStage'>
-                  {options.map(e => <IonSelectOption>{e}</IonSelectOption>)}
+                  {options.map((e, idx) => <IonSelectOption key={e + idx}>{e}</IonSelectOption>)}
                 </IonSelect>
               </IonCol>
             </IonRow>
+
+            <IonRow>
+              <IonCol>
+                <IonLabel>Location: </IonLabel>
+                <IonInput value={state.job.location} onIonChange={e => handleChange(e)} name='location' clearInput></IonInput>
+              </IonCol>
+            </IonRow >
 
             <IonRow>
               <IonCol>
@@ -127,7 +138,7 @@ const JobForm = ({ state, dispatch, showForm, setShowForm }) => {
             <IonRow>
               <IonCol size='12'>
                 <IonLabel>Notes: </IonLabel>
-                <IonTextarea value={state.job.jobNotes} onIonChange={e => handleChange(e)} name='jobNotes' clearInput></IonTextarea>
+                <IonTextarea value={state.job.notes} onIonChange={e => handleChange(e)} name='notes' clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 
