@@ -17,8 +17,6 @@ const CompanyForm = ({ state, dispatch, showForm, setShowForm }) => {
     setLock(!lock);
   }
 
-  let options = ['here', 'also here']
-
   return (
     <>
       <IonContent>
