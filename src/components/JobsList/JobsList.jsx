@@ -5,7 +5,7 @@ import {
 } from '@ionic/react';
 import JobItem from '../JobItems/JobItem';
 
-const JobsList = ({jobs}) => {
+const JobsList = ({ jobs }) => {
   // let jobState = useSelector((state) => state.jobs.jobs); // This should replace the line below vvv
   let jobState = jobs; // TEMP placeholder data until redux initial state created 
   console.log('JOBSTATE: ', jobState);
