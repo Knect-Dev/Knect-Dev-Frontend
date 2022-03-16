@@ -18,7 +18,7 @@ import Home from './pages/Home/Home';
 import Stats from './pages/Stats/Stats';
 import Profile from './pages/Profile/Profile';
 import Header from './components/Header/Header';
-import Filter from './components/Filter';
+import Filter from './components/Filter/Filter';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
