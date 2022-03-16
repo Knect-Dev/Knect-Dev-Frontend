@@ -1,7 +1,9 @@
-import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
 import { When } from 'react-if';
+import { useSelector, useDispatch } from 'react-redux';
+import {getCompanies} from '../../../store/companies'
 
 import { closeOutline } from 'ionicons/icons';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
@@ -16,6 +18,13 @@ const CompanyForm = ({ state, dispatch, showForm, setShowForm }) => {
   function toggleEditHandler() {
     setLock(!lock);
   }
+
+  let dispatchRedux = useDispatch();
+
+  useEffect(() => {
+    console.log('useEffect called')
+    dispatchRedux(getCompanies);
+  });
 
   return (
     <>
