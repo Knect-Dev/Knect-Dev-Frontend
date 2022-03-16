@@ -8,7 +8,7 @@ const initialState = {
     {
       name: 'Microsoft',
       leader: '',
-      size: '10000+',
+      size: 10000,
       hq: 'Redmond, WA',
       product: 'Software',
       clients: 'Kellen, Daniel',

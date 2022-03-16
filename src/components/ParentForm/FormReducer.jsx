@@ -1,7 +1,7 @@
 export const initialState = {
   job: {},
   company: {},
-  contact: {},
+  contact: [{}],
 }
 
 export function reducer(state, action) {
