@@ -4,7 +4,8 @@ import axios from 'axios';
 const CONTACTS_URL = ''
 
 const initialState = {
-  contacts: [{
+  contacts: [
+    {
     id: 1,
     name: 'Mya Linse',
     role: 'Technical Recruiter',
@@ -24,7 +25,8 @@ const initialState = {
     phone: '411',
     photo: 'No Photos Please',
     notes: 'Give me snacks'
-  }],
+    }
+  ],
 }
 
 const contactsReducer = ( state = initialState, action) => {

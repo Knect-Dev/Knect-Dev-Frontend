@@ -6,17 +6,20 @@ const JOB_URL = '';
 const initialState = {
   jobs: [
     {
+      id: 0,
       company: 'Microsoft',
       title: 'Developer',
-      location: 'Seattle',
-      appliedDate: '',
-      applied: true,
+      jobId: '1234re',
+      jobUrl: 'someurl.com',
+      appliedDate: '03/16/2022',
+      stage: 'Not Applied',
+      status: true,
+      openPositions: 10,
+      location: 'Seattle, WA',
+      technologies: 'JavaScript, .NET',
       targeted: '',
-      technologies: '.NET, Azure',
-      openPositions: '1',
-      interview: true,
-      contacts: '',
-      notes: '',
+      offer: '',
+      notes: 'Notes here!',
     },
   ],
 };
@@ -26,7 +29,18 @@ const jobReducer = (state = initialState, action) => {
 
   switch (type) {
     case 'SET_JOB':
-      return { jobs: payload.results };
+      //-- First we find the job we need to update, and make the changes --//
+      console.log(`👽 ~ file: jobs.js ~ line 34 ~ jobReducer ~ payload.id`, payload);
+      let updatedJob = state.jobs.find(e => e.id === payload.id);
+      updatedJob[payload.name] = payload.value;
+
+      //-- Second this filters the array to remove the job we have updated, to prevent dupes --//
+      let noChanges = state.jobs.filter(e => e.id !== payload.id);
+
+      //-- Finally, we concat those two arrays together, resulting in our updated array --//
+      let updatedJobs = noChanges.concat(updatedJob);
+
+      return { jobs: updatedJobs };
 
     case 'REMOVE_JOB':
       return { job: '' };
