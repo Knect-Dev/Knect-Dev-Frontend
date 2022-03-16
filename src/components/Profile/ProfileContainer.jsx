@@ -1,6 +1,11 @@
 import './profileContainer.scss';
 
-import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider } from '@ionic/react';
+import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider,   IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonGrid,
+  IonRow,
+  IonCol, IonCardContent } from '@ionic/react';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 import { useState } from 'react';
 
@@ -20,9 +25,18 @@ const ProfileContainer = () => {
 
 
   return (
-    <IonContent >
+    <IonCard>
+      <IonCardHeader class='ion-text-center'>
+        <IonCardTitle>Profile</IonCardTitle>
+      </IonCardHeader>
+      <IonGrid>
+        <IonRow>
+          <IonCol size="2" />
+          <IonCol>
+          <IonCardContent>
+  
       <IonAvatar class="avatar">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" />
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" alt="User avatar"/>
       </IonAvatar>
       <section id="profile-form">
         <IonItemDivider>Name</IonItemDivider>
@@ -40,15 +54,18 @@ const ProfileContainer = () => {
           <IonInput value="" placeholder="Code Fellows" disabled={!editEnabled}></IonInput>
         </IonItem>
       </section>
-
-      {/* <IonIcon class="edit-profile-icon" icon={createOutline} onClick={editProfileHandler}></IonIcon> */}
-      {console.log('editEnabled: ', editEnabled)}
       {editEnabled ?
         <IonIcon class="edit-profile-icon" icon={lockOpenOutline} onClick={toggleEditHandler}></IonIcon>
         :
         <IonIcon class="edit-profile-icon" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>}
 
-    </IonContent >
+    
+          </IonCardContent>
+          </IonCol>
+          <IonCol size="2" />
+        </IonRow>
+      </IonGrid>
+    </IonCard>
   );
 };
 
