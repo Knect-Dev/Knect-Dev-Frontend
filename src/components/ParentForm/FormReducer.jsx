@@ -5,6 +5,7 @@ export const initialState = {
 }
 
 export function reducer(state, action) {
+  console.log(state);
   switch (action.type) {
     case 'SET_JOB':
       return { ...state, job: { ...state.job, [action.data[0]]: action.data[1] } };
