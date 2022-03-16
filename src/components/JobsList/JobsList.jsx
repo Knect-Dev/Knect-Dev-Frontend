@@ -10,7 +10,7 @@ const JobsList = ({jobs}) => {
   let jobState = jobs; // TEMP placeholder data until redux initial state created 
   console.log('JOBSTATE: ', jobState);
 
-  function handleClick(e) { // BUG 
+  function handleClick(e) { // BUG more info: https://www.educative.io/edpresso/what-is-typeerror-converting-circular-structure-to-json
     let something = JSON.stringify(e.target);
     console.log(something);
   };
