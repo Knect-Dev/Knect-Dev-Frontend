@@ -25,9 +25,9 @@ const Header = () => {
           </IonButton>
           {
             darkTheme ?
-              <IonIcon icon={moonOutline} onClick={themeToggleHandler}></IonIcon>
-              :
               <IonIcon icon={sunnyOutline} onClick={themeToggleHandler}></IonIcon>
+              :
+              <IonIcon icon={moonOutline} onClick={themeToggleHandler}></IonIcon>
           }
           {/* <IonToggle
             slot="icon-only" icon={contrastOutline} class="themeToggle"
