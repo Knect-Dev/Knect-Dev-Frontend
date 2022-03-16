@@ -10,7 +10,7 @@ import {
   IonTabButton,
   IonTabs,
   setupIonicReact,
-  IonContent
+  IonContent, IonMenu, IonList, IonItem
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { homeOutline, personCircleOutline, statsChartOutline } from 'ionicons/icons';
@@ -45,11 +45,18 @@ const store = createReduxStore();
 
 const App = () => (
 
-
   <Provider store={store}>
   <IonApp>
     <Header />
+  <IonMenu side="end" menuId="first" contentId="main">
     <IonContent>
+      {/* Add a filter menu here  */}
+        <IonList>
+          <IonItem>Menu Item</IonItem>
+        </IonList>
+      </IonContent>
+  </IonMenu>
+    <IonContent id="main">
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
