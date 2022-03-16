@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 const JobsList = () => {
   let jobState = useSelector((state) => state.jobs.jobs);
-  console.log('JOBSTATE: ', jobState);
+  // console.log('JOBSTATE: ', jobState);
 
   return (
     <ul>
