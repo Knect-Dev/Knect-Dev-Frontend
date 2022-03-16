@@ -1,4 +1,4 @@
-import { IonModal, IonContent, IonButton, IonItem, IonInput } from '@ionic/react';
+import { IonModal, IonContent, IonButton, IonIcon, IonItem, IonInput, IonItemGroup } from '@ionic/react';
 import { useState, useReducer } from 'react';
 import { When } from 'react-if';
 
@@ -7,7 +7,7 @@ import CompanyForm from './Company/CompanyForm';
 import ContactForm from './Contact/ContactForm';
 import { initialState, reducer } from './FormReducer.jsx';
 
-import './Form.scss';
+import './ParentForm.scss';
 
 const Form = ({ showForm, setShowForm }) => {
 
@@ -20,21 +20,21 @@ const Form = ({ showForm, setShowForm }) => {
         isOpen={showForm}
         swipeToClose={true}
         backdropDismiss={false}
+        id='form-modal'
       >
-        <IonButton onClick={() => setShowForm(!showForm)}>Close</IonButton>
         <When condition={activeForm === 'Job'}>
-          <JobForm state={state} dispatch={dispatch} />
+          <JobForm state={state} dispatch={dispatch} showForm={showForm} setShowForm={setShowForm} />
         </When>
         <When condition={activeForm === 'Company'}>
-          <CompanyForm state={state} dispatch={dispatch} />
+          <CompanyForm state={state} dispatch={dispatch} showForm={showForm} setShowForm={setShowForm} />
         </When>
         <When condition={activeForm === 'Contact'}>
-          <ContactForm state={state} dispatch={dispatch} />
+          <ContactForm state={state} dispatch={dispatch} showForm={showForm} setShowForm={setShowForm} />
         </When>
-        <div>
-          <IonButton onClick={() => setActiveForm('Job')}>Job</IonButton>
-          <IonButton onClick={() => setActiveForm('Company')}>Company</IonButton>
-          <IonButton onClick={() => setActiveForm('Contact')}>Contact</IonButton>
+        <div className='button-group'>
+          <IonButton size='large' onClick={() => setActiveForm('Job')}>Job</IonButton>
+          <IonButton size='large' onClick={() => setActiveForm('Company')}>Company</IonButton>
+          <IonButton size='large' onClick={() => setActiveForm('Contact')}>Contact</IonButton>
         </div>
       </IonModal>
     </>
