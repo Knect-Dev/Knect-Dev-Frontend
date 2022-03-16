@@ -1,19 +1,13 @@
 import './jobsList.scss';
 import {
-  IonChip,
   IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
   IonList
 } from '@ionic/react';
-import { useSelector } from 'react-redux';
 import JobItem from '../JobItems/JobItem';
-
 
 const JobsList = ({jobs}) => {
   // let jobState = useSelector((state) => state.jobs.jobs);
-  let jobState = jobs;
+  let jobState = jobs; // TEMP placeholder data until redux initial state created 
   console.log('JOBSTATE: ', jobState);
   return (
     <IonContent>
