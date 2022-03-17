@@ -10,11 +10,11 @@ const Profile = () => {
           <PageHeader title={'Profile'} />
         <IonGrid>
         <IonRow>
-          <IonCol size="2" />
+          <IonCol size="2"/>
           <IonCol size="8">
           <ProfileContainer name='Profile page' />
           </IonCol>
-          <IonCol size="2" />
+          <IonCol size="2"/>
           </IonRow>
         </IonGrid>
       </IonContent>

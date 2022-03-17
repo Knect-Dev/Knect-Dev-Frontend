@@ -1,7 +1,9 @@
-import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
+import { IonLabel, IonText, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
+
+import './jobForm.scss';
 
 import { closeOutline } from 'ionicons/icons';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
@@ -36,16 +38,17 @@ const JobForm = ({ id = 1, disable, setDisable, showForm, setShowForm, setActive
       <IonContent>
         <IonGrid>
           <When condition={lock}>
-
-            <IonRow class='ion-justify-content-around'>
-              <IonCol><IonItem color='success'>Application Status</IonItem></IonCol>
+            {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
+            <IonRow id='status-background' class='ion-justify-content-between'>
+              <IonItem id='status-item' >Application Status</IonItem>
+              <IonButton id='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
             </IonRow>
 
             <IonRow>
               <IonCol size='5' onClick={() => setActiveForm('Company')} style={{ cursor: 'pointer' }}>{currentJob?.company}</IonCol>
               <IonCol size='5'>Career Page</IonCol>
               <IonCol size='2'>
-                <IonButton color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
+                
               </IonCol>
             </IonRow>
 

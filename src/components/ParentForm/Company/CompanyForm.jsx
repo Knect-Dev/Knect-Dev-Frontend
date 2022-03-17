@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { When } from 'react-if';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {getCompanies} from '../../../store/companies'
 
 import { closeOutline } from 'ionicons/icons';
