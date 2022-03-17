@@ -78,14 +78,14 @@ const JobsList = () => {
             </IonCol>
 
             <IonCol size='1.5'>
-              <IonLabel >Date Applied</IonLabel>
+              <IonLabel >Applied</IonLabel>
             </IonCol>
 
             <IonCol size='2'>
               <IonLabel > Location</IonLabel>
             </IonCol>
 
-            <IonCol size='1'>
+            <IonCol size='1.25'>
               <IonLabel>Status</IonLabel>
             </IonCol>
 
