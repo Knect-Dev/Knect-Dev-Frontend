@@ -1,5 +1,5 @@
 
-const initialState = '';
+const initialState = 'Lima';
 
 const searchReducer = (state = initialState, action) => {
   let { type, payload } = action;
