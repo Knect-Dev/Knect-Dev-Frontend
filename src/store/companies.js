@@ -65,7 +65,7 @@ const setCompany = (company) => {
   };
 };
 
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDU4Mzc1fQ.5jr-l4hPDwrpxEnypNBd6kmTs8htbQ0OwZ_I4kUyDb8"
+let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4"
 const config = {
   headers: { Authorization: `Bearer ${token}` }
 };
