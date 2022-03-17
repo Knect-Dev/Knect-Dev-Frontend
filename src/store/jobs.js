@@ -63,7 +63,6 @@ const setJobs = (jobs) => {
 
 export const getJobs = async (dispatch) => {
   try {
-    console.log("testUSER token:", `${process.env.USER_TOKEN}`);
     let response = await axios({
       url: JOB_URL,
       method: 'get',
