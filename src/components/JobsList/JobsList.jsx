@@ -19,24 +19,33 @@ const JobsList = ({ jobs }) => {
   console.log('searchState Jobs', searchState);
   let fuzzyResults;
 
-  // if (searchState.length > 0) {
-  let promise = fuzzysort.goAsync(searchState, jobState, { key: ['company'] })
-  promise.then(results => console.log('fuzzy results', results));
+
+  typeof searchState === 'object' ?
+    fuzzyResults = fuzzysort.go(searchState.search, jobState, { key: ['company'] })
+    :
+    fuzzyResults = fuzzysort.go(searchState, jobState, { key: ['company'] })
+  console.log('fuzzy search', fuzzyResults);
+  // promise.then(results => console.log('fuzzy results', results));
   // }
 
-  console.log('fuzzyResults', fuzzyResults);
 
+  // function handleClick(e) { // BUG more info: https://www.educative.io/edpresso/what-is-typeerror-converting-circular-structure-to-json
+  //   let something = JSON.stringify(e.target);
+  //   console.log(something);
+  // };
+  console.log('jobState', jobState);
 
-  function handleClick(e) { // BUG more info: https://www.educative.io/edpresso/what-is-typeerror-converting-circular-structure-to-json
-    let something = JSON.stringify(e.target);
-    console.log(something);
-  };
-
-
+  /*onClick={handleClick}*/
   return (
     <IonContent>
-      <IonList class="ion-margin" onClick={handleClick}>
-        {jobState.map((job, idx) => <JobItem job={job} key={idx} />)}
+      <IonList class="ion-margin"  >
+        {fuzzyResults.map((job, idx) => {
+          console.log('Current job', job)
+          return (
+            <JobItem job={job.obj} key={idx} />
+          );
+        })
+        }
       </IonList>
     </IonContent>
   );

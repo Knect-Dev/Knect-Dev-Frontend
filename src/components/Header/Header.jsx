@@ -21,10 +21,11 @@ const Header = () => {
 
   const dispatch = useDispatch();
   // const searchStr = useSelector(state => state.search);
-  console.log('searchText', searchText);
+
 
   const [searchText, setSearchText] = useState('');
   const [darkTheme, setDarkTheme] = useState(false);
+  // console.log('searchText', searchText);
 
   const updateSearchText = (string) => dispatch(setSearch(string))
 
