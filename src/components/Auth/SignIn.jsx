@@ -6,11 +6,11 @@ import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider,   Io
   IonCol, IonCardContent, IonText, IonButton } from '@ionic/react';
   import { mailOutline, keyOutline } from 'ionicons/icons';
 
-function Login(props) {
+function SignIn({ toggle }) {
   return(
     <IonCard>
       <IonCardHeader class='ion-text-center'>
-        <IonCardTitle>Log-In</IonCardTitle>
+        <IonCardTitle>Sign-In</IonCardTitle>
       </IonCardHeader>
       <IonGrid>
         <IonRow>
@@ -32,12 +32,12 @@ function Login(props) {
               </IonItem>
             </section>
             <IonButton expand="block">
-              LogIn
+              Sign-In
             </IonButton>
             <IonText>
               <span>Don't have an account?</span>
             </IonText>
-            <IonText color="primary">
+            <IonText color="primary" onClick={toggle}>
               <span> Sign-Up!</span>
             </IonText>
           </IonCardContent>
@@ -49,4 +49,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default SignIn;
