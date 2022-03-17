@@ -6,38 +6,58 @@ import { When } from 'react-if';
 import {getCompanies} from '../../../store/companies'
 
 import { closeOutline } from 'ionicons/icons';
-import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
-const CompanyForm = ({ state, id, disable, setDisable, showForm, setShowForm }) => {
-  const [values, setValues] = useState({});
-  const [lock, setLock] = useState(true);
+import LockButton from '../../lockButton/LockButton.jsx';
+import { addCompany } from '../../../store/companies.js';
+import { updateCompany } from '../../../store/companies.js';
+
+const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => {
 
   let companyState = useSelector(state => state.companies.companies);
   let dispatch = useDispatch();
 
-  function handleChange(e) {
-    if (!id) {
+  let currentCompany = companyState.find(company => company.id === id);
+  const [values, setValues] = useState(currentCompany ? currentCompany : {});
 
-    } else if (id) {
-      dispatch({ type: 'UPDATE_COMPANY', payload: { id: id, name: e.target.name, value: e.detail.value } });
-    }
+  const [lock, setLock] = useState(true);
+
+
+  function handleChange(e) {
+    setValues(prev => {
+      return { ...prev, [e.target.name]: e.detail.value }
+    });
   }
 
-  function toggleEditHandler() {
-    if (!id) {
-
-    } else if (id) {
+  function toggleEditHandler(confirm) {
+    if (confirm) {
+      if (!id) {
+        // values['company'] = 'Scuber';
+        if (values.title && values.company) {
+          dispatch(addCompany(values));
+          setDisable(!disable);
+          setLock(!lock);
+        } else if (!values.title || !values.company) {
+          setValues(currentCompany || {});
+          setDisable(!disable);
+          setLock(!lock);
+        }
+      } else if (id) {
+        dispatch(updateCompany(values))
+        setDisable(!disable);
+        setLock(!lock);
+      }
+    } else if (!confirm) {
+      setValues(currentCompany || {});
       setDisable(!disable);
       setLock(!lock);
     }
   }
-  
-  useEffect(() => {
-    console.log('useEffect called')
-    dispatch(getCompanies);
-  }, []);
 
-  const currentCompany = companyState.find(company => company.id === id);
+  // useEffect(() => {
+  //   console.log('useEffect called')
+  //   dispatch(getCompanies);
+  // });
+
 
   return (
     <>
@@ -51,26 +71,26 @@ const CompanyForm = ({ state, id, disable, setDisable, showForm, setShowForm }) 
             </IonRow>
 
             <IonRow>
-              <IonCol size='6'>{currentCompany?.name || 'Company Name with link to Company website'}</IonCol>
-              <IonCol size='6'>{currentCompany?.careersURL || 'Career URL'}</IonCol>
+              <IonCol size='6'>{values?.name || 'Company Name with link to Company website'}</IonCol>
+              <IonCol size='6'>{values?.careersURL || 'Career URL'}</IonCol>
             </IonRow>
 
             <IonRow>
-              <IonCol size='4'>Leader:<h5>{currentCompany?.leader}</h5></IonCol>
-              <IonCol size='4'>HQ: <h5>{currentCompany?.hq}</h5></IonCol>
-              <IonCol size='4'>Size:<h5>{currentCompany?.size}</h5></IonCol>
+              <IonCol size='4'>Leader:<h5>{values?.leader}</h5></IonCol>
+              <IonCol size='4'>HQ: <h5>{values?.hq}</h5></IonCol>
+              <IonCol size='4'>Size:<h5>{values?.size}</h5></IonCol>
             </IonRow>
 
             <IonRow>
-              <IonCol>Product: <h5>{currentCompany?.product}</h5></IonCol>
+              <IonCol>Product: <h5>{values?.product}</h5></IonCol>
             </IonRow>
 
             <IonRow>
-              <IonCol>Clients: <h5>{currentCompany?.clients}</h5></IonCol>
+              <IonCol>Clients: <h5>{values?.clients}</h5></IonCol>
             </IonRow>
 
             <IonRow>
-              <IonCol>Mission: <h5>{currentCompany?.mission}</h5></IonCol>
+              <IonCol>Mission: <h5>{values?.mission}</h5></IonCol>
             </IonRow >
 
           </When >
@@ -88,46 +108,43 @@ const CompanyForm = ({ state, id, disable, setDisable, showForm, setShowForm }) 
             <IonRow>
               <IonCol size='4'>
                 <IonLabel>Leader: </IonLabel>
-                <IonInput value={currentCompany?.leader} onIonChange={e => handleChange(e)} placeholder='Company Leader' name='leader' clearInput></IonInput>
+                <IonInput value={values?.leader} onIonChange={e => handleChange(e)} placeholder='Company Leader' name='leader' clearInput></IonInput>
               </IonCol>
 
               <IonCol size='4'>
                 <IonLabel>HQ: </IonLabel>
-                <IonInput value={currentCompany?.hq} onIonChange={e => handleChange(e)} placeholder='HQ Location' name='hq' clearInput></IonInput>
+                <IonInput value={values?.hq} onIonChange={e => handleChange(e)} placeholder='HQ Location' name='hq' clearInput></IonInput>
               </IonCol>
 
               <IonCol size='4'>
                 <IonLabel>Size: </IonLabel>
-                <IonInput value={currentCompany?.size} type='number' step='1000' min='0' onIonChange={e => handleChange(e)} placeholder='# of employees' name='size' clearInput></IonInput>
+                <IonInput value={values?.size} type='number' step='1000' min='0' onIonChange={e => handleChange(e)} placeholder='# of employees' name='size' clearInput></IonInput>
               </IonCol >
             </IonRow >
 
             <IonRow>
               <IonCol>
                 <IonLabel>Product: </IonLabel>
-                <IonInput value={currentCompany?.product} onIonChange={e => handleChange(e)} name='product' clearInput></IonInput>
+                <IonInput value={values?.product} onIonChange={e => handleChange(e)} name='product' clearInput></IonInput>
               </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol>
                 <IonLabel>Clients: </IonLabel>
-                <IonInput value={currentCompany?.clients} onIonChange={e => handleChange(e)} name='clients' clearInput></IonInput>
+                <IonInput value={values?.clients} onIonChange={e => handleChange(e)} name='clients' clearInput></IonInput>
               </IonCol>
             </IonRow >
 
             <IonRow>
               <IonCol>
                 <IonLabel>Mission: </IonLabel>
-                <IonTextarea auto-grow value={currentCompany?.mission} onIonChange={e => handleChange(e)} name='mission' clearInput></IonTextarea>
+                <IonTextarea auto-grow value={values?.mission} onIonChange={e => handleChange(e)} name='mission' clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 
           </When >
-          {lock ?
-            <IonIcon class="edit-form-icon-locked" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>
-            :
-            <IonIcon class="edit-form-icon-unlocked" icon={lockOpenOutline} onClick={toggleEditHandler} ></IonIcon>}
+          <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
         </IonGrid >
       </IonContent>
     </>

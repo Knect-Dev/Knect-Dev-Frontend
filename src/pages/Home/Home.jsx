@@ -11,7 +11,8 @@ import Form from '../../components/ParentForm/ParentForm.jsx';
 import AddFAB from '../../components/AddFab/AddFAB.jsx';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
-import { getJobs } from '../../store/jobs';
+import { getJobs } from '../../store/jobs.js';
+import { getCompanies } from '../../store/companies.js';
 
 const Home = () => {
 
@@ -32,6 +33,7 @@ const Home = () => {
   //need to send a token
   useEffect(() => {
     dispatch(getJobs);
+    dispatch(getCompanies);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -41,7 +43,7 @@ const Home = () => {
       <AddFAB showForm={showForm} setShowForm={setShowForm} />
       <IonContent fullscreen>
         <Form showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
-        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
+        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} getJobs={getJobs} getCompanies={getCompanies}/>
       </IonContent>
     </IonPage>
   );

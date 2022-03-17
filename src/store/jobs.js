@@ -127,17 +127,17 @@ const jobReducer = (state = initialState, action) => {
 
   switch (type) {
     case 'ADD_JOB':
-      console.log(`👽 ~ file: jobs.js ~ line 29 ~ jobReducer ~ payload`, payload);
-      return state;
+      if (payload.errors) return state;
+      return { jobs: [...state.jobs, payload] };
     case 'UPDATE_JOB':
       //-- First we find the job we need to update, and make the changes --//
-      console.log(`👽 ~ file: jobs.js ~ line 35 ~ jobReducer ~ payload`, payload);
       let updatedJobId = state.jobs.indexOf(state.jobs.find(e => e.id === payload.id));
       let updatedJob = state.jobs.find(e => e.id === payload.id);
       updatedJob = payload;
 
       //-- Finally, we concat those two arrays together, resulting in our updated array --//
       state.jobs.splice(updatedJobId, 1, updatedJob);
+      console.log(`👽 ~ file: jobs.js ~ line 138 ~ jobReducer ~ state.jobs`, state.jobs);
 
       return { jobs: state.jobs };
 
@@ -156,7 +156,6 @@ const jobReducer = (state = initialState, action) => {
 
 export const addJob = (job) => async (dispatch, getState) => {
   try {
-    // console.log("testUSER token:", `${process.env.USER_TOKEN}`);
     let response = await axios({
       url: JOB_URL,
       method: 'post',
@@ -164,10 +163,24 @@ export const addJob = (job) => async (dispatch, getState) => {
       data: job,
     });
 
-    // let response = await axios.get(JOB_URL);
+    let added = response.data;
+    dispatch({ type: 'ADD_JOB', payload: added });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export const updateJob = (job) => async (dispatch, getState) => {
+  try {
+    let response = await axios({
+      url: `${JOB_URL}${job.id}`,
+      method: 'put',
+      headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
+      data: job,
+    });
+
     let updated = response.data;
-    console.log(updated);
-    dispatch({ type: 'ADD_JOB', payload: updated });
+    dispatch({ type: 'UPDATE_JOB', payload: updated });
   } catch (e) {
     console.log(e);
   }

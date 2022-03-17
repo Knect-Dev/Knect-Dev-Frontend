@@ -1,26 +1,26 @@
 import axios from 'axios';
 
 // Backend
-const USER_URL = ''
+const USER_URL = 'https://knect-dev.herokuapp.com/'
 
 const initialState = {
-  user: [{
-    firstName: 'Mya',
-    lastName: 'Linse',
-    email: 'MyaMooCow@takinNaps.com',
-    token: '123abc',
-    role: 'Queen of the World'
-  }],
+  user: {},
 }
 
 const userReducer = ( state = initialState, action) => {
   let {type, payload} = action;
   
   switch (type) {
-
     case 'SET_USER':
+      const signedInUser = {
+        id: payload.id,
+        email: payload.email,
+        name: payload.name,
+        role: payload.role,
+        token: payload.token
+      }
 
-      return { user: payload.results};
+      return { user: signedInUser };
 
       
     case 'REMOVE_USER':
@@ -49,6 +49,46 @@ export const getusers = async dispatch => {
     console.log(e)
   }
 }
+
+export const signInUser = (credientials) => async dispatch => {
+  //axios request to sign in a user
+  try {
+    let response = await axios({
+      url: `${USER_URL}signin/`,
+      method: 'post',
+      auth: {
+        username: credientials.email,
+        password: credientials.password
+      }
+    });
+    let data = response.data.user[0];
+    dispatch({
+      type: 'SET_USER',
+      payload: data
+    });
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const signUpUser = (credientials) => async dispatch => {
+  //axios request to sign up a user
+  try {
+    let response = await axios({
+      url: `${USER_URL}signup/`,
+      method: 'post',
+      data: credientials,
+    });
+    let data = response.data.user;
+    dispatch({
+      type: 'SET_USER',
+      payload: data
+    });
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 
 
 export default userReducer;
