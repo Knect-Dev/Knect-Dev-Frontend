@@ -5,118 +5,118 @@ const JOB_URL = 'https://knect-dev.herokuapp.com/Jobs/';
 
 const initialState = {
   jobs: [
-    {
-      id: '0',
-      company: 'Microsoft',
-      title: '500',
-      jobId: '1234re',
-      jobUrl: 'someurl.com',
-      appliedDate: '03/16/2022',
-      stage: 'Not Applied',
-      status: true,
-      openPositions: '10',
-      location: 'Seattle, WA',
-      technologies: 'JavaScript, .NET',
-      targeted: '',
-      offer: '',
-      notes: 'Notes here!',
-    },
-    {
-      company: 'Amazon',
-      title: 'burger flipper',
-      jobId: '8098',
-      appliedDate: '',
-      stage: 'Applied',
-      status: true,
-      location: 'Seattle',
-      technologies: 'Spatula, Grill',
-      offer: '',
-      notes:'Low-stress' 
-    },
-    {
-      company: 'Boogie Woogie',
-      title: 'Dancer',
-      jobId: '',
-      appliedDate: '',
-      stage: 'tech Interview',
-      status: false,
-      location: 'Seattle',
-      technologies: '',
-      offer: '',
-      notes:'No compensation but great vibes' 
-    },
-    {
-      company: 'Charlie\'s Chocolates',
-      title: 'Chocolatier',
-      jobId: '',
-      appliedDate: '',
-      stage: 'Offer',
-      status: false,
-      location: '',
-      technologies: '',
-      offer: '',
-      notes:'' 
-    },
-    {
-      company: 'Decks on Decks',
-      title: 'Installer',
-      jobId: '',
-      appliedDate: '',
-      stage: 'phone screen',
-      status: true,
-      location: '',
-      technologies: '',
-      offer: '',
-      notes:'' 
-    },
-    {
-      company: 'Everyone Shops Here',
-      title: 'Developer',
-      jobId: '',
-      appliedDate: '',
-      stage: 'onsite',
-      status: false,
-      location: '',
-      technologies: '',
-      offer: '',
-      notes:'' 
-    },
-    {
-      company: 'Faith, Hope, & Love',
-      title: 'Software Developer',
-      jobId: '',
-      appliedDate: '',
-      stage: 'onsite',
-      status: false,
-      location: '',
-      technologies: '',
-      offer: '',
-      notes:'' 
-    },
-    {
-      company: 'Golf Goobers',
-      title: 'Caddy',
-      jobId: '',
-      appliedDate: '2/24/22',
-      stage: 'Onsite',
-      status: false,
-      location: 'Atlanta',
-      technologies: '',
-      offer: 'lotsa money',
-      notes:'' 
-    },
-    {
-      company: 'Hotel Hotel',
-      title: 'Bartender',
-      jobId: '',
-      appliedDate: '3/22/22',
-      stage: '',
-      status: false,
-      location: 'Seattle',
-      technologies: '',
-      offer: '',
-      notes:'' 
-    },
+    // {
+    //   id: '0',
+    //   company: 'Microsoft',
+    //   title: '500',
+    //   jobId: '1234re',
+    //   jobUrl: 'someurl.com',
+    //   appliedDate: '03/16/2022',
+    //   stage: 'Not Applied',
+    //   status: true,
+    //   openPositions: '10',
+    //   location: 'Seattle, WA',
+    //   technologies: 'JavaScript, .NET',
+    //   targeted: '',
+    //   offer: '',
+    //   notes: 'Notes here!',
+    // },
+    // {
+    //   company: 'Amazon',
+    //   title: 'burger flipper',
+    //   jobId: '8098',
+    //   appliedDate: '',
+    //   stage: 'Applied',
+    //   status: true,
+    //   location: 'Seattle',
+    //   technologies: 'Spatula, Grill',
+    //   offer: '',
+    //   notes:'Low-stress'
+    // },
+    // {
+    //   company: 'Boogie Woogie',
+    //   title: 'Dancer',
+    //   jobId: '',
+    //   appliedDate: '',
+    //   stage: 'tech Interview',
+    //   status: false,
+    //   location: 'Seattle',
+    //   technologies: '',
+    //   offer: '',
+    //   notes:'No compensation but great vibes'
+    // },
+    // {
+    //   company: 'Charlie\'s Chocolates',
+    //   title: 'Chocolatier',
+    //   jobId: '',
+    //   appliedDate: '',
+    //   stage: 'Offer',
+    //   status: false,
+    //   location: '',
+    //   technologies: '',
+    //   offer: '',
+    //   notes:''
+    // },
+    // {
+    //   company: 'Decks on Decks',
+    //   title: 'Installer',
+    //   jobId: '',
+    //   appliedDate: '',
+    //   stage: 'phone screen',
+    //   status: true,
+    //   location: '',
+    //   technologies: '',
+    //   offer: '',
+    //   notes:''
+    // },
+    // {
+    //   company: 'Everyone Shops Here',
+    //   title: 'Developer',
+    //   jobId: '',
+    //   appliedDate: '',
+    //   stage: 'onsite',
+    //   status: false,
+    //   location: '',
+    //   technologies: '',
+    //   offer: '',
+    //   notes:''
+    // },
+    // {
+    //   company: 'Faith, Hope, & Love',
+    //   title: 'Software Developer',
+    //   jobId: '',
+    //   appliedDate: '',
+    //   stage: 'onsite',
+    //   status: false,
+    //   location: '',
+    //   technologies: '',
+    //   offer: '',
+    //   notes:''
+    // },
+    // {
+    //   company: 'Golf Goobers',
+    //   title: 'Caddy',
+    //   jobId: '',
+    //   appliedDate: '2/24/22',
+    //   stage: 'Onsite',
+    //   status: false,
+    //   location: 'Atlanta',
+    //   technologies: '',
+    //   offer: 'lotsa money',
+    //   notes:''
+    // },
+    // {
+    //   company: 'Hotel Hotel',
+    //   title: 'Bartender',
+    //   jobId: '',
+    //   appliedDate: '3/22/22',
+    //   stage: '',
+    //   status: false,
+    //   location: 'Seattle',
+    //   technologies: '',
+    //   offer: '',
+    //   notes:''
+    // },
   ],
 };
 
@@ -129,13 +129,13 @@ const jobReducer = (state = initialState, action) => {
       return { jobs: [...state.jobs, payload] };
     case 'UPDATE_JOB':
       //-- First we find the job we need to update, and make the changes --//
-      console.log(`👽 ~ file: jobs.js ~ line 35 ~ jobReducer ~ payload`, payload);
       let updatedJobId = state.jobs.indexOf(state.jobs.find(e => e.id === payload.id));
       let updatedJob = state.jobs.find(e => e.id === payload.id);
       updatedJob = payload;
 
       //-- Finally, we concat those two arrays together, resulting in our updated array --//
       state.jobs.splice(updatedJobId, 1, updatedJob);
+      console.log(`👽 ~ file: jobs.js ~ line 138 ~ jobReducer ~ state.jobs`, state.jobs);
 
       return { jobs: state.jobs };
 
@@ -161,8 +161,8 @@ export const addJob = (job) => async (dispatch, getState) => {
       data: job,
     });
 
-    let updated = response.data;
-    dispatch({ type: 'ADD_JOB', payload: updated });
+    let added = response.data;
+    dispatch({ type: 'ADD_JOB', payload: added });
   } catch (e) {
     console.log(e);
   }
