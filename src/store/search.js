@@ -1,4 +1,4 @@
-const initialState = 'Lima';
+const initialState = 'A';
 
 const searchReducer = (state = initialState, action) => {
   let { type, payload } = action;
