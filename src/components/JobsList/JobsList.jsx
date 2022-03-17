@@ -18,13 +18,6 @@ const JobsList = () => {
   // get current search input from fuzzy search
   const searchState = useSelector(state => state.search);
 
-  console.log('>>>>>>>>>>>>> jobState type: ', typeof jobState);
-  console.log('jobState : ', jobState);
-  console.log('>>>>>>>>>>>>> searchState type: ', typeof searchState);
-  console.log('searchState : ', searchState);
-
-  
-
   let fuzzyResults;
   fuzzyResults = fuzzysort.go(searchState.search, jobState, {
     keys: [
@@ -48,8 +41,7 @@ const JobsList = () => {
   //   console.log(something);
   // };
 
-  // renders fuzzy results if there is search input
-  // otherwise renders all jobs from job state
+  // render fuzzy results if there is search input OR all jobs
   let jobResults;
   searchState.search ?
     jobResults = fuzzyResults :
@@ -61,10 +53,9 @@ const JobsList = () => {
   return (
     <IonContent>
 
-      <IonList class="ion-margin"  >
-      <IonGrid>
+      <IonList class="ion-margin">
+        <IonGrid>
           <IonRow>
-
             <IonCol size='.3'>
               <IonLabel></IonLabel>
             </IonCol>
@@ -94,19 +85,23 @@ const JobsList = () => {
             </IonCol>
           </IonRow>
         </IonGrid>
-        
-        {jobResults.map((job, idx) => {
-          // console.log('Current job', job)
-          return (
-            // check if results are in fuzzy search result format - fuzzy search returns results nested in an additional object
-            job.obj ?
-              <JobItem job={job.obj} key={idx} />
-              :
-              <JobItem job={job} key={idx} />
-          );
-        })
+
+        {
+          jobResults.map((job, idx) => {
+            // fuzzy search returns results nested in an additional object
+            return (
+              job.obj ?
+                <JobItem job={job.obj} key={idx} /> :
+                <JobItem job={job} key={idx} />
+            );
+          })
         }
-        {!jobResults.length ? <IonItem>NO JOBS MATCH THIS SEARCH</IonItem> : null}
+
+        {
+          !jobResults.length ?
+            <IonItem>NO JOBS MATCH THIS SEARCH</IonItem>
+            : null
+        }
       </IonList>
     </IonContent>
   );

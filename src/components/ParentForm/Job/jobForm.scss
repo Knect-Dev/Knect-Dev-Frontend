@@ -1,0 +1,16 @@
+.status-item{
+  --background: rgba(0, 0, 0, 0);
+  --color: white;
+  --border-style: 0;
+  font-size: 1.2em;
+}
+
+.status-background{
+  background-color: rgba(55, 167, 20, 0.664);
+}
+
+.job-button{
+  --box-shadow: 1px 1px 1px black;
+  margin-right: 3%;
+  margin-top: 0.8%;
+}

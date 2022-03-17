@@ -1,12 +1,12 @@
 import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonGrid, IonRow, IonCol, IonAccordionGroup, IonAccordion, IonList } from '@ionic/react';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
 
 import { closeOutline } from 'ionicons/icons';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
-const ContactForm = ({ state, showForm, setShowForm }) => {
+const ContactForm = ({ state, disable, setDisable, showForm, setShowForm }) => {
   const [lock, setLock] = useState(true);
 
   let contactState = useSelector(state => state.contacts.contacts);
@@ -17,34 +17,28 @@ const ContactForm = ({ state, showForm, setShowForm }) => {
   }
 
   function toggleEditHandler() {
+    setDisable(!disable);
     setLock(!lock);
   }
 
-  // const accordionGroupRef = useRef(null);
-
-  // const closeAccordion = () => {
-  //   if (accordionGroupRef.current) {
-  //     accordionGroupRef.current.value = undefined;
-  //   }
-  // }
-
+  // needs to be worked on after Job and Company tab are being rendered
+  // const currentContacts = contactState.find(contact => contact.JobId === jobId && contact.CompanyId === companyId)
   return (
     <>
       <IonContent>
         <IonGrid>
           <When condition={lock}>
 
-            <IonRow class='ion-justify-content-around'>
-              <IonCol><IonItem color='success'>Application Status</IonItem></IonCol>
+            <IonRow class='ion-justify-content-between status-background'>
+              <IonItem class='status-item' >Application Status</IonItem>
+              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
             </IonRow>
 
             <IonRow>
-              <IonCol size='5'>{state.contact.company || 'Company Name'}</IonCol>
-              <IonCol size='5'>Career Page</IonCol>
-              <IonCol size='2'>
-                <IonButton color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-              </IonCol>
+              <IonCol size='6'>{contactState.company || 'Company Name'}</IonCol>
+              <IonCol size='6'>Career Page</IonCol>
             </IonRow>
+
             <IonAccordionGroup>
               {contactState.map(contact => {
                 return (
@@ -63,6 +57,9 @@ const ContactForm = ({ state, showForm, setShowForm }) => {
                       <IonItem>
                         Phone: <h5>&nbsp; {contact.phone}</h5>
                       </IonItem>
+                      <IonItem>
+                        Notes: <IonCol><h5>&nbsp; {contact.notes}</h5></IonCol>
+                      </IonItem>
                     </IonList>
                   </IonAccordion>
                 )
@@ -70,16 +67,14 @@ const ContactForm = ({ state, showForm, setShowForm }) => {
             </IonAccordionGroup>
           </When >
           <When condition={!lock}>
-            <IonRow class='ion-justify-content-around'>
-              <IonCol><IonItem color='success'>Application Status</IonItem></IonCol>
+            <IonRow class='ion-justify-content-between status-background'>
+              <IonItem class='status-item' >Application Status</IonItem>
+              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
             </IonRow>
 
             <IonRow>
-              <IonCol size='5'>{state.contact.company}</IonCol>
-              <IonCol size='5'>Career Page</IonCol>
-              <IonCol size='2'>
-                <IonButton color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-              </IonCol>
+              <IonCol size='6'>{contactState.company}</IonCol>
+              <IonCol size='6'>Career Page</IonCol>
             </IonRow>
 
             <IonAccordionGroup>
@@ -111,6 +106,10 @@ const ContactForm = ({ state, showForm, setShowForm }) => {
                         <IonLabel>Phone: </IonLabel>
                         <IonInput about={contact.id} value={contact.phone} onIonChange={e => handleChange(e)} name='phone' clearInput></IonInput>
                       </IonItem>
+                      <IonItem>
+                        <IonLabel>Notes: </IonLabel>
+                        <IonInput about={contact.id} value={contact.notes} onIonChange={e => handleChange(e)} name='notes' clearInput></IonInput>
+                      </IonItem>
                     </IonList>
                   </IonAccordion>
                 )
@@ -118,9 +117,9 @@ const ContactForm = ({ state, showForm, setShowForm }) => {
             </IonAccordionGroup>
           </When>
           {lock ?
-            <IonIcon class="edit-form-icon" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>
+            <IonIcon class="edit-form-icon-locked" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>
             :
-            <IonIcon class="edit-form-icon" icon={lockOpenOutline} onClick={toggleEditHandler} ></IonIcon>}
+            <IonIcon class="edit-form-icon-unlocked" icon={lockOpenOutline} onClick={toggleEditHandler} ></IonIcon>}
         </IonGrid >
       </IonContent>
     </>
