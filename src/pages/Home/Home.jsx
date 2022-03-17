@@ -94,7 +94,7 @@ const jobs = [ // TEMP
     status: '',
     location: 'Atlanta',
     technologies: '',
-    offer: '',
+    offer: 'lotsa money',
     notes:'' 
   },
   {

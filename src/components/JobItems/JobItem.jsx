@@ -2,24 +2,59 @@ import {
   IonChip,
   IonIcon,
   IonItem,
-  IonLabel
+  IonLabel,
+  IonRow,
+  IonGrid,
+  IonCol,
 } from '@ionic/react';
 import { magnetOutline } from 'ionicons/icons'; // placeholder for company logo
 
 
-const JobItem = ({job}) => {
+const JobItem = ({ job }) => {
 
   return (
     <IonItem>
-      {/* vvv placeholder for company logo */}
-      <IonIcon icon={magnetOutline} slot="start" />
-      <IonLabel slot=''>{job.company}</IonLabel>
-      <IonLabel slot=''>Some job info here</IonLabel>
-      <IonLabel slot=''>Salary</IonLabel>
-      <IonLabel slot=''>Status</IonLabel>
-      <IonChip slot="end" >99</IonChip>
+      <IonGrid>
+        <IonRow>
+
+          <IonCol>
+            <IonIcon icon={magnetOutline} />
+          </IonCol>
+
+          <IonCol>
+            <IonLabel >{job.company}</IonLabel>
+          </IonCol>
+
+          <IonCol>
+            <IonLabel >{job.title}</IonLabel>
+          </IonCol>
+
+          <IonCol>
+            <IonLabel >{job.appliedDate}</IonLabel>
+          </IonCol>
+
+          <IonCol>
+            <IonLabel >{job.stage}</IonLabel>
+          </IonCol>
+
+          <IonCol>
+            <IonLabel > {job.location}</IonLabel>
+          </IonCol>
+
+          <IonCol>
+            <IonLabel > {job.offer}</IonLabel>
+          </IonCol>
+
+          <IonCol>
+            <IonChip>{job.status}</IonChip>
+          </IonCol>
+
+
+        </IonRow>
+      </IonGrid>
     </IonItem>
   );
 }
+
 
 export default JobItem;
