@@ -14,8 +14,6 @@ const searchReducer = (state = initialState, action) => {
   }
 };
 
-
-
 //get search
 export const setSearch = (search) => {
   return {
@@ -28,7 +26,6 @@ export const clearSearch = () => {
   return {
     type: 'CLEAR_SEARCH',
     payload: null
-    // TEST does this work without payload?
   }
 }
 

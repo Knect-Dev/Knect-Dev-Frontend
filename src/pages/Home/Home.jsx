@@ -113,23 +113,20 @@ const jobs = [ // TEMP
 
 const Home = () => {
 
-
   const [showForm, setShowForm] = useState(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
+  
   useEffect(() => {
     dispatch(setCurrentPage(location.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
-
-
-
   return (
     <IonPage>
       <PageHeader title={'Jorbs'} />
-      <IonContent fullscreen> {/* TEST does this mess up header/footer on scroll? */}
+      <IonContent fullscreen> 
         <Form showForm={showForm} setShowForm={setShowForm} />
         <AddFAB showForm={showForm} setShowForm={setShowForm} />
         <JobsList jobs={jobs} /> {/* jobs prop is TEMP */}

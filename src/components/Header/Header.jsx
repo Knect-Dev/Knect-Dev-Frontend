@@ -20,12 +20,10 @@ import { setSearch, clearSearch } from '../../store/search.js';
 const Header = () => {
 
   const dispatch = useDispatch();
-  // const searchStr = useSelector(state => state.search);
 
 
   const [searchText, setSearchText] = useState('');
   const [darkTheme, setDarkTheme] = useState(false);
-  // console.log('searchText', searchText);
 
   const updateSearchText = (string) => dispatch(setSearch(string))
 
@@ -33,9 +31,6 @@ const Header = () => {
     document.body.classList.toggle('dark');
     darkTheme ? setDarkTheme(false) : setDarkTheme(true);
   };
-
-
-  
 
   const { currentPage } = useSelector(state => state.currentPage);
   console.log('currentPage: ', currentPage);
@@ -60,9 +55,6 @@ const Header = () => {
               value={searchText}
               onIonChange={(e) => updateSearchText(e.detail.value)} // test this
             ></IonSearchbar>
-            <IonButton onClick={() => dispatch(setSearch)}>
-              Search
-            </IonButton>
             Filters
             <IonMenuButton auto-hide='false'></IonMenuButton>
           </IonButtons>

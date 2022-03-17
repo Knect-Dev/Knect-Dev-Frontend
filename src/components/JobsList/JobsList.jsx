@@ -11,17 +11,11 @@ import fuzzysort from 'fuzzysort';
 const JobsList = ({ jobs }) => {
   // let jobState = useSelector((state) => state.jobs.jobs); // This should replace the line below vvv
   let jobState = jobs; // TEMP placeholder data until redux initial state created 
-  console.log(jobState);
-  // console.log('JOBSTATE: ', jobState);
 
   // get current search input from fuzzy search
-  // console.log('jobState', jobState);
   const searchState = useSelector(state => state.search);
-  // fuzzysort
-  console.log('searchState Jobs', searchState);
-  let fuzzyResults;
 
-  // typeof searchState === 'object' ?
+  let fuzzyResults;
   fuzzyResults = fuzzysort.go(searchState.search, jobState, {
     keys: [
       'company',
@@ -35,20 +29,12 @@ const JobsList = ({ jobs }) => {
       'offer',
       'notes',
     ]
-  })
-
-    // :
-    // fuzzyResults = fuzzysort.go(searchState, jobState, { key: ['company'] })
-
-    console.log('fuzzy search', fuzzyResults);
-  // promise.then(results => console.log('fuzzy results', results));
-  // }
+  });
 
   // function handleClick(e) { // BUG more info: https://www.educative.io/edpresso/what-is-typeerror-converting-circular-structure-to-json
   //   let something = JSON.stringify(e.target);
   //   console.log(something);
   // };
-  console.log('jobState', jobState);
 
   // renders fuzzy results if there is search input
   // otherwise renders all jobs from job state
@@ -57,7 +43,7 @@ const JobsList = ({ jobs }) => {
     jobResults = fuzzyResults :
     jobResults = jobState;
 
-  console.log('jobResults', jobResults)
+  console.log('jobResults', jobResults);
 
 
   /*onClick={handleClick}*/
