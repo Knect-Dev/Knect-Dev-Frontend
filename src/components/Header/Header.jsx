@@ -25,6 +25,8 @@ const Header = () => {
     darkTheme ? setDarkTheme(false) : setDarkTheme(true);
   };
 
+
+
   const { currentPage } = useSelector(state => state.currentPage);
   console.log('currentPage: ', currentPage);
 

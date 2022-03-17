@@ -7,6 +7,7 @@ import jobReducer from './jobs.js';
 import companiesReducer from './companies.js';
 import contactsReducer from './contacts.js';
 import currentPageReducer from './currentPage.js';
+import searchReducer from './search.js';
 
 const reducers = combineReducers({
   user: userReducer,
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   companies: companiesReducer,
   contacts: contactsReducer,
   currentPage: currentPageReducer,
+  search: searchReducer,
 });
 
 const createReduxStore = () => {
