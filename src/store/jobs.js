@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 // Backend
-const JOB_URL = '';
+const JOB_URL = 'https://knect-dev.herokuapp.com/Jobs/';
 
 const initialState = {
   jobs: [
     {
-      id: 1,
+      id: 0,
       company: 'Microsoft',
       title: 'Developer',
       jobId: '1234re',
@@ -43,24 +43,37 @@ const jobReducer = (state = initialState, action) => {
     case 'REMOVE_JOB':
       return { job: '' };
 
+    case 'SET_JOBS':
+      //payload is my array of jobs
+      console.log("PAYLOAD @ SET_JOBS", payload);
+      return { ...state, jobs: [...state.jobs, ...payload] };
+
     default:
       return state;
   }
 };
 
 //get job
-const setJob = (job) => {
+const setJobs = (jobs) => {
   return {
-    type: 'SET_JOB',
-    payload: job,
+    type: 'SET_JOBS',
+    payload: jobs,
   };
 };
 
 export const getJobs = async (dispatch) => {
   try {
-    let response = await axios.get(JOB_URL);
+    console.log("testUSER token:", `${process.env.USER_TOKEN}`);
+    let response = await axios({
+      url: JOB_URL,
+      method: 'get',
+      headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
+    });
+
+    // let response = await axios.get(JOB_URL);
     let data = response.data;
-    dispatch(setJob(data));
+    console.log(data);
+    dispatch(setJobs(data));
   } catch (e) {
     console.log(e);
   }
