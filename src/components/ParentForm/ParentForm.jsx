@@ -12,11 +12,7 @@ import './ParentForm.scss';
 const Form = ({ showForm, setShowForm }) => {
 
   const [state, setState] = useState({});
-  /* {
-    jobId: 
-    companyId: job.companyId
-  }
-  */
+
   const [activeForm, setActiveForm] = useState('Job');
 
   const [disable, setDisable] = useState(false);
@@ -30,7 +26,7 @@ const Form = ({ showForm, setShowForm }) => {
         id='form-modal'
       >
         <When condition={activeForm === 'Job'}>
-          <JobForm state={state} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
+          <JobForm state={state} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} setActiveForm={setActiveForm} />
         </When>
         <When condition={activeForm === 'Company'}>
           <CompanyForm state={state} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
