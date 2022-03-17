@@ -4,13 +4,7 @@ import axios from 'axios';
 const USER_URL = 'https://knect-dev.herokuapp.com/signin/'
 
 const initialState = {
-  user: {
-    firstName: 'Mya',
-    lastName: 'Linse',
-    email: 'MyaMooCow@takinNaps.com',
-    token: '123abc',
-    role: 'Queen of the World'
-  },
+  user: {},
 }
 
 const userReducer = ( state = initialState, action) => {
@@ -18,8 +12,16 @@ const userReducer = ( state = initialState, action) => {
   
   switch (type) {
     case 'SET_USER':
-      //take data 
-      return { user: payload.results};
+      const signedInUser = {
+        id: payload.id,
+        email: payload.email,
+        name: payload.name,
+        role: payload.role,
+        token: payload.token
+      }
+      console.log('SIGNEDIN USER', signedInUser);
+
+      return { user: signedInUser };
 
       
     case 'REMOVE_USER':
@@ -51,9 +53,6 @@ export const getusers = async dispatch => {
 
 export const signInUser = (credientials) => async dispatch => {
   //axios request to sign in a user
-  console.log('CREDS from SignINuser', credientials);
-  //encrypt the credentials
-
   try {
     let response = await axios({
       url: USER_URL,
@@ -64,8 +63,11 @@ export const signInUser = (credientials) => async dispatch => {
       }
     });
     console.log(response);
-    // let data = response.data;
-    // dispatch(setuser(data));
+    let data = response.data.user[0];
+    dispatch({
+      type: 'SET_USER',
+      payload: data
+    });
   } catch (e) {
     console.log(e)
   }
