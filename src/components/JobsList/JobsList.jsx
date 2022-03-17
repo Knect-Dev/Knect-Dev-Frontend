@@ -17,12 +17,14 @@ const JobsList = ({ jobs }) => {
   const searchState = useSelector(state => state.search);
   // fuzzysort
   console.log('searchState Jobs', searchState);
-  let results;
-  if (searchState.length > 0) {
-    let promise = fuzzysort.goAsync(searchState, jobState, { key: ['company'] })
-    promise.then(results => console.log('fuzzy results', results));
-  }
-  console.log('results', results);
+  let fuzzyResults;
+
+  // if (searchState.length > 0) {
+  let promise = fuzzysort.goAsync(searchState, jobState, { key: ['company'] })
+  promise.then(results => console.log('fuzzy results', results));
+  // }
+
+  console.log('fuzzyResults', fuzzyResults);
 
 
   function handleClick(e) { // BUG more info: https://www.educative.io/edpresso/what-is-typeerror-converting-circular-structure-to-json
