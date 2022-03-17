@@ -1,7 +1,10 @@
 import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { When } from 'react-if';
+import { useSelector, useDispatch } from 'react-redux';
+import {getCompanies} from '../../../store/companies'
 
 import { closeOutline } from 'ionicons/icons';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
@@ -20,6 +23,11 @@ const CompanyForm = ({ state, id = 1, disable, setDisable, showForm, setShowForm
     setDisable(!disable);
     setLock(!lock);
   }
+  
+  useEffect(() => {
+    console.log('useEffect called')
+    dispatch(getCompanies);
+  }, []);
 
   const currentCompany = companyState.find(company => company.id === id);
 

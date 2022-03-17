@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from "react-router";
 import {
   IonHeader,
   IonTitle,
@@ -11,8 +12,9 @@ import {
 } from '@ionic/react';
 import { sunnyOutline, moonOutline } from 'ionicons/icons';
 import { accessibilityOutline } from 'ionicons/icons';
-import { useSelector } from 'react-redux';
+// import { useLocation } from 'react-router';
 import './header.scss';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const [searchText, setSearchText] = useState('');
@@ -23,7 +25,8 @@ const Header = () => {
     darkTheme ? setDarkTheme(false) : setDarkTheme(true);
   };
 
-  let userState = useSelector((state) => state.user);
+  const { currentPage } = useSelector(state => state.currentPage);
+  console.log('currentPage: ', currentPage);
 
   return (
     <IonHeader>
@@ -34,21 +37,22 @@ const Header = () => {
           </IonButton>
           {darkTheme ?
             <IonIcon icon={sunnyOutline} onClick={themeToggleHandler}></IonIcon>
-            : 
+            :
             <IonIcon icon={moonOutline} onClick={themeToggleHandler}></IonIcon>}
         </IonButtons>
         <IonTitle>Knect.Dev</IonTitle>
-        <IonButtons slot='secondary'>
-          <IonSearchbar
-            id='search-bar'
-            value={searchText}
-            onIonChange={(e) => setSearchText(e.detail.value)}
-          ></IonSearchbar>
-        </IonButtons>
-        <IonButtons slot='end'>
-          Filters
-          <IonMenuButton auto-hide='false'></IonMenuButton>
-        </IonButtons>
+        {currentPage === '/home' ?
+          <IonButtons slot='end'>
+            <IonSearchbar
+              id='search-bar'
+              value={searchText}
+              onIonChange={(e) => setSearchText(e.detail.value)}
+            ></IonSearchbar>
+            Filters
+            <IonMenuButton auto-hide='false'></IonMenuButton>
+          </IonButtons>
+          : null
+        }
       </IonToolbar>
     </IonHeader>
   );
