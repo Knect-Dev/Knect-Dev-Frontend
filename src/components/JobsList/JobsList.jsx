@@ -20,10 +20,10 @@ const JobsList = ({ jobs }) => {
   console.log('searchState Jobs', searchState);
   let fuzzyResults;
 
-  typeof searchState === 'object' ?
+  // typeof searchState === 'object' ?
     fuzzyResults = fuzzysort.go(searchState.search, jobState, { key: ['company'] })
-    :
-    fuzzyResults = fuzzysort.go(searchState, jobState, { key: ['company'] })
+    // :
+    // fuzzyResults = fuzzysort.go(searchState, jobState, { key: ['company'] })
 
   console.log('fuzzy search', fuzzyResults);
   // promise.then(results => console.log('fuzzy results', results));
@@ -38,7 +38,8 @@ const JobsList = ({ jobs }) => {
   // renders fuzzy results if there is search input
   // otherwise renders all jobs from job state
   let jobResults;
-  fuzzyResults.length > 0 ? jobResults = fuzzyResults :
+  searchState.search ? 
+    jobResults = fuzzyResults :
     jobResults = jobState;
 
   console.log('jobResults', jobResults)
