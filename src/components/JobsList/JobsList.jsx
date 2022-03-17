@@ -19,7 +19,7 @@ const JobsList = ({ jobs }) => {
   return (
     <IonContent>
       <IonList class="ion-margin" onClick={handleClick}>
-        {jobState.map((job, idx) => <JobItem job={job} key={idx} />)}
+        {jobState?.map((job, idx) => <JobItem job={job} key={idx} />)}
       </IonList>
     </IonContent>
   );

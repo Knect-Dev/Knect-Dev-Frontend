@@ -8,19 +8,28 @@ import {getCompanies} from '../../../store/companies'
 import { closeOutline } from 'ionicons/icons';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
-const CompanyForm = ({ state, id = 1, disable, setDisable, showForm, setShowForm }) => {
+const CompanyForm = ({ state, id, disable, setDisable, showForm, setShowForm }) => {
+  const [values, setValues] = useState({});
   const [lock, setLock] = useState(true);
 
   let companyState = useSelector(state => state.companies.companies);
   let dispatch = useDispatch();
 
   function handleChange(e) {
-    dispatch({ type: 'UPDATE_COMPANY', payload: { id: id, name: e.target.name, value: e.detail.value } });
+    if (!id) {
+
+    } else if (id) {
+      dispatch({ type: 'UPDATE_COMPANY', payload: { id: id, name: e.target.name, value: e.detail.value } });
+    }
   }
 
   function toggleEditHandler() {
-    setDisable(!disable);
-    setLock(!lock);
+    if (!id) {
+
+    } else if (id) {
+      setDisable(!disable);
+      setLock(!lock);
+    }
   }
   
   useEffect(() => {
@@ -89,7 +98,7 @@ const CompanyForm = ({ state, id = 1, disable, setDisable, showForm, setShowForm
 
               <IonCol size='4'>
                 <IonLabel>Size: </IonLabel>
-                <IonInput value={currentCompany?.size} onIonChange={e => handleChange(e)} placeholder='# of employees' name='size' clearInput></IonInput>
+                <IonInput value={currentCompany?.size} type='number' step='1000' min='0' onIonChange={e => handleChange(e)} placeholder='# of employees' name='size' clearInput></IonInput>
               </IonCol >
             </IonRow >
 
@@ -110,7 +119,7 @@ const CompanyForm = ({ state, id = 1, disable, setDisable, showForm, setShowForm
             <IonRow>
               <IonCol>
                 <IonLabel>Mission: </IonLabel>
-                <IonTextarea value={currentCompany?.mission} onIonChange={e => handleChange(e)} name='mission' clearInput></IonTextarea>
+                <IonTextarea auto-grow value={currentCompany?.mission} onIonChange={e => handleChange(e)} name='mission' clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 
