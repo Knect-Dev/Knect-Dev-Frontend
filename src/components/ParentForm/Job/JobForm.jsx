@@ -1,4 +1,4 @@
-import { IonLabel, IonText, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
+import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
@@ -7,10 +7,11 @@ import { closeOutline } from 'ionicons/icons';
 
 import LockButton from '../../lockButton/LockButton.jsx';
 import { addJob } from '../../../store/jobs.js';
+import { updateJob } from '../../../store/jobs.js';
 
 import './jobForm.scss';
 
-const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm }) => {
+const JobForm = ({ id = 2, disable, setDisable, showForm, setShowForm, setActiveForm }) => {
 
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
@@ -35,17 +36,23 @@ const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm
   function toggleEditHandler(confirm) {
     if (confirm) {
       if (!id) {
-        values['company'] = 'google';
-        if (values) dispatch(addJob(values));
-        setDisable(!disable);
-        setLock(!lock);
+        values['company'] = 'Scuber';
+        if (values.title && values.company) {
+          dispatch(addJob(values));
+          setDisable(!disable);
+          setLock(!lock);
+        } else if (!values.title || !values.company) {
+          setValues(currentJob || {});
+          setDisable(!disable);
+          setLock(!lock);
+        }
       } else if (id) {
-        dispatch({ type: 'UPDATE_JOB', payload: values });
+        dispatch(updateJob(values))
         setDisable(!disable);
         setLock(!lock);
       }
     } else if (!confirm) {
-      setValues(currentJob);
+      setValues(currentJob || {});
       setDisable(!disable);
       setLock(!lock);
     }
@@ -72,11 +79,11 @@ const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm
             <IonRow>
               <IonCol size='4'>Job:<h5>{values?.title}</h5></IonCol>
               <IonCol size='4'>ID:<h5>{values?.jobId}</h5></IonCol>
-              <IonCol size='4'>Date Applied: <h5>{values?.appliedDate}</h5></IonCol>
+              <IonCol size='4'>Date Applied: <h5>{values?.appliedDate.slice(0, 10)}</h5></IonCol>
             </IonRow>
 
             <IonRow>
-              <IonCol size='4'>Stage: <h5>{values?.interviewStage}</h5></IonCol>
+              <IonCol size='4'>Stage: <h5>{values?.stage}</h5></IonCol>
               <IonCol size='4'>Status:
                 {values?.status ?
                   <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="success"><IonLabel color="success">ACTIVE</IonLabel></IonChip>
@@ -113,7 +120,7 @@ const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm
             <IonRow>
               <IonCol size='4'>
                 <IonLabel>Job: </IonLabel>
-                <IonInput value={values?.title} onIonChange={e => handleChange(e)} placeholder='Job Title' name='title' clearInput></IonInput>
+                <IonInput value={values?.title} onIonChange={e => handleChange(e)} placeholder='Job Title' required={true} name='title' clearInput></IonInput>
               </IonCol>
 
               <IonCol size='4'>
@@ -123,14 +130,14 @@ const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm
 
               <IonCol size='4'>
                 <IonLabel>Date Applied: </IonLabel>
-                <IonInput value={values?.appliedDate} onIonChange={e => handleChange(e)} placeholder='mm/dd/yyyy' name='appliedDate' clearInput></IonInput>
+                <IonInput value={values?.appliedDate.slice(0, 10)} onIonChange={e => handleChange(e)} placeholder='yyyy-mm-dd' name='appliedDate' clearInput></IonInput>
               </IonCol >
             </IonRow >
 
             <IonRow>
               <IonCol size='4'>
                 <IonLabel>Stage: </IonLabel>
-                <IonSelect value={values?.interviewStage} multiple={false} cancelText="Cancel" okText="Okay" onIonChange={e => handleChange(e)} name='interviewStage'>
+                <IonSelect value={values?.stage} multiple={false} cancelText="Cancel" okText="Okay" onIonChange={e => handleChange(e)} name='stage'>
                   {options.map((e, idx) => <IonSelectOption key={e + idx}>{e}</IonSelectOption>)}
                 </IonSelect>
               </IonCol>
@@ -172,11 +179,6 @@ const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm
 
           </When >
           <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
-
-          {/* {lock ?
-            <IonIcon class="edit-form-icon-locked" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>
-            :
-            <IonIcon class="edit-form-icon-unlocked" icon={lockOpenOutline} onClick={toggleEditHandler} ></IonIcon>} */}
         </IonGrid >
       </IonContent>
     </>
