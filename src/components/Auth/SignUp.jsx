@@ -6,7 +6,7 @@ import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider,   Io
   IonCol, IonCardContent, IonText, IonButton } from '@ionic/react';
   import { mailOutline, keyOutline, personOutline } from 'ionicons/icons';
 
-function SignUp(props) {
+function SignUp({toggle}) {
   return(
     <IonCard>
       <IonCardHeader class='ion-text-center'>
@@ -40,7 +40,7 @@ function SignUp(props) {
             <IonText>
               <span>Already have an account?</span>
             </IonText>
-            <IonText color="primary">
+            <IonText color="primary" onClick={toggle}>
               <span> Log-In!</span>
             </IonText>
           </IonCardContent>
