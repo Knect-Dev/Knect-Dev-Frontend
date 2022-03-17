@@ -6,7 +6,21 @@ const COMPANY_URL = 'https://knect-dev.herokuapp.com/Companies';
 const initialState = {
   companies: [
     {
+      id: 1,
       name: 'Microsoft',
+      leader: '',
+      size: 10000,
+      hq: 'Redmond, WA',
+      product: 'Software',
+      clients: 'Kellen, Daniel',
+      mission: '',
+      careersURL: '',
+      companyURL: '',
+      logo: '',
+    },
+    {
+      id: 2,
+      name: 'Uber',
       leader: '',
       size: 10000,
       hq: 'Redmond, WA',
@@ -24,8 +38,16 @@ const companiesReducer = (state = initialState, action) => {
   let { type, payload } = action;
 
   switch (type) {
-    case 'SET_COMPANY':
-      return { jobs: payload.results };
+    case 'UPDATE_COMPANY':
+      //-- First we find the company we need to update, and make the changes --//
+      let updatedCompanyId = state.companies.indexOf(state.companies.find(e => e.id === payload.id));
+      let updatedCompany = state.companies.find(e => e.id === payload.id);
+      updatedCompany[payload.name] = payload.value;
+
+      //-- Second this filters the array to remove the contact we have updated, to prevent dupes --//
+      state.companies.splice(updatedCompanyId, 1, updatedCompany);
+
+      return { companies: state.companies };
 
     case 'REMOVE_COMPANY':
       return { job: '' };
@@ -43,7 +65,8 @@ const setCompany = (company) => {
   };
 };
 
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDU4Mzc1fQ.5jr-l4hPDwrpxEnypNBd6kmTs8htbQ0OwZ_I4kUyDb8"
+let token = process.env.TEST_TOKEN;
+
 const config = {
   headers: { Authorization: `Bearer ${token}` }
 };
