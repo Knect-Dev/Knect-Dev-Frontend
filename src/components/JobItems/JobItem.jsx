@@ -37,7 +37,7 @@ const JobItem = ({ job }) => {
   linear-gradient(208deg, rgba(145,58,180,0.923406862745098) 0%, rgba(253,64,29,0.8253676470588236) 50%, rgba(252,227,69,1) 100%)
   */
 
-  let stageBGC = stageChipBkgrds[job.stage.toLowerCase()];
+  let stageBGC = stageChipBkgrds[job?.stage?.toLowerCase()];
 
   let statusStyle = job.status === true ? { background: '#A1F189AA' } : { background: '#80808099' };
 
@@ -51,27 +51,27 @@ const JobItem = ({ job }) => {
           </IonCol>
 
           <IonCol size='2'>
-            <IonLabel >{job.company}</IonLabel>
+            <IonLabel >{job?.company}</IonLabel>
           </IonCol>
 
           <IonCol size='2.5'>
-            <IonLabel >{job.title}</IonLabel>
+            <IonLabel >{job?.title}</IonLabel>
           </IonCol>
 
           <IonCol size='1.5'>
-            <IonLabel >{job.appliedDate}</IonLabel>
+            <IonLabel >{job?.appliedDate?.slice(0, 10)}</IonLabel>
           </IonCol>
 
           <IonCol size='2'>
-            <IonLabel > {job.location}</IonLabel>
+            <IonLabel > {job?.location}</IonLabel>
           </IonCol>
 
           <IonCol size='1.25'>
-            <IonChip style={statusStyle}>{job.status}</IonChip>
+            <IonChip style={statusStyle}>{job?.status}</IonChip>
           </IonCol>
 
           <IonCol size='1.5'>
-            <IonChip style={stageBGC}>{job.stage}</IonChip>
+            <IonChip style={stageBGC}>{job?.stage}</IonChip>
           </IonCol>
         </IonRow>
       </IonGrid>
