@@ -1,18 +1,18 @@
-import './jobsList.scss';
-import {
-  IonContent,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonRow,
-  IonGrid,
-  IonCol,
-} from '@ionic/react';
-import JobItem from '../JobItems/JobItem';
+import { IonContent, IonList, IonItem, IonLabel, IonRow, IonGrid, IonCol } from '@ionic/react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import fuzzysort from 'fuzzysort';
 
-const JobsList = () => {
+import JobItem from '../JobItems/JobItem';
+
+import './jobsList.scss';
+
+const JobsList = ({ getJobs, getCompanies }) => {
+
+  // useEffect(() => {
+  //   getJobs();
+  //   getCompanies();
+  // });
 
   const jobState = useSelector(state => state.jobs.jobs);
   // get current search input from fuzzy search
@@ -43,6 +43,7 @@ const JobsList = () => {
 
   // render fuzzy results if there is search input OR all jobs
   let jobResults;
+  console.log(searchState);
   searchState.search ?
     jobResults = fuzzyResults :
     jobResults = jobState;
@@ -61,19 +62,19 @@ const JobsList = () => {
             </IonCol>
 
             <IonCol size='2'>
-              <IonLabel >Company</IonLabel>
+              <IonLabel>Company</IonLabel>
             </IonCol>
 
             <IonCol size='2.5'>
-              <IonLabel >Title</IonLabel>
+              <IonLabel>Title</IonLabel>
             </IonCol>
 
             <IonCol size='1.5'>
-              <IonLabel >Applied</IonLabel>
+              <IonLabel>Applied</IonLabel>
             </IonCol>
 
             <IonCol size='2'>
-              <IonLabel > Location</IonLabel>
+              <IonLabel>Location</IonLabel>
             </IonCol>
 
             <IonCol size='1.25'>

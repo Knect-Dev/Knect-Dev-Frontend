@@ -11,7 +11,7 @@ import { updateJob } from '../../../store/jobs.js';
 
 import './jobForm.scss';
 
-const JobForm = ({ id = 2, disable, setDisable, showForm, setShowForm, setActiveForm }) => {
+const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActiveForm }) => {
 
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
@@ -79,7 +79,7 @@ const JobForm = ({ id = 2, disable, setDisable, showForm, setShowForm, setActive
             <IonRow>
               <IonCol size='4'>Job:<h5>{values?.title}</h5></IonCol>
               <IonCol size='4'>ID:<h5>{values?.jobId}</h5></IonCol>
-              <IonCol size='4'>Date Applied: <h5>{values?.appliedDate.slice(0, 10)}</h5></IonCol>
+              <IonCol size='4'>Date Applied: <h5>{values?.appliedDate?.slice(0, 10)}</h5></IonCol>
             </IonRow>
 
             <IonRow>
@@ -130,7 +130,7 @@ const JobForm = ({ id = 2, disable, setDisable, showForm, setShowForm, setActive
 
               <IonCol size='4'>
                 <IonLabel>Date Applied: </IonLabel>
-                <IonInput value={values?.appliedDate.slice(0, 10)} onIonChange={e => handleChange(e)} placeholder='yyyy-mm-dd' name='appliedDate' clearInput></IonInput>
+                <IonInput value={values?.appliedDate?.slice(0, 10)} onIonChange={e => handleChange(e)} placeholder='yyyy-mm-dd' name='appliedDate' clearInput></IonInput>
               </IonCol >
             </IonRow >
 
