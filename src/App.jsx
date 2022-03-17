@@ -35,21 +35,28 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
+import Auth from '../src/components/Auth/Auth';
+
+
 /* Theme variables */
 import './theme/variables.css';
 import './theme/font.scss';
 
+let isAuthed = false;
 
 setupIonicReact();
 const store = createReduxStore();
 
-const App = () => (
 
+const App = () => {
+  return(
   <Provider store={store}>
     <IonApp>
       <Header />
       <Filter />
       <IonContent id="main">
+        {!isAuthed ?
+        <Auth/> :
         <IonReactRouter>
           <IonTabs>
             <IonRouterOutlet>
@@ -82,9 +89,11 @@ const App = () => (
             </IonTabBar>
           </IonTabs>
         </IonReactRouter>
+        }
       </IonContent>
     </IonApp>
   </Provider>
-);
+  );
+};
 
 export default App;
