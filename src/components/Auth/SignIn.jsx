@@ -6,7 +6,11 @@ import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider,   Io
   IonGrid,
   IonRow,
   IonCol, IonCardContent, IonText, IonButton } from '@ionic/react';
-  import { mailOutline, keyOutline } from 'ionicons/icons';
+import { mailOutline, keyOutline } from 'ionicons/icons';
+
+import {signInUser} from '../../store/user';
+
+
 
 
 
@@ -16,6 +20,10 @@ function SignIn({ toggle }) {
   
   const handleChange = (event) => {
     updateCredentials({...credentials, [event.target.name]: event.detail.value} );
+  }
+
+  const handleSubmit = () => {
+    dispatch(signInUser(credentials));
   }
   console.log(credentials);
 
@@ -42,7 +50,7 @@ function SignIn({ toggle }) {
                 <IonInput name="password" type="password" value={credentials?.password || ''} placeholder="Secure Password" onIonChange={handleChange} ></IonInput>
               </IonItem>
             </section>
-            <IonButton expand="block">
+            <IonButton onClick={handleSubmit} expand="block">
               Sign-In
             </IonButton>
             <IonText>
