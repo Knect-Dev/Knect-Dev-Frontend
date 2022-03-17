@@ -1,12 +1,31 @@
-import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider,   IonCard,
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { IonAvatar, IonIcon, IonInput, IonItem, IonCard,
   IonCardHeader,
   IonCardTitle,
   IonGrid,
   IonRow,
   IonCol, IonCardContent, IonText, IonButton } from '@ionic/react';
-  import { mailOutline, keyOutline, personOutline } from 'ionicons/icons';
+import { mailOutline, keyOutline, personOutline } from 'ionicons/icons';
+import { signUpUser } from '../../store/user';
 
 function SignUp({toggle}) {
+  
+  const dispatch = useDispatch();
+  const [credentials, updateCredentials] = useState({});
+  
+  const handleChange = (event) => {
+    updateCredentials({...credentials, [event.target.name]: event.detail.value} );
+  }
+
+  const handleSubmit = () => {
+    if(credentials.name && credentials.email && credentials.password ){
+      dispatch(signUpUser(credentials));
+      console.log(credentials);
+    }
+  }
+  console.log(credentials);
+
   return(
     <IonCard>
       <IonCardHeader class='ion-text-center'>
@@ -23,18 +42,18 @@ function SignUp({toggle}) {
             <section id="profile-form">
             <IonItem>
                 <IonIcon icon={personOutline} style={{margin: 15}}/>
-                <IonInput type="name" value="" placeholder="Full Name" ></IonInput>
+                <IonInput name="name" type="name" value={credentials.name} placeholder="Full Name" onIonChange={handleChange} ></IonInput>
               </IonItem>
               <IonItem>
                 <IonIcon icon={mailOutline} style={{margin: 15}}/>
-                <IonInput type="email" value="" placeholder="email@domain.com" ></IonInput>
+                <IonInput name="email" type="email" value={credentials.email} placeholder="email@domain.com" onIonChange={handleChange} ></IonInput>
               </IonItem>
               <IonItem>
                 <IonIcon icon={keyOutline} style={{margin: 15}}/>
-                <IonInput type="password" value="" placeholder="Secure Password" ></IonInput>
+                <IonInput name="password" type="password" value={credentials.password} placeholder="Secure Password" onIonChange={handleChange}></IonInput>
               </IonItem>
             </section>
-            <IonButton expand="block">
+            <IonButton expand="block" onClick={handleSubmit}>
               Sign-Up
             </IonButton>
             <IonText>

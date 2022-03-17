@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider,   IonCard,
+import { IonAvatar, IonIcon, IonInput, IonItem, IonCard,
   IonCardHeader,
   IonCardTitle,
   IonGrid,
