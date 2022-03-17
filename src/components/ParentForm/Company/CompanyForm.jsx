@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
 import { When } from 'react-if';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {getCompanies} from '../../../store/companies'
 
 import { closeOutline } from 'ionicons/icons';

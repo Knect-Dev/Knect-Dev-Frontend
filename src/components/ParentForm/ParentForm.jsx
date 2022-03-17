@@ -19,7 +19,7 @@ const Form = ({ showForm, setShowForm }) => {
       <IonModal
         isOpen={showForm}
         swipeToClose={true}
-        backdropDismiss={false}
+        backdropDismiss={false}  // <--- if you change this to true you can click on the background to dismiss the modal.
         id='form-modal'
       >
         <When condition={activeForm === 'Job'}>
