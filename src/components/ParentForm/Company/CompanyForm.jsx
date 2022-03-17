@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { When } from 'react-if';
-import { useDispatch } from 'react-redux';
 import {getCompanies} from '../../../store/companies'
 
 import { closeOutline } from 'ionicons/icons';
@@ -37,16 +36,14 @@ const CompanyForm = ({ state, id = 1, disable, setDisable, showForm, setShowForm
         <IonGrid>
           <When condition={lock}>
 
-            <IonRow class='ion-justify-content-around'>
-              <IonCol><IonItem color='success'>Application Status</IonItem></IonCol>
+            <IonRow class='ion-justify-content-between status-background'>
+              <IonItem class='status-item' >Application Status</IonItem>
+              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
             </IonRow>
 
             <IonRow>
-              <IonCol size='5'>{currentCompany?.name || 'Company Name with link to Company website'}</IonCol>
-              <IonCol size='5'>{currentCompany?.careersURL || 'Career URL'}</IonCol>
-              <IonCol size='2'>
-                <IonButton color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-              </IonCol>
+              <IonCol size='6'>{currentCompany?.name || 'Company Name with link to Company website'}</IonCol>
+              <IonCol size='6'>{currentCompany?.careersURL || 'Career URL'}</IonCol>
             </IonRow>
 
             <IonRow>
@@ -69,16 +66,14 @@ const CompanyForm = ({ state, id = 1, disable, setDisable, showForm, setShowForm
 
           </When >
           <When condition={!lock}>
-            <IonRow class='ion-justify-content-around'>
-              <IonCol><IonItem color='success'>Application Status</IonItem></IonCol>
+            <IonRow class='ion-justify-content-between status-background'>
+              <IonItem class='status-item' >Application Status</IonItem>
+              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
             </IonRow>
 
             <IonRow>
-              <IonCol size='5'>{'Company Name'}</IonCol>
-              <IonCol size='5'>Career Page</IonCol>
-              <IonCol size='2'>
-                <IonButton color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-              </IonCol>
+              <IonCol size='6'>{'Company Name'}</IonCol>
+              <IonCol size='6'>Career Page</IonCol>
             </IonRow>
 
             <IonRow>

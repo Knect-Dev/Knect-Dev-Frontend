@@ -29,17 +29,16 @@ const ContactForm = ({ state, disable, setDisable, showForm, setShowForm }) => {
         <IonGrid>
           <When condition={lock}>
 
-            <IonRow class='ion-justify-content-around'>
-              <IonCol><IonItem color='success'>Application Status</IonItem></IonCol>
+            <IonRow class='ion-justify-content-between status-background'>
+              <IonItem class='status-item' >Application Status</IonItem>
+              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
             </IonRow>
 
             <IonRow>
-              <IonCol size='5'>{contactState.company || 'Company Name'}</IonCol>
-              <IonCol size='5'>Career Page</IonCol>
-              <IonCol size='2'>
-                <IonButton color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-              </IonCol>
+              <IonCol size='6'>{contactState.company || 'Company Name'}</IonCol>
+              <IonCol size='6'>Career Page</IonCol>
             </IonRow>
+
             <IonAccordionGroup>
               {contactState.map(contact => {
                 return (
@@ -68,16 +67,14 @@ const ContactForm = ({ state, disable, setDisable, showForm, setShowForm }) => {
             </IonAccordionGroup>
           </When >
           <When condition={!lock}>
-            <IonRow class='ion-justify-content-around'>
-              <IonCol><IonItem color='success'>Application Status</IonItem></IonCol>
+            <IonRow class='ion-justify-content-between status-background'>
+              <IonItem class='status-item' >Application Status</IonItem>
+              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
             </IonRow>
 
             <IonRow>
-              <IonCol size='5'>{contactState.company}</IonCol>
-              <IonCol size='5'>Career Page</IonCol>
-              <IonCol size='2'>
-                <IonButton color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-              </IonCol>
+              <IonCol size='6'>{contactState.company}</IonCol>
+              <IonCol size='6'>Career Page</IonCol>
             </IonRow>
 
             <IonAccordionGroup>
