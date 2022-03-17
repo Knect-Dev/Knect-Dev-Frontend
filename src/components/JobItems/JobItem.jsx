@@ -39,7 +39,7 @@ const JobItem = ({ job }) => {
 
   let stageBGC = stageChipBkgrds[job.stage.toLowerCase()];
 
-  let statusStyle = job.status === true ||  job.status.toLowerCase() === 'active' ? { background: '#A1F189AA' } : { background: '#80808099' };
+  let statusStyle = job.status === true ? { background: '#A1F189AA' } : { background: '#80808099' };
 
   return (
     <IonItem>
