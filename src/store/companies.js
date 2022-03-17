@@ -65,7 +65,8 @@ const setCompany = (company) => {
   };
 };
 
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4"
+let token = process.env.TEST_TOKEN;
+
 const config = {
   headers: { Authorization: `Bearer ${token}` }
 };
