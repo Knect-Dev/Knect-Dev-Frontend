@@ -1,7 +1,8 @@
 import './jobsList.scss';
 import {
   IonContent,
-  IonList
+  IonList,
+  IonItem
 } from '@ionic/react';
 import JobItem from '../JobItems/JobItem';
 import { useSelector } from 'react-redux';
@@ -21,11 +22,25 @@ const JobsList = ({ jobs }) => {
   let fuzzyResults;
 
   // typeof searchState === 'object' ?
-    fuzzyResults = fuzzysort.go(searchState.search, jobState, { key: ['company'] })
+  fuzzyResults = fuzzysort.go(searchState.search, jobState, {
+    keys: [
+      'company',
+      'title',
+      'jobId',
+      'appliedDate',
+      'stage',
+      'status',
+      'location',
+      'technologies',
+      'offer',
+      'notes',
+    ]
+  })
+
     // :
     // fuzzyResults = fuzzysort.go(searchState, jobState, { key: ['company'] })
 
-  console.log('fuzzy search', fuzzyResults);
+    console.log('fuzzy search', fuzzyResults);
   // promise.then(results => console.log('fuzzy results', results));
   // }
 
@@ -38,7 +53,7 @@ const JobsList = ({ jobs }) => {
   // renders fuzzy results if there is search input
   // otherwise renders all jobs from job state
   let jobResults;
-  searchState.search ? 
+  searchState.search ?
     jobResults = fuzzyResults :
     jobResults = jobState;
 
@@ -60,6 +75,7 @@ const JobsList = ({ jobs }) => {
           );
         })
         }
+        {!jobResults.length ? <IonItem>NO JOBS MATCH THIS SEARCH</IonItem> : null}
       </IonList>
     </IonContent>
   );
