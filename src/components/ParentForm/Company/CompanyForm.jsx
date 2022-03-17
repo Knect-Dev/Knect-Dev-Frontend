@@ -110,7 +110,7 @@ const CompanyForm = ({ state, id = 1, disable, setDisable, showForm, setShowForm
             <IonRow>
               <IonCol>
                 <IonLabel>Mission: </IonLabel>
-                <IonTextarea value={currentCompany?.mission} onIonChange={e => handleChange(e)} name='mission' clearInput></IonTextarea>
+                <IonTextarea auto-grow value={currentCompany?.mission} onIonChange={e => handleChange(e)} name='mission' clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 
