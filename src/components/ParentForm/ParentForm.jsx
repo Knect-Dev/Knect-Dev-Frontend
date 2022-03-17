@@ -11,8 +11,15 @@ import './ParentForm.scss';
 
 const Form = ({ showForm, setShowForm }) => {
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, setState] = useState({});
+  /* {
+    jobId: 
+    companyId: job.companyId
+  }
+  */
   const [activeForm, setActiveForm] = useState('Job');
+
+  const [disable, setDisable] = useState(false);
 
   return (
     <>
@@ -23,18 +30,18 @@ const Form = ({ showForm, setShowForm }) => {
         id='form-modal'
       >
         <When condition={activeForm === 'Job'}>
-          <JobForm state={state} dispatch={dispatch} showForm={showForm} setShowForm={setShowForm} />
+          <JobForm state={state} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
         </When>
         <When condition={activeForm === 'Company'}>
-          <CompanyForm state={state} dispatch={dispatch} showForm={showForm} setShowForm={setShowForm} />
+          <CompanyForm state={state} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
         </When>
         <When condition={activeForm === 'Contact'}>
-          <ContactForm state={state} dispatch={dispatch} showForm={showForm} setShowForm={setShowForm} />
+          <ContactForm state={state} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
         </When>
         <div className='button-group'>
-          <IonButton class='tab-button job-button' id={activeForm === 'Job' && 'active'} onClick={() => setActiveForm('Job')}>Job</IonButton>
-          <IonButton class='tab-button company-button' id={activeForm === 'Company' && 'active'} onClick={() => setActiveForm('Company')}>Company</IonButton>
-          <IonButton class='tab-button contact-button' id={activeForm === 'Contact' && 'active'} onClick={() => setActiveForm('Contact')}>Contacts</IonButton>
+          <IonButton class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Job' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Job')}>Job</IonButton>
+          <IonButton class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Company' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Company')}>Company</IonButton>
+          <IonButton class={`tab-button contact-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Contact' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Contact')}>Contacts</IonButton>
         </div>
       </IonModal>
     </>
