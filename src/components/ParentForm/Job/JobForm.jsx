@@ -66,7 +66,7 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
             </IonRow>
 
             <IonRow>
-              <IonCol size='6' onClick={() => setActiveForm('Company')} style={{ cursor: 'pointer' }}>{ }</IonCol>
+              <IonCol size='6' onClick={() => setActiveForm('Company')} style={{ cursor: 'pointer' }}>{values?.company}</IonCol>
               <IonCol size='6'>Career Page</IonCol>
             </IonRow>
 
