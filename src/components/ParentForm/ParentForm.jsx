@@ -9,9 +9,9 @@ import { initialState, reducer } from './FormReducer.jsx';
 
 import './ParentForm.scss';
 
-const Form = ({ showForm, setShowForm }) => {
-// TODO This setState is what changes the state passed to the Job / Company / Contact forms
-  const [state, setState] = useState({}); 
+const Form = ({ showForm, setShowForm, selectedJob, setSelectedJob }) => {
+  // TODO This setState is what changes the state passed to the Job / Company / Contact forms
+
 
   const [activeForm, setActiveForm] = useState('Job');
 
@@ -26,13 +26,13 @@ const Form = ({ showForm, setShowForm }) => {
         id='form-modal'
       >
         <When condition={activeForm === 'Job'}>
-          <JobForm state={state} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} setActiveForm={setActiveForm} />
+          <JobForm selectedJob={selectedJob} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} setActiveForm={setActiveForm} />
         </When>
         <When condition={activeForm === 'Company'}>
-          <CompanyForm state={state} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
+          <CompanyForm selectedJob={selectedJob} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
         </When>
         <When condition={activeForm === 'Contact'}>
-          <ContactForm state={state} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
+          <ContactForm selectedJob={selectedJob} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
         </When>
         <div className='button-group'>
           <IonButton class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Job' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Job')}>Job</IonButton>

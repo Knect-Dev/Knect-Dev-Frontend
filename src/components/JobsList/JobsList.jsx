@@ -12,7 +12,7 @@ import JobItem from '../JobItems/JobItem';
 import { useSelector } from 'react-redux';
 import fuzzysort from 'fuzzysort';
 
-const JobsList = ({ showForm, setShowForm }) => {
+const JobsList = ({ showForm, setShowForm, selectedJob, setSelectedJob }) => {
 
   const jobState = useSelector(state => state.jobs.jobs);
   // get current search input from fuzzy search
@@ -34,7 +34,7 @@ const JobsList = ({ showForm, setShowForm }) => {
     ]
   });
 
-  console.log('fuzzyResults type: ', typeof fuzzyResults);
+  // console.log('fuzzyResults type: ', typeof fuzzyResults);
 
   // function handleClick(e) { // BUG more info: https://www.educative.io/edpresso/what-is-typeerror-converting-circular-structure-to-json
   //   let something = JSON.stringify(e.target);
@@ -47,7 +47,7 @@ const JobsList = ({ showForm, setShowForm }) => {
     jobResults = fuzzyResults :
     jobResults = jobState;
 
-  console.log('jobResults', jobResults);
+  // console.log('jobResults', jobResults);
 
   /*onClick={handleClick}*/
   return (
@@ -91,8 +91,8 @@ const JobsList = ({ showForm, setShowForm }) => {
             // fuzzy search returns results nested in an additional object
             return (
               job.obj ?
-                <JobItem job={job.obj} key={idx} showForm={showForm} setShowForm={setShowForm} /> :
-                <JobItem job={job} key={idx} showForm={showForm} setShowForm={setShowForm} />
+                <JobItem job={job.obj} key={idx} showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} /> :
+                <JobItem job={job} key={idx} showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
             );
           })
         }

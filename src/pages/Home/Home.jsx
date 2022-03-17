@@ -16,6 +16,9 @@ import { getJobs } from '../../store/jobs';
 const Home = () => {
 
   const [showForm, setShowForm] = useState(false);
+  const [selectedJob, setSelectedJob] = useState({});
+
+  console.log('SELECTED JOB HOME: ', selectedJob);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -37,8 +40,8 @@ const Home = () => {
       <PageHeader title={'Jorbs'} />
       <AddFAB showForm={showForm} setShowForm={setShowForm} />
       <IonContent fullscreen>
-        <Form showForm={showForm} setShowForm={setShowForm} />
-        <JobsList showForm={showForm} setShowForm={setShowForm} />
+        <Form showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
+        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
       </IonContent>
     </IonPage>
   );

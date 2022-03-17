@@ -10,12 +10,13 @@ import { addJob } from '../../../store/jobs.js';
 
 import './jobForm.scss';
 // TODO id is the job id
-const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm }) => {
+const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, selectedJob, setSelectedJob }) => {
+
 
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
 
-  let currentJob = jobState.find(job => job.id === id);
+  let currentJob = jobState.find(job => job.id === selectedJob.id);
   const [values, setValues] = useState(currentJob ? currentJob : {});
 
   const [lock, setLock] = useState(true);
@@ -34,12 +35,12 @@ const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm
 
   function toggleEditHandler(confirm) {
     if (confirm) {
-      if (!id) {
+      if (!selectedJob.id) {
         values['company'] = 'google';
         if (values) dispatch(addJob(values));
         setDisable(!disable);
         setLock(!lock);
-      } else if (id) {
+      } else if (selectedJob.id) {
         dispatch({ type: 'UPDATE_JOB', payload: values });
         setDisable(!disable);
         setLock(!lock);
