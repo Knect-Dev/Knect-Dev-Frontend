@@ -1,27 +1,29 @@
 import axios from 'axios';
 
 // Backend
-const JOB_URL = '';
+const JOB_URL = 'https://knect-dev.herokuapp.com/Jobs/';
 
 const initialState = {
-  jobs: [
-    {
-      id: 1,
-      company: 'Microsoft',
-      title: 'Developer',
-      jobId: '1234re',
-      jobUrl: 'someurl.com',
-      appliedDate: '03/16/2022',
-      stage: 'Not Applied',
-      status: true,
-      openPositions: 10,
-      location: 'Seattle, WA',
-      technologies: 'JavaScript, .NET',
-      targeted: '',
-      offer: '',
-      notes: 'Notes here!',
-    },
-  ],
+  jobs: getJobs(),
+
+  // jobs: [
+  //   {
+  //     id: 0,
+  //     company: 'Microsoft',
+  //     title: 'Developer',
+  //     jobId: '1234re',
+  //     jobUrl: 'someurl.com',
+  //     appliedDate: '03/16/2022',
+  //     stage: 'Not Applied',
+  //     status: true,
+  //     openPositions: 10,
+  //     location: 'Seattle, WA',
+  //     technologies: 'JavaScript, .NET',
+  //     targeted: '',
+  //     offer: '',
+  //     notes: 'Notes here!',
+  //   },
+  // ],
 };
 
 const jobReducer = (state = initialState, action) => {
@@ -43,6 +45,9 @@ const jobReducer = (state = initialState, action) => {
     case 'REMOVE_JOB':
       return { job: '' };
 
+    // case 'SET_JOB':
+    //   return { job: '' };
+
     default:
       return state;
   }
@@ -58,8 +63,16 @@ const setJob = (job) => {
 
 export const getJobs = async (dispatch) => {
   try {
-    let response = await axios.get(JOB_URL);
+    console.log("testUSER token:", `${process.env.USER_TOKEN}`);
+    let response = await axios({
+      url: JOB_URL,
+      method: 'get',
+      headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
+    });
+
+    // let response = await axios.get(JOB_URL);
     let data = response.data;
+    console.log(data);
     dispatch(setJob(data));
   } catch (e) {
     console.log(e);
