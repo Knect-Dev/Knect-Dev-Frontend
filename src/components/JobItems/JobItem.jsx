@@ -17,36 +17,32 @@ const JobItem = ({ job }) => {
       <IonGrid>
         <IonRow>
 
-          <IonCol>
+          <IonCol size='.3'>
             <IonIcon icon={magnetOutline} />
           </IonCol>
 
-          <IonCol>
+          <IonCol size='2'>
             <IonLabel >{job.company}</IonLabel>
           </IonCol>
 
-          <IonCol>
+          <IonCol size='2.5'>
             <IonLabel >{job.title}</IonLabel>
           </IonCol>
 
-          <IonCol>
+          <IonCol size='1.5'>
             <IonLabel >{job.appliedDate}</IonLabel>
           </IonCol>
 
-          <IonCol>
-            <IonLabel >{job.stage}</IonLabel>
-          </IonCol>
-
-          <IonCol>
+          <IonCol size='2'>
             <IonLabel > {job.location}</IonLabel>
           </IonCol>
 
-          <IonCol>
-            <IonLabel > {job.offer}</IonLabel>
+          <IonCol size='1'>
+            <IonChip>{job.status}</IonChip>
           </IonCol>
 
-          <IonCol>
-            <IonChip>{job.status}</IonChip>
+          <IonCol size='1.5'>
+            <IonChip  >{job.stage}</IonChip>
           </IonCol>
 
 
