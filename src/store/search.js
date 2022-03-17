@@ -1,4 +1,3 @@
-
 const initialState = 'Lima';
 
 const searchReducer = (state = initialState, action) => {
@@ -9,11 +8,13 @@ const searchReducer = (state = initialState, action) => {
       let updatedSearch = payload;
       return { search: updatedSearch };
     case 'CLEAR_SEARCH':
-      return {search: ''};
+      return { search: '' };
     default:
       return state;
   }
 };
+
+
 
 //get search
 export const setSearch = (search) => {

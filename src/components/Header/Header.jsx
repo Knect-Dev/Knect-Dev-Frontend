@@ -15,15 +15,15 @@ import { accessibilityOutline } from 'ionicons/icons';
 // import { useLocation } from 'react-router';
 import './header.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import {setSearch, clearSearch} from '../../store/search.js';
+import { setSearch, clearSearch } from '../../store/search.js';
 
 const Header = () => {
 
   const dispatch = useDispatch();
-  const searchText = useSelector(state => state.search);
+  // const searchStr = useSelector(state => state.search);
   console.log('searchText', searchText);
 
-  // const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('');
   const [darkTheme, setDarkTheme] = useState(false);
 
   const updateSearchText = (string) => dispatch(setSearch(string))
@@ -58,6 +58,9 @@ const Header = () => {
               value={searchText}
               onIonChange={(e) => updateSearchText(e.detail.value)} // test this
             ></IonSearchbar>
+            <IonButton onClick={() => dispatch(setSearch)}>
+              Search
+            </IonButton>
             Filters
             <IonMenuButton auto-hide='false'></IonMenuButton>
           </IonButtons>
