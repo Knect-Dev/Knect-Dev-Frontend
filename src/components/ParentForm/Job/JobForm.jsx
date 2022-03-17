@@ -6,7 +6,7 @@ import { When } from 'react-if';
 import { closeOutline } from 'ionicons/icons';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
-const JobForm = ({ id, showForm, setShowForm }) => {
+const JobForm = ({ id, disable, setDisable, showForm, setShowForm }) => {
   const [lock, setLock] = useState(true);
   id = 0;
   let jobState = useSelector(state => state.jobs.jobs);
@@ -21,6 +21,7 @@ const JobForm = ({ id, showForm, setShowForm }) => {
   }
 
   function toggleEditHandler() {
+    setDisable(!disable);
     setLock(!lock);
   }
 
@@ -149,9 +150,9 @@ const JobForm = ({ id, showForm, setShowForm }) => {
 
           </When >
           {lock ?
-            <IonIcon class="edit-form-icon" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>
-              :
-            <IonIcon class="edit-form-icon" icon={lockOpenOutline} onClick={toggleEditHandler} ></IonIcon>}
+            <IonIcon class="edit-form-icon-locked" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>
+            :
+            <IonIcon class="edit-form-icon-unlocked" icon={lockOpenOutline} onClick={toggleEditHandler} ></IonIcon>}
         </IonGrid >
       </IonContent>
     </>
