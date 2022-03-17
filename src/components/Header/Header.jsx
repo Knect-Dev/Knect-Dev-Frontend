@@ -1,20 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from "react-router";
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { sunnyOutline, moonOutline, logOutOutline} from 'ionicons/icons';
 import {
   IonHeader,
   IonTitle,
   IonToolbar,
   IonSearchbar,
   IonMenuButton,
-  IonButton,
   IonButtons,
   IonIcon
 } from '@ionic/react';
-import { sunnyOutline, moonOutline } from 'ionicons/icons';
-import { accessibilityOutline } from 'ionicons/icons';
-// import { useLocation } from 'react-router';
 import './header.scss';
-import { useSelector } from 'react-redux';
 
 const Header = () => {
   const [searchText, setSearchText] = useState('');
@@ -31,16 +27,14 @@ const Header = () => {
   return (
     <IonHeader>
       <IonToolbar>
-        <IonButtons slot='start'>
-          <IonButton>
-            <IonIcon slot='icon-only' icon={accessibilityOutline}></IonIcon>
-          </IonButton>
-          {darkTheme ?
-            <IonIcon icon={sunnyOutline} onClick={themeToggleHandler}></IonIcon>
+        <IonButtons slot='start'> 
+        <IonIcon id='logout-button' icon={logOutOutline}></IonIcon>
+        <IonTitle id='title'>Knect.Dev</IonTitle>
+        {darkTheme ?
+            <IonIcon class='dark-icon' icon={sunnyOutline} onClick={themeToggleHandler}></IonIcon>
             :
-            <IonIcon icon={moonOutline} onClick={themeToggleHandler}></IonIcon>}
+            <IonIcon class='dark-icon' icon={moonOutline} onClick={themeToggleHandler}></IonIcon>}
         </IonButtons>
-        <IonTitle>Knect.Dev</IonTitle>
         {currentPage === '/home' ?
           <IonButtons slot='end'>
             <IonSearchbar
