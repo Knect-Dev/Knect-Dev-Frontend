@@ -24,7 +24,7 @@ const Home = () => {
     dispatch(setCurrentPage(location.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
-  
+
   //on page load grab all of the jobs
   //need to send a token
   useEffect(() => {
@@ -35,9 +35,9 @@ const Home = () => {
   return (
     <IonPage>
       <PageHeader title={'Jorbs'} />
-      <IonContent fullscreen> 
+      <AddFAB showForm={showForm} setShowForm={setShowForm} />
+      <IonContent fullscreen>
         <Form showForm={showForm} setShowForm={setShowForm} />
-        <AddFAB showForm={showForm} setShowForm={setShowForm} />
         <JobsList />
       </IonContent>
     </IonPage>

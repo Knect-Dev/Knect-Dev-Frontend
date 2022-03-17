@@ -6,10 +6,10 @@ const AddFAB = ({ showForm, setShowForm }) => {
   const handleClick = (e) => {
     setShowForm(!showForm);
   };
-  
+
   return (
     <IonFab vertical="top" horizontal="end" slot="fixed">
-      <IonFabButton onClick={handleClick} color="danger">
+      <IonFabButton onClick={handleClick} color="success">
         <IonIcon icon={addOutline} />
       </IonFabButton>
     </IonFab>
