@@ -23,7 +23,9 @@ function SignIn({ toggle }) {
   }
 
   const handleSubmit = () => {
-    dispatch(signInUser(credentials));
+    if(credentials.email && credentials.password){
+      dispatch(signInUser(credentials));
+    }
   }
   console.log(credentials);
 
