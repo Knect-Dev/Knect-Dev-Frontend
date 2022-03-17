@@ -38,6 +38,12 @@ const companiesReducer = (state = initialState, action) => {
   let { type, payload } = action;
 
   switch (type) {
+
+    case 'SET_COMPANIES':
+
+
+      return {companies: payload}
+
     case 'UPDATE_COMPANY':
       //-- First we find the company we need to update, and make the changes --//
       let updatedCompanyId = state.companies.indexOf(state.companies.find(e => e.id === payload.id));
@@ -58,14 +64,14 @@ const companiesReducer = (state = initialState, action) => {
 };
 
 //get company
-const setCompany = (company) => {
+const setCompanies = (companies) => {
   return {
-    type: 'SET_COMPANY',
-    payload: company,
+    type: 'SET_COMPANIES',
+    payload: companies,
   };
 };
 
-let token = process.env.TEST_TOKEN;
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4';
 
 const config = {
   headers: { Authorization: `Bearer ${token}` }
@@ -75,8 +81,8 @@ export const getCompanies = async (dispatch) => {
   try {
     let response = await axios.get(COMPANY_URL, config);
     let data = response.data;
-    console.log('Data: ', data)
-    dispatch(setCompany(data));
+    console.log('Companies: ', data)
+    dispatch(setCompanies(data));
   } catch (e) {
     console.log(e);
   }
