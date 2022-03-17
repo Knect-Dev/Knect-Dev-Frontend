@@ -8,18 +8,38 @@ import {
   IonMenuButton,
   IonButton,
   IonButtons,
-  IonIcon
+  IonIcon,
 } from '@ionic/react';
 import { sunnyOutline, moonOutline } from 'ionicons/icons';
 import { accessibilityOutline } from 'ionicons/icons';
 // import { useLocation } from 'react-router';
 import './header.scss';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearch, clearSearch } from '../../store/search.js';
 
 const Header = () => {
-  const [searchText, setSearchText] = useState('');
-  const [darkTheme, setDarkTheme] = useState(false);
 
+  const searchState = useSelector(state => state.search);
+  // console.log('searchState', searchState);
+  const dispatch = useDispatch();
+  // const searchStr = useSelector(state => state.search);
+
+  // const [searchText, setSearchText] = useState('');
+
+
+  // const updateSearchText = (string) => dispatch(setSearch(string))
+  const [searchText, setSearchText] = useState('');
+
+  const searchTextHandler = (value) => {
+    setSearchText(value);
+    dispatch(setSearch(searchText));
+  }
+
+  console.log('searchText', searchText);
+  console.log('SEARCH STATE', searchState);
+
+
+  const [darkTheme, setDarkTheme] = useState(false);
   const themeToggleHandler = () => {
     document.body.classList.toggle('dark');
     darkTheme ? setDarkTheme(false) : setDarkTheme(true);
@@ -46,14 +66,19 @@ const Header = () => {
             <IonSearchbar
               id='search-bar'
               value={searchText}
-              onIonChange={(e) => setSearchText(e.detail.value)}
+              onIonChange={(e) => searchTextHandler(e.detail.value)} // test this
             ></IonSearchbar>
+            <IonButton onClick={() => dispatch(setSearch(searchText))}>
+              Search
+            </IonButton>
             Filters
+
             <IonMenuButton auto-hide='false'></IonMenuButton>
           </IonButtons>
           : null
         }
       </IonToolbar>
+
     </IonHeader>
   );
 };
