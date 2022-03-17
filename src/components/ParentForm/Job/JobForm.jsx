@@ -9,7 +9,7 @@ import LockButton from '../../lockButton/LockButton.jsx';
 import { addJob } from '../../../store/jobs.js';
 
 import './jobForm.scss';
-
+// TODO id is the job id
 const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm }) => {
 
   let jobState = useSelector(state => state.jobs.jobs);

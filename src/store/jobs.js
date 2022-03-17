@@ -22,6 +22,7 @@ const initialState = {
       notes: 'Notes here!',
     },
     {
+      id: '450',
       company: 'Amazon',
       title: 'burger flipper',
       jobId: '8098',
@@ -31,7 +32,7 @@ const initialState = {
       location: 'Seattle',
       technologies: 'Spatula, Grill',
       offer: '',
-      notes:'Low-stress' 
+      notes: 'Low-stress'
     },
     {
       company: 'Boogie Woogie',
@@ -43,7 +44,7 @@ const initialState = {
       location: 'Seattle',
       technologies: '',
       offer: '',
-      notes:'No compensation but great vibes' 
+      notes: 'No compensation but great vibes'
     },
     {
       company: 'Charlie\'s Chocolates',
@@ -55,7 +56,7 @@ const initialState = {
       location: '',
       technologies: '',
       offer: '',
-      notes:'' 
+      notes: ''
     },
     {
       company: 'Decks on Decks',
@@ -67,7 +68,7 @@ const initialState = {
       location: '',
       technologies: '',
       offer: '',
-      notes:'' 
+      notes: ''
     },
     {
       company: 'Everyone Shops Here',
@@ -79,7 +80,7 @@ const initialState = {
       location: '',
       technologies: '',
       offer: '',
-      notes:'' 
+      notes: ''
     },
     {
       company: 'Faith, Hope, & Love',
@@ -91,9 +92,10 @@ const initialState = {
       location: '',
       technologies: '',
       offer: '',
-      notes:'' 
+      notes: ''
     },
     {
+      id: '333',
       company: 'Golf Goobers',
       title: 'Caddy',
       jobId: '',
@@ -103,7 +105,7 @@ const initialState = {
       location: 'Atlanta',
       technologies: '',
       offer: 'lotsa money',
-      notes:'' 
+      notes: ''
     },
     {
       company: 'Hotel Hotel',
@@ -115,7 +117,7 @@ const initialState = {
       location: 'Seattle',
       technologies: '',
       offer: '',
-      notes:'' 
+      notes: ''
     },
   ],
 };

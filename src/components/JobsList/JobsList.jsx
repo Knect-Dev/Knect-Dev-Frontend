@@ -12,7 +12,7 @@ import JobItem from '../JobItems/JobItem';
 import { useSelector } from 'react-redux';
 import fuzzysort from 'fuzzysort';
 
-const JobsList = () => {
+const JobsList = ({ showForm, setShowForm }) => {
 
   const jobState = useSelector(state => state.jobs.jobs);
   // get current search input from fuzzy search
@@ -91,8 +91,8 @@ const JobsList = () => {
             // fuzzy search returns results nested in an additional object
             return (
               job.obj ?
-                <JobItem job={job.obj} key={idx} /> :
-                <JobItem job={job} key={idx} />
+                <JobItem job={job.obj} key={idx} showForm={showForm} setShowForm={setShowForm} /> :
+                <JobItem job={job} key={idx} showForm={showForm} setShowForm={setShowForm} />
             );
           })
         }

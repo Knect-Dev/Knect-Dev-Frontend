@@ -9,7 +9,9 @@ import {
 } from '@ionic/react';
 import { magnetOutline } from 'ionicons/icons'; // placeholder for company logo
 
-const JobItem = ({ job }) => {
+const JobItem = ({ job, showForm, setShowForm }) => {
+
+  // console.log('JOB ID: ', job.jobId);
 
   const stageChipBkgrds = {
     'not applied': { background: '#80808099' },
@@ -41,10 +43,16 @@ const JobItem = ({ job }) => {
 
   let statusStyle = job.status === true ? { background: '#A1F189AA' } : { background: '#80808099' };
 
+  function handleOnClick() {
+    // update id in job form, then show form
+    console.log('JOB ID: ', job.id)
+    setShowForm(!showForm)
+  }
+
   return (
-    <IonItem>
+    <IonItem >
       <IonGrid>
-        <IonRow>
+        <IonRow onClick={handleOnClick}>
 
           <IonCol size='.3'>
             <IonIcon icon={magnetOutline} />

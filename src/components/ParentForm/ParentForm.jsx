@@ -10,8 +10,8 @@ import { initialState, reducer } from './FormReducer.jsx';
 import './ParentForm.scss';
 
 const Form = ({ showForm, setShowForm }) => {
-
-  const [state, setState] = useState({});
+// TODO This setState is what changes the state passed to the Job / Company / Contact forms
+  const [state, setState] = useState({}); 
 
   const [activeForm, setActiveForm] = useState('Job');
 

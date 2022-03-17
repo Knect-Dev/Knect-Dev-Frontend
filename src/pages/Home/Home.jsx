@@ -38,7 +38,7 @@ const Home = () => {
       <AddFAB showForm={showForm} setShowForm={setShowForm} />
       <IonContent fullscreen>
         <Form showForm={showForm} setShowForm={setShowForm} />
-        <JobsList />
+        <JobsList showForm={showForm} setShowForm={setShowForm} />
       </IonContent>
     </IonPage>
   );
