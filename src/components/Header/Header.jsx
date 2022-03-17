@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { sunnyOutline, moonOutline, logOutOutline} from 'ionicons/icons';
 import {
   IonHeader,
@@ -11,10 +10,18 @@ import {
   IonIcon
 } from '@ionic/react';
 import './header.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearch, clearSearch } from '../../store/search.js';
 
 const Header = () => {
+
+  const dispatch = useDispatch();
+
+
   const [searchText, setSearchText] = useState('');
   const [darkTheme, setDarkTheme] = useState(false);
+
+  const updateSearchText = (string) => dispatch(setSearch(string))
 
   const themeToggleHandler = () => {
     document.body.classList.toggle('dark');
@@ -40,7 +47,7 @@ const Header = () => {
             <IonSearchbar
               id='search-bar'
               value={searchText}
-              onIonChange={(e) => setSearchText(e.detail.value)}
+              onIonChange={(e) => updateSearchText(e.detail.value)} // test this
             ></IonSearchbar>
             Filters
             <IonMenuButton auto-hide='false'></IonMenuButton>

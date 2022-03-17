@@ -11,26 +11,15 @@ import Form from '../../components/ParentForm/ParentForm.jsx';
 import AddFAB from '../../components/AddFab/AddFAB.jsx';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
-
 import { getJobs } from '../../store/jobs';
 
-// const jobs = [ // TEMP
-//   { company: 'Amazon' },
-//   { company: 'Boogie Woogie' },
-//   { company: 'Charlie\'s Chocolates' },
-//   { company: 'Decks on Decks' },
-//   { company: 'Everyone Shops Here' },
-//   { company: 'Faith, Hope, & Love' },
-//   { company: 'Golf Goobers' },
-//   { company: 'Hotel Hotel' },
-// ]
 const Home = () => {
-  const jobs = useSelector(state => state.jobs);
 
   const [showForm, setShowForm] = useState(false);
 
   const dispatch = useDispatch();
   const location = useLocation();
+
   useEffect(() => {
     dispatch(setCurrentPage(location.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,16 +32,13 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-
-
   return (
     <IonPage>
       <PageHeader title={'Jorbs'} />
-      <IonContent fullscreen> {/* TEST does this mess up header/footer on scroll? */}
+      <IonContent fullscreen> 
         <Form showForm={showForm} setShowForm={setShowForm} />
         <AddFAB showForm={showForm} setShowForm={setShowForm} />
-        <JobsList jobs={jobs} /> {/* jobs prop is TEMP */}
+        <JobsList />
       </IonContent>
     </IonPage>
   );

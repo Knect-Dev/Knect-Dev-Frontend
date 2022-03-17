@@ -1,4 +1,10 @@
+
+
 ion-chip {
-  --background: #ce33ce;
+  --background: transparent;
+  min-width: 4rem;
+  font-family: monospace;
+  font-size: .75em;
+  font-weight: bold;
 };
 
