@@ -1,4 +1,4 @@
-import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
+import { IonLabel, IonContent, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonAlert } from '@ionic/react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
@@ -21,6 +21,7 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
   let currentJob = jobState.find(job => job.id === selectedJobId);
   const [values, setValues] = useState(currentJob ? currentJob : {});
   const [lock, setLock] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
 
   const token = useSelector(state => state.user.user.token);
 
@@ -49,6 +50,14 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
     setShowForm(!showForm);
     setDisable(false);
     setSelectedJobId(null);
+  }
+
+  function handleClick(e) {
+    setShowAlert(false);
+    if (e === 'confirm') {
+      deleteHandler({ type: 'JOB', id: currentJob?.id });
+      handleCloseForm();
+    };
   }
 
   function toggleEditHandler(confirm) {
@@ -86,15 +95,10 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
     <>
       <IonContent>
         <IonGrid>
-            <IonRow class='ion-justify-content-between status-background'>
-            <IonIcon icon={trashOutline} onClick={() => deleteHandler({ type: 'JOB', id: currentJob?.id })}></IonIcon> 
+            <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
+            <IonIcon class="header-icon" icon={trashOutline} onClick={() => setShowAlert(true)}></IonIcon> 
               <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton 
-                class='job-button' 
-                color='danger' 
-                onClick={handleCloseForm}>
-                <IonIcon icon={closeOutline}></IonIcon>
-              </IonButton>
+            <IonIcon class="header-icon" icon={closeOutline} onClick={() => handleCloseForm()}></IonIcon> 
             </IonRow>
           <When condition={lock}>
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
@@ -201,6 +205,31 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
           </When >
           <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
         </IonGrid >
+        <IonAlert
+          isOpen={showAlert}
+          onDidDismiss={() => setShowAlert(false)}
+          cssClass='ion-text-center'
+          header={'CONFIRM DELETE'}
+          message={'Deleting this Job will be <strong>Permanent!</strong>'}
+          buttons={[
+            {
+              text: 'Cancel',
+              id: 'cancel',
+              cssClass: 'secondary',
+              handler: () => {
+                handleClick('cancel');
+              }
+            },
+            {
+              text: 'Confirm',
+              id: 'accept',
+              cssClass: 'success',
+              handler: () => {
+                handleClick('confirm');
+              }
+            },
+          ]}
+        />
       </IonContent>
     </>
   )

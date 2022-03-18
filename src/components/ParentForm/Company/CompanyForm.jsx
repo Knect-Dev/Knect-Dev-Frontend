@@ -56,9 +56,9 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
     <>
       <IonContent>
         <IonGrid>
-            <IonRow class='ion-justify-content-between status-background'>
+            <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
               <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
+              <IonIcon class="header-icon" icon={closeOutline} onClick={() => setShowForm(!showForm)}></IonIcon> 
             </IonRow>
 
           <When condition={lock}>
