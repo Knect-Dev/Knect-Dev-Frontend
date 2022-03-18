@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSearch } from '../../store/search.js';
 import { removeUser } from '../../store/user';
 
-const Header = () => {
+const Header = ({user}) => {
 
   const dispatch = useDispatch();
 
@@ -35,11 +35,16 @@ const Header = () => {
     dispatch(removeUser);
   }
 
+  console.log(Object.keys(user).length)
+
   return (
     <IonHeader>
       <IonToolbar>
         <IonButtons slot='start'> 
+        {
+        (Object.keys(user).length > 0) && 
         <IonIcon id='logout-button' icon={logOutOutline} onClick={handleLogOut}></IonIcon>
+        }
         <IonTitle id='title'>Knect.Dev</IonTitle>
         {darkTheme ?
             <IonIcon class='dark-icon' icon={sunnyOutline} onClick={themeToggleHandler}></IonIcon>

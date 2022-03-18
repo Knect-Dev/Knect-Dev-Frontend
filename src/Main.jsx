@@ -45,7 +45,7 @@ const Main = () => {
 
   return(
     <>
-      <Header />
+      <Header user={user}/>
       <Filter />
       <IonContent id="main">
         {!user.email ?
