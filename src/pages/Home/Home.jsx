@@ -17,9 +17,9 @@ import { getCompanies } from '../../store/companies.js';
 const Home = () => {
 
   const [showForm, setShowForm] = useState(false);
-  const [selectedJob, setSelectedJob] = useState({});
+  const [selectedJobId, setSelectedJobId] = useState({});
 
-  console.log('SELECTED JOB HOME: ', selectedJob);
+  console.log('SELECTED JOB HOME: ', selectedJobId);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -42,8 +42,8 @@ const Home = () => {
       <PageHeader title={'Jorbs'} />
       <AddFAB showForm={showForm} setShowForm={setShowForm} />
       <IonContent fullscreen>
-        <ParentForm showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
-        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} getJobs={getJobs} getCompanies={getCompanies} />
+        <ParentForm showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} />
+        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} getJobs={getJobs} getCompanies={getCompanies} />
       </IonContent>
     </IonPage>
   );

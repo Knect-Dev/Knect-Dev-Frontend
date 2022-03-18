@@ -9,7 +9,7 @@ import {
 } from '@ionic/react';
 import { magnetOutline } from 'ionicons/icons'; // placeholder for company logo
 
-const JobItem = ({ job, showForm, setShowForm, selectedJob, setSelectedJob }) => {
+const JobItem = ({ job, showForm, setShowForm, selectedJobId, setSelectedJobId }) => {
 
   // console.log('JOB ID: ', job.jobId);
 
@@ -47,7 +47,7 @@ const JobItem = ({ job, showForm, setShowForm, selectedJob, setSelectedJob }) =>
     // update id in job form, then show form
     console.log('JOB ID: ', job.id)
     console.log('JOB: ', job)
-    setSelectedJob(job);
+    setSelectedJobId(job.id);
 
     setShowForm(!showForm);
   }

@@ -11,8 +11,8 @@ import { updateJob } from '../../../store/jobs.js';
 
 import './jobForm.scss';
 
-// selectedJob replaces what was previously id
-const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, selectedJob, setSelectedJob }) => {
+// selectedJobId replaces what was previously id
+const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, selectedJobId, setSelectedJobId }) => {
 
 
 
@@ -21,8 +21,8 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
   let dispatch = useDispatch();
 
   // console.log('JOB ID FORM: ', jobState.job.id);
-  console.log('SELECTED JOB ID: ', selectedJob);
-  let currentJob = jobState.find(job => job.id === selectedJob.id);
+  console.log('SELECTED JOB ID: ', selectedJobId);
+  let currentJob = jobState.find(job => job.id === selectedJobId);
   const [values, setValues] = useState(currentJob ? currentJob : {});
 
   console.log('CURRENT JOB: ', currentJob);
@@ -42,7 +42,7 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
 
   function toggleEditHandler(confirm) {
     if (confirm) {
-      if (!selectedJob.id) {
+      if (!selectedJobId) {
         values['company'] = 'Scuber';
         if (values.title && values.company) {
           dispatch(addJob(values));
@@ -53,7 +53,7 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
           setDisable(!disable);
           setLock(!lock);
         }
-      } else if (selectedJob.id) {
+      } else if (selectedJobId) {
         dispatch(updateJob(values))
         setDisable(!disable);
         setLock(!lock);
