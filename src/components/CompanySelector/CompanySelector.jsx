@@ -8,6 +8,7 @@ const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, s
   const [companySearch, setCompanySearch] = useState('');
   const companies = useSelector(state => state.companies.companies);
   const [displayCompanies, setDisplayComanies] = useState(companies);
+  const [selectedCompany, setSelectedCompany] = useState(null);
 
   function handleInput(event) {
     setCompanySearch(event.target.value);
@@ -20,6 +21,11 @@ const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, s
     else if (fuzziedCompanies.length === 0) setDisplayComanies(companies);
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [companySearch]);
+
+  function handleChange(value) {
+    setSelectedCompany(value.company);
+    handleCompanyChange(value);
+  }
 
   function handleClick() {
     setActiveForm('Company');
@@ -38,11 +44,11 @@ const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, s
           <IonSearchbar placeholder='Search Companies' onIonChange={handleInput}></IonSearchbar>
           <When condition={displayCompanies.length > 0}>
             <IonSelect
-              placeholder={`Select Company`}
+              placeholder={selectedCompany || 'Select Company'}
               multiple={false}
               cancelText="Cancel"
               okText="Okay"
-              onIonChange={e => handleCompanyChange(e.detail.value)}
+              onIonChange={e => handleChange(e.detail.value)}
               name='CompanyId'>
               {displayCompanies.map((company, idx) => {
                 return (
