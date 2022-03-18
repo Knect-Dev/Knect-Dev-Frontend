@@ -192,7 +192,7 @@ export const updateJob = (job, token) => async (dispatch, getState) => {
 
 export const deleteJob = (id) => async (dispatch, getState) => {
   try {
-    let response = await axios({
+    await axios({
       url: `${JOB_URL}${id}`,
       method: 'delete',
       headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
