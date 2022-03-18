@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
 
-import { closeOutline, trashOutline } from 'ionicons/icons';
+import { closeOutline, trashOutline, openOutline } from 'ionicons/icons';
 
 import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
 
@@ -122,6 +122,13 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
             <IonRow>
               <CompanySelector currentCompany={{ company: values?.company, id: values?.CompanyId }} setActiveForm={setActiveForm} handleCompanyChange={handleCompanyChange} lock={lock} />
+              <IonCol size='6'><a href={values?.jobUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={{ textDecoration: 'none', color: 'black' }}>
+                Job Posting <IonIcon icon={openOutline}></IonIcon>
+              </a>
+              </IonCol>
             </IonRow>
 
             <IonRow>
@@ -158,12 +165,16 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
 
             <IonRow>
               <CompanySelector currentCompany={{ company: values?.company, id: values?.CompanyId }} setActiveForm={setActiveForm} handleCompanyChange={handleCompanyChange} lock={lock} />
+              <IonCol size='6'>
+                <IonLabel>Input Link to Job: </IonLabel>
+                <IonInput value={values?.jobUrl} onIonChange={e => handleChange(e)} placeholder='Job URL' name='jobUrl' clearInput></IonInput>
+              </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol size='4'>
                 <IonLabel>Job: </IonLabel>
-                <IonInput value={values?.title} onIonChange={e => handleChange(e)} placeholder='Job Title' required={true} name='title' clearInput></IonInput>
+                <IonTextarea value={values?.title} onIonChange={e => handleChange(e)} placeholder='Job Title' name='title' auto-grow clearInput></IonTextarea>
               </IonCol>
 
               <IonCol size='4'>
@@ -209,14 +220,14 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
             <IonRow>
               <IonCol>
                 <IonLabel>Technologies: </IonLabel>
-                <IonInput value={values?.technologies} onIonChange={e => handleChange(e)} name='technologies' clearInput></IonInput>
+                <IonTextarea value={values?.technologies} onIonChange={e => handleChange(e)} name='technologies' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 
             <IonRow>
               <IonCol size='12'>
                 <IonLabel>Notes: </IonLabel>
-                <IonTextarea value={values?.notes} onIonChange={e => handleChange(e)} name='notes' clearInput></IonTextarea>
+                <IonTextarea value={values?.notes} onIonChange={e => handleChange(e)} name='notes' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 
