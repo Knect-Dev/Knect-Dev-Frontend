@@ -6,7 +6,7 @@ import { When } from 'react-if';
 import { closeOutline } from 'ionicons/icons';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
-const ContactForm = ({ state, disable, setDisable, showForm, setShowForm }) => {
+const ContactForm = ({ state, disable, setDisable, showForm, setShowForm, setSelectedJobId }) => {
   const [lock, setLock] = useState(true);
 
   let contactState = useSelector(state => state.contacts.contacts);
@@ -21,19 +21,25 @@ const ContactForm = ({ state, disable, setDisable, showForm, setShowForm }) => {
     setLock(!lock);
   }
 
+  function handleCloseForm() {
+    setShowForm(!showForm);
+    setDisable(false);
+    setLock(true);
+    setSelectedJobId(null);
+  }
   // needs to be worked on after Job and Company tab are being rendered
   // const currentContacts = contactState.find(contact => contact.JobId === jobId && contact.CompanyId === companyId)
   return (
     <>
       <IonContent>
         <IonGrid>
+          <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
+            {/* <IonItem class='status-item' >Contacts at this Company</IonItem> */}
+            <IonText class='status-item ion-padding-start' ><h3>Contacts at this Company</h3></IonText>
+            <IonIcon class="header-icon" icon={closeOutline} onClick={handleCloseForm}></IonIcon>
+          </IonRow>
           <When condition={lock}>
 
-            <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
-              {/* <IonItem class='status-item' >Contacts at this Company</IonItem> */}
-              <IonText class='status-item ion-padding-start' ><h3>Contacts at this Company</h3></IonText>
-              <IonIcon class="header-icon" icon={closeOutline} onClick={() => setShowForm(!showForm)}></IonIcon> 
-            </IonRow>
 
             <IonRow>
               <IonCol size='6'>{contactState.company || 'Company Name'}</IonCol>
@@ -68,10 +74,6 @@ const ContactForm = ({ state, disable, setDisable, showForm, setShowForm }) => {
             </IonAccordionGroup>
           </When >
           <When condition={!lock}>
-            <IonRow class='ion-justify-content-between status-background'>
-              <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-            </IonRow>
 
             <IonRow>
               <IonCol size='6'>{contactState.company}</IonCol>

@@ -10,7 +10,7 @@ import LockButton from '../../LockButton/LockButton.jsx';
 import { addCompany } from '../../../store/companies.js';
 import { updateCompany } from '../../../store/companies.js';
 
-const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompanyId }) => {
+const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompanyId, setSelectedJobId }) => {
 
   let companyState = useSelector(state => state.companies.companies);
   let dispatch = useDispatch();
@@ -19,13 +19,19 @@ const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompa
   const [values, setValues] = useState(currentCompany ? currentCompany : {});
 
   const [lock, setLock] = useState(true);
-  
   const token = useSelector(state => state.user.user.token);
 
   function handleChange(e) {
     setValues(prev => {
       return { ...prev, [e.target.name]: e.detail.value }
     });
+  }
+
+  function handleCloseForm() {
+    setShowForm(!showForm);
+    setDisable(false);
+    setLock(true);
+    setSelectedJobId(null);
   }
 
   function toggleEditHandler(confirm) {
@@ -58,7 +64,7 @@ const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompa
         <IonGrid>
             <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
               <IonText class='status-item ion-padding-start' ><h3>Company Information</h3></IonText>
-              <IonIcon class="header-icon" icon={closeOutline} onClick={() => setShowForm(!showForm)}></IonIcon> 
+            <IonIcon class="header-icon" icon={closeOutline} onClick={handleCloseForm}></IonIcon> 
             </IonRow>
 
           <When condition={lock}>
