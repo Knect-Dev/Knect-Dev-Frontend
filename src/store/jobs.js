@@ -141,11 +141,13 @@ const jobReducer = (state = initialState, action) => {
       return { jobs: state.jobs };
 
     case 'REMOVE_JOB':
-      console.log('JOB WAS REMOVED BOIIII');
       let newArr = state.jobs.filter(job => job.id !== payload);
-      console.log(`👽 ~ file: jobs.js ~ line 144 ~ jobReducer ~ state.jobs`, state.jobs);
 
       return { jobs: newArr };
+
+    case 'TEARDOWN_JOBS':
+
+      return { jobs: [] };
 
     case 'SET_JOBS':
       //payload is my array of jobs
@@ -204,7 +206,6 @@ export const deleteJob = (id) => async (dispatch, getState) => {
 }
 
 export const getJobs = (token) => async (dispatch) => {
-
   try {
     let response = await axios({
       url: JOB_URL,
@@ -220,5 +221,9 @@ export const getJobs = (token) => async (dispatch) => {
     console.log(e);
   }
 };
+
+export const tearDownJobs = (dispatch) => {
+  dispatch({ type: 'TEARDOWN_JOBS' });
+}
 
 export default jobReducer;

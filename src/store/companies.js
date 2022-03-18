@@ -57,6 +57,9 @@ const companiesReducer = (state = initialState, action) => {
     case 'REMOVE_COMPANY':
       return { job: '' };
 
+    case 'TEARDOWN_COMPANIES':
+
+      return { companies: [] };
     case 'SET_COMPANIES':
 
 
@@ -117,5 +120,9 @@ export const getCompanies = (token) => async (dispatch) => {
     console.log(e);
   }
 };
+
+export const tearDownCompanies = (dispatch) => {
+  dispatch({ type: 'TEARDOWN_COMPANIES' });
+}
 
 export default companiesReducer;

@@ -40,8 +40,7 @@ const JobsList = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, getJ
   // };
 
   // render fuzzy results if there is search input OR all jobs
-  let jobResults;
-  console.log(searchState);
+  let jobResults = [];
   searchState.search ?
     jobResults = fuzzyResults :
     jobResults = jobState;

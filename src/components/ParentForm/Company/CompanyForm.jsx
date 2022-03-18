@@ -6,7 +6,7 @@ import { When } from 'react-if';
 
 import { closeOutline, trashOutline } from 'ionicons/icons';
 
-import LockButton from '../../lockButton/LockButton.jsx';
+import LockButton from '../../LockButton/LockButton.jsx';
 import { addCompany } from '../../../store/companies.js';
 import { updateCompany } from '../../../store/companies.js';
 
@@ -64,8 +64,8 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
           <When condition={lock}>
 
             <IonRow>
-              <IonCol size='6'>{values?.name || 'Company Name with link to Company website'}</IonCol>
-              <IonCol size='6'>{values?.careersURL || 'Career URL'}</IonCol>
+              <IonCol size='6'>{values?.name}</IonCol>
+              <IonCol size='6'>{values?.careersURL}</IonCol>
             </IonRow>
 
             <IonRow>
