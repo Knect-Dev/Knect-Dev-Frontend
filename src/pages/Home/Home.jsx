@@ -17,7 +17,7 @@ import { getCompanies } from '../../store/companies.js';
 const Home = () => {
 
   const [showForm, setShowForm] = useState(false);
-  const [selectedJobId, setSelectedJobId] = useState({});
+  const [selectedJobId, setSelectedJobId] = useState(null);
 
   const token = useSelector(state => state.user.user.token);
   const dispatch = useDispatch();
