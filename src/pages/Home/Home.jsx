@@ -11,13 +11,14 @@ import ParentForm from '../../components/ParentForm/ParentForm.jsx';
 import AddFAB from '../../components/AddFab/AddFAB.jsx';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
-import { getJobs } from '../../store/jobs.js';
-import { getCompanies } from '../../store/companies.js';
+import { getJobs, tearDownJobs } from '../../store/jobs.js';
+import { getCompanies, tearDownCompanies } from '../../store/companies.js';
 
 const Home = () => {
 
   const [showForm, setShowForm] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState(null);
+  const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 
   const token = useSelector(state => state.user.user.token);
   const dispatch = useDispatch();
@@ -34,15 +35,33 @@ const Home = () => {
     dispatch(getJobs(token));
     dispatch(getCompanies(token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      tearDownJobs();
+      tearDownCompanies();
+    }
   }, []);
-
+  console.log('selected company id', selectedCompanyId);
   return (
     <IonPage>
-      <PageHeader title={'Jorbs'} />
-      <AddFAB showForm={showForm} setShowForm={setShowForm} />
+      <PageHeader title={'Jobs'} />
+      <AddFAB showForm={showForm} setShowForm={setShowForm} setSelectedJobId={setSelectedJobId} setSelectedCompanyId={setSelectedCompanyId} />
       <IonContent fullscreen>
-        <ParentForm showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} />
-        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} getJobs={getJobs} getCompanies={getCompanies} />
+        <ParentForm
+          showForm={showForm}
+          setShowForm={setShowForm}
+          selectedJobId={selectedJobId}
+          setSelectedJobId={setSelectedJobId}
+          selectedCompanyId={selectedCompanyId}
+          setSelectedCompanyId={setSelectedCompanyId} />
+        <JobsList
+          showForm={showForm}
+          setShowForm={setShowForm}
+          selectedJobId={selectedJobId}
+          setSelectedJobId={setSelectedJobId}
+          selectedCompanyId={selectedCompanyId}
+          setSelectedCompanyId={setSelectedCompanyId}
+          getJobs={getJobs}
+          getCompanies={getCompanies} />
       </IonContent>
     </IonPage>
   );

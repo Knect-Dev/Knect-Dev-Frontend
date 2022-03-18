@@ -14,6 +14,7 @@ const userReducer = ( state = initialState, action) => {
   switch (type) {
 
     case 'SET_USER':
+      console.log('PAYLOAD', payload)
       const signedInUser = {
         id: payload.id,
         email: payload.email,
@@ -69,33 +70,34 @@ export const getusers = async dispatch => {
   }
 }
 
-export const signInUser = (credientials) => async dispatch => {
+export const signInUser = (credentials) => async dispatch => {
   //axios request to sign in a user
   try {
     let response = await axios({
       url: `${USER_URL}signin/`,
       method: 'post',
       auth: {
-        username: credientials.email,
-        password: credientials.password
+        username: credentials.email,
+        password: credentials.password
       }
     });
-    let data = response.data.user[0];
+    let data = response.data.user;
     dispatch(setUser(data));
   } catch (e) {
     console.log(e)
   }
 }
 
-export const signUpUser = (credientials) => async dispatch => {
+export const signUpUser = (credentials) => async dispatch => {
   //axios request to sign up a user
   try {
     let response = await axios({
       url: `${USER_URL}signup/`,
       method: 'post',
-      data: credientials,
+      data: credentials,
     });
     let data = response.data.user;
+    // console.log('RESPONSE2', data)
     dispatch(setUser(data));
   } catch (e) {
     console.log(e)

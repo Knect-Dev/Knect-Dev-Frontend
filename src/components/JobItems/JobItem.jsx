@@ -20,7 +20,7 @@ import {
 } from 'ionicons/icons'; // placeholder for company logo
 import './jobItem.scss';
 
-const JobItem = ({ job, showForm, setShowForm, selectedJobId, setSelectedJobId }) => {
+const JobItem = ({ job, showForm, setShowForm, setSelectedJobId, setSelectedCompanyId }) => {
 
   const stageChipBkgrds = {
     'not applied': { background: '#80808099' },
@@ -60,9 +60,8 @@ const JobItem = ({ job, showForm, setShowForm, selectedJobId, setSelectedJobId }
 
   function handleOnClick() {
     // update id in job form, then show form
-    console.log('JOB ID: ', job.id)
-    console.log('JOB: ', job)
     setSelectedJobId(job.id);
+    setSelectedCompanyId(job.CompanyId);
     setShowForm(!showForm);
   }
 
