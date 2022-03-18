@@ -10,11 +10,11 @@ import {
 
 // This can be modified to take in data like the XYGrid, or the XYGrid can be modified to work like this.
 const blueData = [
-  { x: 'Applied', y: 30 },
-  { x: 'Phone Screen', y: 15 },
-  { x: 'Tech Interview', y: 11 },
-  { x: 'Onsite', y: 8 },
-  { x: 'Offer', y: 4 },
+  { x: 'Applied', y: 30, color: '#32a852' },
+  { x: 'Phone Screen', y: 15, color: '#3261a8' },
+  { x: 'Tech Interview', y: 11, color: '#a89c32' },
+  { x: 'Onsite', y: 8, color: '#6332a8' },
+  { x: 'Offer', y: 4, color: '#a83e32' },
 ];
 
 
@@ -25,7 +25,7 @@ const BarGraph = () => {
           <HorizontalGridLines />
           <XAxis />
           <YAxis />
-          <VerticalBarSeriesCanvas data={blueData} />
+          <VerticalBarSeriesCanvas colorType="literal" data={blueData} />
         </XYPlot>
   );
 };

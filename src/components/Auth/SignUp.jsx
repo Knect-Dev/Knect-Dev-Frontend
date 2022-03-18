@@ -27,7 +27,7 @@ function SignUp({toggle}) {
   return(
     <IonCard>
       <IonCardHeader class='ion-text-center'>
-        <IonCardTitle>Sign-Up</IonCardTitle>
+        <IonCardTitle style={{fontSize: '3em'}}>Sign-Up</IonCardTitle>
       </IonCardHeader>
       <IonGrid>
         <IonRow>
@@ -35,7 +35,7 @@ function SignUp({toggle}) {
           <IonCol>
           <IonCardContent>
             <IonAvatar class="avatar">
-              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" alt="User avatar"/>
+              <img src={require ('../../resources/knect_small.png')} alt="User avatar"/>
             </IonAvatar>
             <section id="profile-form">
             <IonItem>
