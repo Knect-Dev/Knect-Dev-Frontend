@@ -11,6 +11,7 @@ const userReducer = ( state = initialState, action) => {
   let {type, payload} = action;
   
   switch (type) {
+
     case 'SET_USER':
       const signedInUser = {
         id: payload.id,
@@ -24,8 +25,7 @@ const userReducer = ( state = initialState, action) => {
 
       
     case 'REMOVE_USER':
-
-      return { user: ''};
+      return { user: {}};
 
     default:
       return state;
@@ -38,6 +38,13 @@ const setuser = user => {
     type: 'SET_USER',
     payload: user
   }
+}
+
+export const removeUser = dispatch => {
+  dispatch( {
+    type: 'REMOVE_USER',
+    payload: {}
+  });
 }
 
 export const getusers = async dispatch => {

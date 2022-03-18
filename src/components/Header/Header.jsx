@@ -12,6 +12,7 @@ import {
 import './header.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearch, clearSearch } from '../../store/search.js';
+import { removeUser } from '../../store/user';
 
 const Header = () => {
 
@@ -31,11 +32,15 @@ const Header = () => {
   const { currentPage } = useSelector(state => state.currentPage);
   console.log('currentPage: ', currentPage);
 
+  const handleLogOut = () => {
+    dispatch(removeUser);
+  }
+
   return (
     <IonHeader>
       <IonToolbar>
         <IonButtons slot='start'> 
-        <IonIcon id='logout-button' icon={logOutOutline}></IonIcon>
+        <IonIcon id='logout-button' icon={logOutOutline} onClick={handleLogOut}></IonIcon>
         <IonTitle id='title'>Knect.Dev</IonTitle>
         {darkTheme ?
             <IonIcon class='dark-icon' icon={sunnyOutline} onClick={themeToggleHandler}></IonIcon>

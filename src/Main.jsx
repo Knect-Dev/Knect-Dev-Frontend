@@ -22,7 +22,7 @@ import Auth from './components/Auth/Auth';
 const Main = () => {
   
   const user = useSelector(state => state.user);
-  
+
   return(
     <>
       <Header />
