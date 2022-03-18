@@ -45,6 +45,7 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
   function handleCloseForm() {
     setShowForm(!showForm);
     setDisable(false);
+    setLock(true);
     setSelectedJobId(null);
   }
 
@@ -92,12 +93,19 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
             <IonRow class={'ion-justify-content-between ion-align-items-center'} style={{background: stageBackground}}>
             <IonIcon class="header-icon" icon={trashOutline} onClick={() => setShowAlert(true)}></IonIcon>
             <IonText class='status-item ion-padding-start' ><h3>{values?.stage || 'Application Status'}</h3></IonText>
-            <IonIcon class="header-icon" icon={closeOutline} onClick={() => handleCloseForm()}></IonIcon> 
+            <IonIcon class="header-icon" icon={closeOutline} onClick={handleCloseForm}></IonIcon> 
             </IonRow>
           <When condition={lock}>
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
             <IonRow>
-              <CompanySelector currentCompany={{ company: values?.company, id: values?.CompanyId }} setActiveForm={setActiveForm} handleCompanyChange={handleCompanyChange} lock={lock} />
+              <CompanySelector
+                currentCompany={{ company: values?.company, id: values?.CompanyId }}
+                setActiveForm={setActiveForm}
+                handleCompanyChange={handleCompanyChange}
+                setLock={setLock}
+                setDisable={setDisable}
+                lock={lock}
+                disable={disable} />
               <IonCol size='6'><a href={values?.jobUrl}
                 target="_blank"
                 rel="noreferrer"
@@ -140,10 +148,17 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
           <When condition={!lock}>
 
             <IonRow>
-              <CompanySelector currentCompany={{ company: values?.company, id: values?.CompanyId }} setActiveForm={setActiveForm} handleCompanyChange={handleCompanyChange} lock={lock} />
+              <CompanySelector
+                currentCompany={{ company: values?.company, id: values?.CompanyId }}
+                setActiveForm={setActiveForm}
+                handleCompanyChange={handleCompanyChange}
+                setLock={setLock}
+                setDisable={setDisable}
+                lock={lock}
+                disable={disable} />
               <IonCol size='6'>
                 <IonLabel>Input Link to Job: </IonLabel>
-                <IonInput value={values?.jobUrl} onIonChange={e => handleChange(e)} placeholder='Job URL' name='jobUrl' clearInput></IonInput>
+                <IonTextarea value={values?.jobUrl} onIonChange={e => handleChange(e)} placeholder='Job URL' name='jobUrl' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow>
 

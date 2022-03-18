@@ -52,7 +52,8 @@ const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selected
             setDisable={setDisable}
             showForm={showForm}
             setShowForm={setShowForm}
-            selectedCompanyId={selectedCompanyId} />
+            selectedCompanyId={selectedCompanyId}
+            setSelectedJobId={setSelectedJobId} />
         </When>
         <When condition={activeForm === 'Contact'}>
           <ContactForm 
@@ -60,7 +61,8 @@ const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selected
             showForm={showForm}
             disable={disable}
             setDisable={setDisable}
-            setShowForm={setShowForm} />
+            setShowForm={setShowForm}
+            setSelectedJobId={setSelectedJobId} />
         </When>
 
         <div className='button-group'>  
