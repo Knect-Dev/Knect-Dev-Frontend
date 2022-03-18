@@ -10,7 +10,8 @@ import {
 } from '@ionic/react';
 import { homeOutline, personCircleOutline, statsChartOutline } from 'ionicons/icons';
 import { IonReactRouter } from '@ionic/react-router';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 import Home from './pages/Home/Home';
 import Stats from './pages/Stats/Stats';
@@ -19,16 +20,28 @@ import Header from './components/Header/Header';
 import Filter from './components/Filter/Filter';
 import Auth from './components/Auth/Auth';
 
+import { setLocalUser } from './store/user'
+
 const Main = () => {
-  
-  const user = useSelector(state => state.user);
+  let dispatch = useDispatch();
+
+  //get user from localStorage
+  let localUser = reactLocalStorage.getObject('localUser');
+  let user = useSelector(state => state.user.user);
+
+  if(Object.keys(user).length === 0){
+    if(Object.keys(localUser).length !== 0){
+      user = localUser;
+      dispatch(setLocalUser(localUser));
+    }
+  } 
 
   return(
     <>
       <Header />
       <Filter />
       <IonContent id="main">
-        {!user.user.email ?
+        {!user.email ?
         <Auth/> :
         <IonReactRouter>
           <IonTabs>

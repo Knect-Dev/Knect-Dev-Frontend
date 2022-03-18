@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 // Backend
 const USER_URL = 'https://knect-dev.herokuapp.com/'
@@ -33,14 +34,25 @@ const userReducer = ( state = initialState, action) => {
 }
 
 //get user
-const setuser = user => {
+const setUser = user => {
+  reactLocalStorage.setObject('localUser', user);
+  console.log('setUser called')
   return {
     type: 'SET_USER',
     payload: user
   }
 }
+//set User via session data
+export const setLocalUser = user => dispatch => {
+  console.log('setLocalUser called')
+  dispatch({
+    type: 'SET_USER',
+    payload: user
+  });
+}
 
 export const removeUser = dispatch => {
+  reactLocalStorage.setObject('localUser', {});
   dispatch( {
     type: 'REMOVE_USER',
     payload: {}
@@ -51,7 +63,7 @@ export const getusers = async dispatch => {
   try{
     let response = await axios.get(USER_URL);
     let data = response.data;
-    dispatch(setuser(data));
+    dispatch(setUser(data));
   } catch(e){
     console.log(e)
   }
@@ -69,10 +81,7 @@ export const signInUser = (credientials) => async dispatch => {
       }
     });
     let data = response.data.user[0];
-    dispatch({
-      type: 'SET_USER',
-      payload: data
-    });
+    dispatch(setUser(data));
   } catch (e) {
     console.log(e)
   }
@@ -87,10 +96,7 @@ export const signUpUser = (credientials) => async dispatch => {
       data: credientials,
     });
     let data = response.data.user;
-    dispatch({
-      type: 'SET_USER',
-      payload: data
-    });
+    dispatch(setUser(data));
   } catch (e) {
     console.log(e)
   }
