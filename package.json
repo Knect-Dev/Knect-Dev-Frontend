@@ -30,6 +30,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.0",
     "react-vis": "^1.11.7",
+    "reactjs-localstorage": "^1.0.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "sass": "^1.49.9",

@@ -50,9 +50,7 @@ const companiesReducer = (state = initialState, action) => {
       updatedCompany = payload;
 
       //-- Second this filters the array to remove the contact we have updated, to prevent dupes --//
-      console.log(`👽 ~ file: companies.js ~ line 53 ~ companiesReducer ~ state.companies`, state.companies);
       state.companies.splice(updatedCompanyId, 1, updatedCompany);
-      console.log(`👽 ~ file: companies.js ~ line 55 ~ companiesReducer ~ state.companies`, state.companies);
 
       return { companies: state.companies };
 
@@ -70,12 +68,12 @@ const companiesReducer = (state = initialState, action) => {
   }
 };
 
-export const addCompany = (company) => async (dispatch, getState) => {
+export const addCompany = (company, token) => async (dispatch, getState) => {
   try {
     let response = await axios({
       url: COMPANY_URL,
       method: 'post',
-      headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
+      headers: { 'Authorization': token },
       data: company,
     });
 
@@ -86,12 +84,12 @@ export const addCompany = (company) => async (dispatch, getState) => {
   }
 }
 
-export const updateCompany = (company) => async (dispatch, getState) => {
+export const updateCompany = (company, token) => async (dispatch, getState) => {
   try {
     let response = await axios({
       url: `${COMPANY_URL}${company.id}`,
       method: 'put',
-      headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
+      headers: { 'Authorization': token },
       data: company,
     });
 
@@ -102,15 +100,16 @@ export const updateCompany = (company) => async (dispatch, getState) => {
   }
 }
 
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4';
-
-const config = {
-  headers: { Authorization: `Bearer ${token}` }
-};
-
-export const getCompanies = async (dispatch) => {
+export const getCompanies = (token) => async (dispatch) => {
   try {
-    let response = await axios.get(COMPANY_URL, config);
+    let response = await axios({
+      url: COMPANY_URL,
+      method: 'get',
+      headers: {
+        'Authorization': token,
+      }
+    });
+
     let data = response.data;
     console.log('Companies: ', data)
     dispatch({ type: 'SET_COMPANIES', payload: data });

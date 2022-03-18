@@ -137,16 +137,18 @@ const jobReducer = (state = initialState, action) => {
 
       //-- Finally, we concat those two arrays together, resulting in our updated array --//
       state.jobs.splice(updatedJobId, 1, updatedJob);
-      console.log(`👽 ~ file: jobs.js ~ line 138 ~ jobReducer ~ state.jobs`, state.jobs);
 
       return { jobs: state.jobs };
 
     case 'REMOVE_JOB':
-      return { job: '' };
+      console.log('JOB WAS REMOVED BOIIII');
+      let newArr = state.jobs.filter(job => job.id !== payload);
+      console.log(`👽 ~ file: jobs.js ~ line 144 ~ jobReducer ~ state.jobs`, state.jobs);
+
+      return { jobs: newArr };
 
     case 'SET_JOBS':
       //payload is my array of jobs
-      console.log("PAYLOAD @ SET_JOBS", payload);
       return { ...state, jobs: [...state.jobs, ...payload] };
 
     default:
@@ -154,12 +156,12 @@ const jobReducer = (state = initialState, action) => {
   }
 };
 
-export const addJob = (job) => async (dispatch, getState) => {
+export const addJob = (job, token) => async (dispatch, getState) => {
   try {
     let response = await axios({
       url: JOB_URL,
       method: 'post',
-      headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
+      headers: { 'Authorization': token },
       data: job,
     });
 
@@ -170,12 +172,12 @@ export const addJob = (job) => async (dispatch, getState) => {
   }
 }
 
-export const updateJob = (job) => async (dispatch, getState) => {
+export const updateJob = (job, token) => async (dispatch, getState) => {
   try {
     let response = await axios({
       url: `${JOB_URL}${job.id}`,
       method: 'put',
-      headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
+      headers: { 'Authorization': token },
       data: job,
     });
 
@@ -186,12 +188,28 @@ export const updateJob = (job) => async (dispatch, getState) => {
   }
 }
 
-export const getJobs = async (dispatch) => {
+export const deleteJob = (id) => async (dispatch, getState) => {
+  try {
+    let response = await axios({
+      url: `${JOB_URL}${id}`,
+      method: 'delete',
+      headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
+    });
+
+    console.log(response.data);
+    dispatch({ type: 'REMOVE_JOB', payload: id });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export const getJobs = (token) => async (dispatch) => {
+
   try {
     let response = await axios({
       url: JOB_URL,
       method: 'get',
-      headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
+      headers: { 'Authorization': token },
     });
 
     // let response = await axios.get(JOB_URL);

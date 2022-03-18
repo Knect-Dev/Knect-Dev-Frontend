@@ -19,8 +19,7 @@ const Home = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState({});
 
-  console.log('SELECTED JOB HOME: ', selectedJobId);
-
+  const token = useSelector(state => state.user.user.token);
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -32,8 +31,8 @@ const Home = () => {
   //on page load grab all of the jobs
   //need to send a token
   useEffect(() => {
-    dispatch(getJobs);
-    dispatch(getCompanies);
+    dispatch(getJobs(token));
+    dispatch(getCompanies(token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,17 +1,40 @@
 import { IonModal, IonButton } from '@ionic/react';
-import { useState, useReducer } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { When } from 'react-if';
 
 import JobForm from './Job/JobForm';
 import CompanyForm from './Company/CompanyForm';
 import ContactForm from './Contact/ContactForm';
-
+import { deleteJob } from '../../store/jobs.js';
 import './ParentForm.scss';
 
 const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) => {
   // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
+  const dispatch = useDispatch();
   const [activeForm, setActiveForm] = useState('Job');
   const [disable, setDisable] = useState(false);
+
+  function deleteHandler(trgToDestroy) {
+    let { id, type } = trgToDestroy;
+    console.log(`👽 ~ file: ParentForm.jsx ~ line 21 ~ deleteHandler ~ id`, id);
+    console.log(`👽 ~ file: ParentForm.jsx ~ line 21 ~ deleteHandler ~ type`, type);
+    console.log(`👽 ~ file: ParentForm.jsx ~ line 21 ~ deleteHandler ~ trgToDestroy`, trgToDestroy);
+    switch (type) {
+      case 'JOB':
+        console.log('in here');
+        dispatch(deleteJob(id));
+        return;
+      // case 'COMPANY':
+
+      //   return;
+      // case 'CONTACT':
+
+      //   return;
+      default:
+        return;
+    }
+  }
 
   return (
     <>
@@ -29,7 +52,8 @@ const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) 
           disable={disable}
           setDisable={setDisable} 
           setShowForm={setShowForm} 
-          setActiveForm={setActiveForm} />
+          setActiveForm={setActiveForm}
+          deleteHandler={deleteHandler} />
         </When>
         <When condition={activeForm === 'Company'}>
           <CompanyForm 
