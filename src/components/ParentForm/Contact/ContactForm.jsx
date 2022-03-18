@@ -1,4 +1,4 @@
-import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonGrid, IonRow, IonCol, IonAccordionGroup, IonAccordion, IonList, IonText } from '@ionic/react';
+import { IonLabel, IonContent, IonIcon, IonItem, IonInput, IonGrid, IonRow, IonCol, IonAccordionGroup, IonAccordion, IonList, IonText } from '@ionic/react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
@@ -6,7 +6,7 @@ import { When } from 'react-if';
 import { closeOutline } from 'ionicons/icons';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
-const ContactForm = ({ state, disable, setDisable, showForm, setShowForm, setSelectedJobId }) => {
+const ContactForm = ({ disable, setDisable, showForm, setShowForm, setSelectedJobId }) => {
   const [lock, setLock] = useState(true);
 
   let contactState = useSelector(state => state.contacts.contacts);
