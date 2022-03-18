@@ -7,11 +7,20 @@ import {
   IonGrid,
   IonCol,
 } from '@ionic/react';
-import { magnetOutline } from 'ionicons/icons'; // placeholder for company logo
+import { 
+  magnetOutline, 
+  flashOutline, 
+  flashOffOutline,
+  locateOutline,
+  pulseSharp,
+  skullOutline,
+  removeOutline,
+  speedometerOutline
+
+} from 'ionicons/icons'; // placeholder for company logo
+import './jobItem.scss';
 
 const JobItem = ({ job, showForm, setShowForm, selectedJobId, setSelectedJobId }) => {
-
-  // console.log('JOB ID: ', job.jobId);
 
   const stageChipBkgrds = {
     'not applied': { background: '#80808099' },
@@ -41,14 +50,19 @@ const JobItem = ({ job, showForm, setShowForm, selectedJobId, setSelectedJobId }
 
   let stageBGC = stageChipBkgrds[job?.stage?.toLowerCase()];
 
-  let statusStyle = job.status === true ? { background: '#A1F189AA' } : { background: '#80808099' };
+  let statusStyle = { 
+    borderRadius: '50%',
+    padding: '4px',
+    fontSize: '1.3rem',
+    marginLeft: '25%'
+  };
+  statusStyle.background = job.status === true ? '#A1F189AA' : '#80808099';
 
   function handleOnClick() {
     // update id in job form, then show form
     console.log('JOB ID: ', job.id)
     console.log('JOB: ', job)
     setSelectedJobId(job.id);
-
     setShowForm(!showForm);
   }
 
@@ -77,12 +91,18 @@ const JobItem = ({ job, showForm, setShowForm, selectedJobId, setSelectedJobId }
             <IonLabel > {job?.location}</IonLabel>
           </IonCol>
 
-          <IonCol size='1.25'>
-            <IonChip style={statusStyle}>{job?.status}</IonChip>
+          <IonCol size='1'>
+            {/* <IonItem style={statusStyle}> */}
+              {
+                job?.status === true ?
+                  <IonIcon style={statusStyle} icon={pulseSharp}/> :
+                  <IonIcon style={statusStyle} icon={skullOutline}/>
+              }
+            {/* </IonItem> */}
           </IonCol>
 
           <IonCol size='1.5'>
-            <IonChip style={stageBGC}>{job?.stage}</IonChip>
+            <IonChip class='ion-justify-content-center  ion-align-items-center' style={stageBGC}>{job?.stage}</IonChip>
           </IonCol>
         </IonRow>
       </IonGrid>
@@ -92,5 +112,3 @@ const JobItem = ({ job, showForm, setShowForm, selectedJobId, setSelectedJobId }
 
 
 export default JobItem;
-
-<IonChip style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="success"><IonLabel color="success">ACTIVE</IonLabel></IonChip>
