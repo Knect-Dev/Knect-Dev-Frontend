@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
 
-import { closeOutline, trashOutline } from 'ionicons/icons';
+import { closeOutline, trashOutline, openOutline } from 'ionicons/icons';
 
 import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
 
@@ -123,6 +123,13 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
             <IonRow>
               <CompanySelector currentCompany={{ company: values?.company, id: values?.CompanyId }} setActiveForm={setActiveForm} handleCompanyChange={handleCompanyChange} lock={lock} />
+              <IonCol size='6'><a href={values?.jobUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={{ textDecoration: 'none', color: 'black' }}>
+                Job Posting <IonIcon icon={openOutline}></IonIcon>
+              </a>
+              </IonCol>
             </IonRow>
 
             <IonRow>
@@ -135,9 +142,9 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
               <IonCol size='4'>Stage: <h5>{values?.stage}</h5></IonCol>
               <IonCol size='4'>Status:
                 {values?.status ?
-                  <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="success"><IonLabel color="success">ACTIVE</IonLabel></IonChip>
+                  <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="success"><IonLabel color="success">ACTIVE</IonLabel></IonChip>
                   :
-                  <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="danger"><IonLabel color="danger">INACTIVE</IonLabel></IonChip>}
+                  <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="danger"><IonLabel color="danger">INACTIVE</IonLabel></IonChip>}
               </IonCol>
               <IonCol size='4'>Positions Open: <h5>{values?.openPositions}</h5></IonCol>
             </IonRow>
@@ -159,12 +166,16 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
 
             <IonRow>
               <CompanySelector currentCompany={{ company: values?.company, id: values?.CompanyId }} setActiveForm={setActiveForm} handleCompanyChange={handleCompanyChange} lock={lock} />
+              <IonCol size='6'>
+                <IonLabel>Input Link to Job: </IonLabel>
+                <IonInput value={values?.jobUrl} onIonChange={e => handleChange(e)} placeholder='Job URL' name='jobUrl' clearInput></IonInput>
+              </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol size='4'>
                 <IonLabel>Job: </IonLabel>
-                <IonInput value={values?.title} onIonChange={e => handleChange(e)} placeholder='Job Title' required={true} name='title' clearInput></IonInput>
+                <IonTextarea value={values?.title} onIonChange={e => handleChange(e)} placeholder='Job Title' name='title' auto-grow clearInput></IonTextarea>
               </IonCol>
 
               <IonCol size='4'>
@@ -189,9 +200,9 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
               <IonCol size='4'>
                 <IonLabel>Status: </IonLabel>
                 {values?.status ?
-                  <IonChip onClick={e => toggleActive(e)} name='status' value={false} style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="success">ACTIVE</IonChip>
+                  <IonChip onClick={e => toggleActive(e)} name='status' value={false} style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="success">ACTIVE</IonChip>
                   :
-                  <IonChip onClick={e => toggleActive(e)} name='status' value={true} style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="danger">INACTIVE</IonChip>}
+                  <IonChip onClick={e => toggleActive(e)} name='status' value={true} style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="danger">INACTIVE</IonChip>}
               </IonCol>
 
               <IonCol size='4'><IonLabel>Positions Open: </IonLabel>
@@ -210,14 +221,14 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
             <IonRow>
               <IonCol>
                 <IonLabel>Technologies: </IonLabel>
-                <IonInput value={values?.technologies} onIonChange={e => handleChange(e)} name='technologies' clearInput></IonInput>
+                <IonTextarea value={values?.technologies} onIonChange={e => handleChange(e)} name='technologies' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 
             <IonRow>
               <IonCol size='12'>
                 <IonLabel>Notes: </IonLabel>
-                <IonTextarea value={values?.notes} onIonChange={e => handleChange(e)} name='notes' clearInput></IonTextarea>
+                <IonTextarea value={values?.notes} onIonChange={e => handleChange(e)} name='notes' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 

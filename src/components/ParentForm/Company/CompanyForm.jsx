@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { When } from 'react-if';
 
-import { closeOutline } from 'ionicons/icons';
+import { closeOutline, openOutline } from 'ionicons/icons';
 
 import LockButton from '../../LockButton/LockButton.jsx';
 import { addCompany } from '../../../store/companies.js';
@@ -64,7 +64,14 @@ const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompa
           <When condition={lock}>
 
             <IonRow>
-              <IonCol size='6' style={{ cursor: 'pointer' }}>Company: <h5 style={{ display: 'inline' }}>{values?.name}</h5></IonCol>
+              <IonCol size='6'>Company: <h5 style={{ display: 'inline' }}>{values?.name}</h5></IonCol>
+              <IonCol size='6'><a href={values?.careersUrl}
+                target="_blank"
+                rel="noreferrer"
+                style={{ textDecoration: 'none', color: 'black' }}>
+                Career Page <IonIcon icon={openOutline}></IonIcon>
+              </a>
+              </IonCol>
             </IonRow>
 
             <IonRow>
@@ -89,14 +96,17 @@ const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompa
           <When condition={!lock}>
 
             <IonRow>
-              <IonCol size='6'>{'Company Name'}</IonCol>
-              <IonCol size='6'>Career Page</IonCol>
+              <IonCol size='6'>Company: <h5 style={{ display: 'inline' }}>{values?.name}</h5></IonCol>
+              <IonCol size='6'>
+                <IonLabel>Input Link to Job: </IonLabel>
+                <IonTextarea value={values?.careersUrl} onIonChange={e => handleChange(e)} placeholder='Career Page URL' name='careersUrl' clearInput></IonTextarea>
+              </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol size='4'>
                 <IonLabel>Leader: </IonLabel>
-                <IonInput value={values?.leader} onIonChange={e => handleChange(e)} placeholder='Company Leader' name='leader' clearInput></IonInput>
+                <IonInput value={values?.leader} onIonChange={e => handleChange(e)} placeholder='Company Leader' name='leader' auto-grow clearInput></IonInput>
               </IonCol>
 
               <IonCol size='4'>
@@ -113,21 +123,21 @@ const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompa
             <IonRow>
               <IonCol>
                 <IonLabel>Product: </IonLabel>
-                <IonInput value={values?.product} onIonChange={e => handleChange(e)} name='product' clearInput></IonInput>
+                <IonTextarea value={values?.product} onIonChange={e => handleChange(e)} name='product' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol>
                 <IonLabel>Clients: </IonLabel>
-                <IonInput value={values?.clients} onIonChange={e => handleChange(e)} name='clients' clearInput></IonInput>
+                <IonTextarea value={values?.clients} onIonChange={e => handleChange(e)} name='clients' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 
             <IonRow>
               <IonCol>
                 <IonLabel>Mission: </IonLabel>
-                <IonTextarea auto-grow value={values?.mission} onIonChange={e => handleChange(e)} name='mission' clearInput></IonTextarea>
+                <IonTextarea value={values?.mission} onIonChange={e => handleChange(e)} name='mission' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow >
 
