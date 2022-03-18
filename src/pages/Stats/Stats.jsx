@@ -6,9 +6,12 @@ import StatsCard from '../../components/StatCard/StatCard';
 import './stats.scss';
 
 const exampleData = [
-  { x: 1, y: 30 },
-  { x: 2, y: 5 },
-  { x: 3, y: 15 },
+  { x: 1, y: 78000 },
+  { x: 2, y: 80000 },
+  { x: 3, y: 75000},
+  { x: 4, y: 92000 },
+  { x: 5, y: 90000 },
+  { x: 6, y: 100000},
 ];
 
 const Stats = () => {
@@ -22,6 +25,10 @@ const Stats = () => {
               <StatsCard title='Jobs'>
                 <BarGraph />
               </StatsCard>
+            <IonCol/>
+          </IonRow>
+          <IonRow>
+          <IonCol/>
               <StatsCard title='Offers'>
                 <XYGrid data={exampleData} />
               </StatsCard>
