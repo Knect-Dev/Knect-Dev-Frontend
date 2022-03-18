@@ -8,12 +8,13 @@ import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider,   Io
   IonCol, IonCardContent } from '@ionic/react';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
 
 const ProfileContainer = () => {
 
-
+  const user = useSelector(state => state.user.user);
   const [editEnabled, setEditEnabled] = useState(false);
 
   console.log('editEnabled, ', editEnabled);
@@ -41,17 +42,12 @@ const ProfileContainer = () => {
       <section id="profile-form">
         <IonItemDivider>Name</IonItemDivider>
         <IonItem>
-          <IonInput value="" placeholder="First Name, Last Name" disabled={!editEnabled}></IonInput>
+          <IonInput value={user.name} placeholder="First Name, Last Name" disabled={!editEnabled}></IonInput>
         </IonItem>
 
         <IonItemDivider>Email</IonItemDivider>
         <IonItem>
-          <IonInput value="" placeholder="Email" disabled={!editEnabled}></IonInput>
-        </IonItem>
-
-        <IonItemDivider>Organization</IonItemDivider>
-        <IonItem>
-          <IonInput value="" placeholder="Code Fellows" disabled={!editEnabled}></IonInput>
+          <IonInput value={user.email} placeholder="Email" disabled={!editEnabled}></IonInput>
         </IonItem>
       </section>
       {editEnabled ?
@@ -59,7 +55,6 @@ const ProfileContainer = () => {
         :
         <IonIcon class="edit-profile-icon" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>}
 
-    
           </IonCardContent>
           </IonCol>
           <IonCol size="2" />
