@@ -6,12 +6,12 @@ import StatsCard from '../../components/StatCard/StatCard';
 import './stats.scss';
 
 const exampleData = [
-  { x: 1, y: 78000 },
-  { x: 2, y: 80000 },
-  { x: 3, y: 75000},
-  { x: 4, y: 92000 },
-  { x: 5, y: 90000 },
-  { x: 6, y: 100000},
+  { x: 1, y: 78000, color: '2' },
+  { x: 2, y: 80000, color: '3' },
+  { x: 3, y: 75000, color: '5'},
+  { x: 4, y: 92000, color: '7' },
+  { x: 5, y: 90000, color: '8' },
+  { x: 6, y: 100000, color: '9'},
 ];
 
 const Stats = () => {
