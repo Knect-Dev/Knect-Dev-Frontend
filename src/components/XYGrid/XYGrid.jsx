@@ -4,17 +4,15 @@ import {
   XYPlot,
   XAxis,
   YAxis,
+  LineMarkSeries,
   HorizontalGridLines,
-  LineSeries,
 } from 'react-vis';
 
 const Stats = ({data}) => {
   return (
-    <XYPlot width={300} height={300}>
+    <XYPlot width={600} height={400} margin={{left: 60, right: 10, top: 10, bottom: 40}}  xType="ordinal">
       <HorizontalGridLines />
-      <LineSeries
-        data={data}
-      />
+      <LineMarkSeries data={data} curve="curveMonotoneX" />
       <XAxis />
       <YAxis />
     </XYPlot>
