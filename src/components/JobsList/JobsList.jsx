@@ -5,7 +5,7 @@ import fuzzysort from 'fuzzysort';
 import JobItem from '../JobItems/JobItem';
 import './jobsList.scss';
 
-const JobsList = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, getJobs, getCompanies }) => {
+const JobsList = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, selectedCompanyId, setSelectedCompanyId, getJobs, getCompanies }) => {
 
   // useEffect(() => {
   //   getJobs();
@@ -89,8 +89,20 @@ const JobsList = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, getJ
             // fuzzy search returns results nested in an additional object
             return (
               job.obj ?
-                <JobItem job={job.obj} key={idx} showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} /> :
-                <JobItem job={job} key={idx} showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} />
+                <JobItem
+                  job={job.obj}
+                  key={idx}
+                  showForm={showForm}
+                  setShowForm={setShowForm}
+                  setSelectedJobId={setSelectedJobId}
+                  setSelectedCompanyId={setSelectedCompanyId} /> :
+                <JobItem
+                  job={job}
+                  key={idx}
+                  showForm={showForm}
+                  setShowForm={setShowForm}
+                  setSelectedJobId={setSelectedJobId}
+                  setSelectedCompanyId={setSelectedCompanyId} />
             );
           })
         }

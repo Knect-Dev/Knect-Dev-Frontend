@@ -18,6 +18,7 @@ const Home = () => {
 
   const [showForm, setShowForm] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState(null);
+  const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 
   const token = useSelector(state => state.user.user.token);
   const dispatch = useDispatch();
@@ -39,14 +40,28 @@ const Home = () => {
       tearDownCompanies();
     }
   }, []);
-
+  console.log('selected company id', selectedCompanyId);
   return (
     <IonPage>
       <PageHeader title={'Jobs'} />
-      <AddFAB showForm={showForm} setShowForm={setShowForm} />
+      <AddFAB showForm={showForm} setShowForm={setShowForm} setSelectedJobId={setSelectedJobId} setSelectedCompanyId={setSelectedCompanyId} />
       <IonContent fullscreen>
-        <ParentForm showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} />
-        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} getJobs={getJobs} getCompanies={getCompanies} />
+        <ParentForm
+          showForm={showForm}
+          setShowForm={setShowForm}
+          selectedJobId={selectedJobId}
+          setSelectedJobId={setSelectedJobId}
+          selectedCompanyId={selectedCompanyId}
+          setSelectedCompanyId={setSelectedCompanyId} />
+        <JobsList
+          showForm={showForm}
+          setShowForm={setShowForm}
+          selectedJobId={selectedJobId}
+          setSelectedJobId={setSelectedJobId}
+          selectedCompanyId={selectedCompanyId}
+          setSelectedCompanyId={setSelectedCompanyId}
+          getJobs={getJobs}
+          getCompanies={getCompanies} />
       </IonContent>
     </IonPage>
   );

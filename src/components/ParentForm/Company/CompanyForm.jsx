@@ -1,21 +1,21 @@
-import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
-import { useState, useEffect } from 'react';
+import { IonLabel, IonContent, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol } from '@ionic/react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { When } from 'react-if';
 
-import { closeOutline, trashOutline } from 'ionicons/icons';
+import { closeOutline } from 'ionicons/icons';
 
 import LockButton from '../../LockButton/LockButton.jsx';
 import { addCompany } from '../../../store/companies.js';
 import { updateCompany } from '../../../store/companies.js';
 
-const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => {
+const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompanyId }) => {
 
   let companyState = useSelector(state => state.companies.companies);
   let dispatch = useDispatch();
 
-  let currentCompany = companyState.find(company => company.id === id);
+  let currentCompany = companyState.find(company => company.id === selectedCompanyId);
   const [values, setValues] = useState(currentCompany ? currentCompany : {});
 
   const [lock, setLock] = useState(true);
@@ -30,7 +30,7 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
 
   function toggleEditHandler(confirm) {
     if (confirm) {
-      if (!id) {
+      if (!selectedCompanyId) {
         if (values.title && values.company) {
           dispatch(addCompany(values, token));
           setDisable(!disable);
@@ -40,7 +40,7 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
           setDisable(!disable);
           setLock(!lock);
         }
-      } else if (id) {
+      } else if (selectedCompanyId) {
         dispatch(updateCompany(values, token))
         setDisable(!disable);
         setLock(!lock);
@@ -64,8 +64,7 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
           <When condition={lock}>
 
             <IonRow>
-              <IonCol size='6'>{values?.name}</IonCol>
-              <IonCol size='6'>{values?.careersURL}</IonCol>
+              <IonCol size='6' style={{ cursor: 'pointer' }}>Company: <h5 style={{ display: 'inline' }}>{values?.name}</h5></IonCol>
             </IonRow>
 
             <IonRow>

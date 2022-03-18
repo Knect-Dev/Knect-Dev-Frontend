@@ -14,7 +14,7 @@ import { updateJob } from '../../../store/jobs.js';
 import './jobForm.scss';
 
 // selectedJobId replaces what was previously id
-const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, selectedJobId, setSelectedJobId, deleteHandler }) => {
+const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, selectedJobId, setSelectedJobId, setSelectedCompanyId, deleteHandler }) => {
 
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
@@ -33,11 +33,10 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
 
   function handleCompanyChange(change) {
     let { id, company } = change;
-    console.log(`👽 ~ file: JobForm.jsx ~ line 35 ~ handleCompanyChange ~ company`, company);
-    console.log(`👽 ~ file: JobForm.jsx ~ line 35 ~ handleCompanyChange ~ id`, id);
     setValues(prev => {
       return { ...prev, CompanyId: id, company: company }
     })
+    setSelectedCompanyId(id);
   }
 
   function toggleActive(e) {
@@ -63,10 +62,8 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
   function toggleEditHandler(confirm) {
     if (confirm) {
       if (!selectedJobId) {
-        values['company'] = 'Scuber';
         if (values.title && values.company) {
           dispatch(addJob(values, token));
-          setSelectedJobId(null);
           setDisable(!disable);
           setLock(!lock);
         } else if (!values.title || !values.company) {
@@ -76,9 +73,7 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
           setLock(!lock);
         }
       } else if (selectedJobId) {
-        console.log('update called')
         dispatch(updateJob(values, token))
-        setSelectedJobId(null);
         setDisable(!disable);
         setLock(!lock);
       }
