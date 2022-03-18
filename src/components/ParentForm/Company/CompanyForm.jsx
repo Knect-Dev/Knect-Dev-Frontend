@@ -1,4 +1,4 @@
-import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
+import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -57,7 +57,7 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
       <IonContent>
         <IonGrid>
             <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
-              <IonItem class='status-item' >Application Status</IonItem>
+              <IonText class='status-item ion-padding-start' ><h3>Company Information</h3></IonText>
               <IonIcon class="header-icon" icon={closeOutline} onClick={() => setShowForm(!showForm)}></IonIcon> 
             </IonRow>
 

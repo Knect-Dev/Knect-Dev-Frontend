@@ -6,8 +6,15 @@
 }
 
 .status-background{
-  background-color: rgba(55, 167, 20, 0.664);
+  background-color: rgb(213, 205, 205); 
 }
+
+// 'stage-not-applied': { background: '#80808099' },
+//     'stage-applied': { background: '#F2C70088' },
+//     'stage-phone-screen': { background: '#8C00B080' },
+//     'stage-tech-interview': { background: '#CB006399' },
+//     'stage-onsite': { background: '#6ADFC299' },
+//     'stage-offer': { background: 'linear-gradient(326deg, rgba(255,0,184,0.9682247899159664) 12%, rgba(74,175,252,1) 50%, rgba(74,252,129,1) 76%, rgba(252,248,69,1) 89%)' }
 
 .job-button{
   --box-shadow: 1px 1px 1px black;

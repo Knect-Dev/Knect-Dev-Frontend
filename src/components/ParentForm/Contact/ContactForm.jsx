@@ -1,4 +1,4 @@
-import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonGrid, IonRow, IonCol, IonAccordionGroup, IonAccordion, IonList } from '@ionic/react';
+import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonGrid, IonRow, IonCol, IonAccordionGroup, IonAccordion, IonList, IonText } from '@ionic/react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
@@ -30,7 +30,8 @@ const ContactForm = ({ state, disable, setDisable, showForm, setShowForm }) => {
           <When condition={lock}>
 
             <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
-              <IonItem class='status-item' >Application Status</IonItem>
+              {/* <IonItem class='status-item' >Contacts at this Company</IonItem> */}
+              <IonText class='status-item ion-padding-start' ><h3>Contacts at this Company</h3></IonText>
               <IonIcon class="header-icon" icon={closeOutline} onClick={() => setShowForm(!showForm)}></IonIcon> 
             </IonRow>
 
