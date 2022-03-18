@@ -19,7 +19,8 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
   const [values, setValues] = useState(currentCompany ? currentCompany : {});
 
   const [lock, setLock] = useState(true);
-
+  
+  const token = useSelector(state => state.user.user.token);
 
   function handleChange(e) {
     setValues(prev => {
@@ -31,7 +32,7 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
     if (confirm) {
       if (!id) {
         if (values.title && values.company) {
-          dispatch(addCompany(values));
+          dispatch(addCompany(values, token));
           setDisable(!disable);
           setLock(!lock);
         } else if (!values.title || !values.company) {
@@ -40,7 +41,7 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
           setLock(!lock);
         }
       } else if (id) {
-        dispatch(updateCompany(values))
+        dispatch(updateCompany(values, token))
         setDisable(!disable);
         setLock(!lock);
       }
