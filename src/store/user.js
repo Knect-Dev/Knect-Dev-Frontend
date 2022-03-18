@@ -52,7 +52,7 @@ export const setLocalUser = user => dispatch => {
 }
 
 export const removeUser = dispatch => {
-  reactLocalStorage.setObject('localUser', {});
+  reactLocalStorage.remove('localUser');
   dispatch( {
     type: 'REMOVE_USER',
     payload: {}
