@@ -50,9 +50,7 @@ const companiesReducer = (state = initialState, action) => {
       updatedCompany = payload;
 
       //-- Second this filters the array to remove the contact we have updated, to prevent dupes --//
-      console.log(`👽 ~ file: companies.js ~ line 53 ~ companiesReducer ~ state.companies`, state.companies);
       state.companies.splice(updatedCompanyId, 1, updatedCompany);
-      console.log(`👽 ~ file: companies.js ~ line 55 ~ companiesReducer ~ state.companies`, state.companies);
 
       return { companies: state.companies };
 

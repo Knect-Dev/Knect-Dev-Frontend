@@ -3,9 +3,8 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { When } from 'react-if';
-import {getCompanies} from '../../../store/companies'
 
-import { closeOutline } from 'ionicons/icons';
+import { closeOutline, trashOutline } from 'ionicons/icons';
 
 import LockButton from '../../lockButton/LockButton.jsx';
 import { addCompany } from '../../../store/companies.js';
@@ -32,7 +31,6 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
   function toggleEditHandler(confirm) {
     if (confirm) {
       if (!id) {
-        // values['company'] = 'Scuber';
         if (values.title && values.company) {
           dispatch(addCompany(values, token));
           setDisable(!disable);
@@ -54,22 +52,16 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
     }
   }
 
-  // useEffect(() => {
-  //   console.log('useEffect called')
-  //   dispatch(getCompanies);
-  // });
-
-
   return (
     <>
       <IonContent>
         <IonGrid>
-          <When condition={lock}>
-
             <IonRow class='ion-justify-content-between status-background'>
               <IonItem class='status-item' >Application Status</IonItem>
               <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
             </IonRow>
+
+          <When condition={lock}>
 
             <IonRow>
               <IonCol size='6'>{values?.name || 'Company Name with link to Company website'}</IonCol>
@@ -96,10 +88,6 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
 
           </When >
           <When condition={!lock}>
-            <IonRow class='ion-justify-content-between status-background'>
-              <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-            </IonRow>
 
             <IonRow>
               <IonCol size='6'>{'Company Name'}</IonCol>
