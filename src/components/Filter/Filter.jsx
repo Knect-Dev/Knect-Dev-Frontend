@@ -1,37 +1,36 @@
 import {
-  IonContent, IonMenu, IonList, IonItem, IonHeader, IonTitle, IonToolbar
+  IonContent, IonMenu, IonList, IonItem, IonHeader, IonTitle, IonToolbar, IonButton
 } from '@ionic/react';
 
 const Filter = () => {
 
-  let jobFilters =
-  {
-    stages: ['Not applied', 'Phone screen', 'Code Challenge', 'Onsite'],
-  };
+  // let jobFilters =
+  // {
+  //   stages: ['Not applied', 'Phone screen', 'Code Challenge', 'Onsite'],
+  // };
 
   return (
     <IonMenu side="end" menuId="first" contentId="main">
       <IonHeader>
         <IonToolbar translucent>
-          <IonTitle>(Active Page) Filter</IonTitle>
+          <IonTitle>Jobs Filter</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
         {/* Add a filter menu here  */}
 
         <IonList>
-          {jobFilters.stages.map((stage, key) => {
+          {/* {jobFilters.stages.map((stage, key) => {
             return (
               <IonItem onClick={() => ''} key={key}>{stage}</IonItem>
             )
-          })}
-          <IonItem>Status</IonItem>
+          })} */}
+          <IonItem><IonButton>Reset</IonButton></IonItem>
           <IonItem>Company</IonItem>
-          <IonItem>Date Applied</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
-          <IonItem>Menu Item</IonItem>
+          <IonItem>Title</IonItem>
+          <IonItem>Location</IonItem>
+          <IonItem>Active</IonItem>
+          <IonItem>Stage</IonItem>
         </IonList>
       </IonContent>
     </IonMenu>
