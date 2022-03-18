@@ -21,6 +21,8 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
 
   const [lock, setLock] = useState(true);
 
+  const token = useSelector(state => state.user.user.token);
+
   function handleChange(e) {
     setValues(prev => {
       return { ...prev, [e.target.name]: e.detail.value }
@@ -38,7 +40,7 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
       if (!id) {
         values['company'] = 'Scuber';
         if (values.title && values.company) {
-          dispatch(addJob(values));
+          dispatch(addJob(values, token));
           setDisable(!disable);
           setLock(!lock);
         } else if (!values.title || !values.company) {
@@ -47,7 +49,7 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
           setLock(!lock);
         }
       } else if (id) {
-        dispatch(updateJob(values))
+        dispatch(updateJob(values, token))
         setDisable(!disable);
         setLock(!lock);
       }
