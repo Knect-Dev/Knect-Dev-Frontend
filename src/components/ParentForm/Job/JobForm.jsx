@@ -17,13 +17,8 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
   console.log('setSelectedJobId: ', setSelectedJobId);
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
-
-  // console.log('JOB ID FORM: ', jobState.job.id);
-  console.log('SELECTED JOB ID: ', selectedJobId);
   let currentJob = jobState.find(job => job.id === selectedJobId);
   const [values, setValues] = useState(currentJob ? currentJob : {});
-
-  console.log('CURRENT JOB: ', currentJob);
   const [lock, setLock] = useState(true);
 
   function handleChange(e) {

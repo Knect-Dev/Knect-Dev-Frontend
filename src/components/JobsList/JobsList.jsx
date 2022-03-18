@@ -5,9 +5,7 @@ import fuzzysort from 'fuzzysort';
 import JobItem from '../JobItems/JobItem';
 import './jobsList.scss';
 
-
 const JobsList = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, getJobs, getCompanies }) => {
-
 
   // useEffect(() => {
   //   getJobs();

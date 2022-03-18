@@ -5,7 +5,6 @@ import { When } from 'react-if';
 import JobForm from './Job/JobForm';
 import CompanyForm from './Company/CompanyForm';
 import ContactForm from './Contact/ContactForm';
-import { initialState, reducer } from './FormReducer.jsx';
 
 import './ParentForm.scss';
 
@@ -26,8 +25,8 @@ const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) 
           <JobForm 
           selectedJobId={selectedJobId} 
           setSelectedJobId={setSelectedJobId} 
-          showForm={showForm} 
-          disable={disable} 
+          showForm={showForm}
+          disable={disable}
           setDisable={setDisable} 
           setShowForm={setShowForm} 
           setActiveForm={setActiveForm} />
