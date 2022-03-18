@@ -9,7 +9,7 @@ import ContactForm from './Contact/ContactForm';
 import { deleteJob } from '../../store/jobs.js';
 import './ParentForm.scss';
 
-const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) => {
+const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, selectedCompanyId, setSelectedCompanyId }) => {
   // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
   const dispatch = useDispatch();
   const [activeForm, setActiveForm] = useState('Job');
@@ -17,12 +17,8 @@ const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) 
 
   function deleteHandler(trgToDestroy) {
     let { id, type } = trgToDestroy;
-    console.log(`👽 ~ file: ParentForm.jsx ~ line 21 ~ deleteHandler ~ id`, id);
-    console.log(`👽 ~ file: ParentForm.jsx ~ line 21 ~ deleteHandler ~ type`, type);
-    console.log(`👽 ~ file: ParentForm.jsx ~ line 21 ~ deleteHandler ~ trgToDestroy`, trgToDestroy);
     switch (type) {
       case 'JOB':
-        console.log('in here');
         dispatch(deleteJob(id));
         return;
       // case 'COMPANY':
@@ -46,30 +42,31 @@ const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) 
       >
         <When condition={activeForm === 'Job'}>
           <JobForm 
-          selectedJobId={selectedJobId} 
-          setSelectedJobId={setSelectedJobId} 
-          showForm={showForm}
-          disable={disable}
-          setDisable={setDisable} 
-          setShowForm={setShowForm} 
-          setActiveForm={setActiveForm}
-          deleteHandler={deleteHandler} />
+            disable={disable}
+            setDisable={setDisable}
+            showForm={showForm}
+            setShowForm={setShowForm}
+            setActiveForm={setActiveForm}
+            selectedJobId={selectedJobId}
+            setSelectedJobId={setSelectedJobId}
+            setSelectedCompanyId={setSelectedCompanyId}
+            deleteHandler={deleteHandler} />
         </When>
         <When condition={activeForm === 'Company'}>
           <CompanyForm 
-          selectedJobId={selectedJobId} 
-          showForm={showForm} 
-          disable={disable} 
-          setDisable={setDisable} 
-          setShowForm={setShowForm} />
+            disable={disable}
+            setDisable={setDisable}
+            showForm={showForm}
+            setShowForm={setShowForm}
+            selectedCompanyId={selectedCompanyId} />
         </When>
         <When condition={activeForm === 'Contact'}>
           <ContactForm 
-          selectedJobId={selectedJobId} 
-          showForm={showForm} 
-          disable={disable} 
-          setDisable={setDisable} 
-          setShowForm={setShowForm} />
+            selectedJobId={selectedJobId}
+            showForm={showForm}
+            disable={disable}
+            setDisable={setDisable}
+            setShowForm={setShowForm} />
         </When>
 
         <div className='button-group'>  
