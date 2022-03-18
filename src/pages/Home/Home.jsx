@@ -19,6 +19,7 @@ const Home = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState(null);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
+  const [activeForm, setActiveForm] = useState('Job');
 
   const token = useSelector(state => state.user.user.token);
   const dispatch = useDispatch();
@@ -40,15 +41,21 @@ const Home = () => {
       tearDownCompanies();
     }
   }, []);
-  console.log('selected company id', selectedCompanyId);
+
   return (
     <IonPage>
       <PageHeader title={'Jobs'} />
-      <AddFAB showForm={showForm} setShowForm={setShowForm} setSelectedJobId={setSelectedJobId} setSelectedCompanyId={setSelectedCompanyId} />
+      <AddFAB showForm={showForm}
+        setShowForm={setShowForm}
+        setSelectedJobId={setSelectedJobId}
+        setSelectedCompanyId={setSelectedCompanyId}
+        setActiveForm={setActiveForm} />
       <IonContent fullscreen>
         <ParentForm
           showForm={showForm}
           setShowForm={setShowForm}
+          activeForm={activeForm}
+          setActiveForm={setActiveForm}
           selectedJobId={selectedJobId}
           setSelectedJobId={setSelectedJobId}
           selectedCompanyId={selectedCompanyId}
