@@ -20,19 +20,26 @@ import Header from './components/Header/Header';
 import Filter from './components/Filter/Filter';
 import Auth from './components/Auth/Auth';
 
-import { setLocalUser } from './store/user'
+import { setLocalUser } from './store/user';
+import jwt_decode from "jwt-decode";
 
 const Main = () => {
   let dispatch = useDispatch();
 
   //get user from localStorage
-  let localUser = reactLocalStorage.getObject('localUser');
+  let localUser = reactLocalStorage.getObject('localUser') ? reactLocalStorage.getObject('localUser') : {};
   let user = useSelector(state => state.user.user);
 
   if(Object.keys(user).length === 0){
     if(Object.keys(localUser).length !== 0){
+    
       user = localUser;
-      dispatch(setLocalUser(localUser));
+      let decoded = jwt_decode(user.token);
+      if( Date.now() > decoded.expiresIn + decoded.signTime ){
+      } else {
+        user = {};
+        dispatch(setLocalUser(localUser));
+      }
     }
   } 
 
