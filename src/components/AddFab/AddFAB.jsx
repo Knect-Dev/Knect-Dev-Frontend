@@ -1,9 +1,11 @@
 import { IonFab, IonFabButton, IonIcon } from '@ionic/react';
 import { addOutline } from 'ionicons/icons';
 
-const AddFAB = ({ showForm, setShowForm }) => {
+const AddFAB = ({ showForm, setShowForm, setSelectedJobId, setSelectedCompanyId }) => {
 
   const handleClick = (e) => {
+    setSelectedCompanyId(null);
+    setSelectedJobId(null);
     setShowForm(!showForm);
   };
 
