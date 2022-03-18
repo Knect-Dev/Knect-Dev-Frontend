@@ -10,11 +10,8 @@ import { initialState, reducer } from './FormReducer.jsx';
 import './ParentForm.scss';
 
 const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) => {
-  // TODO This setState is what changes the state passed to the Job / Company / Contact forms
-
-
+  // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
   const [activeForm, setActiveForm] = useState('Job');
-
   const [disable, setDisable] = useState(false);
 
   return (
@@ -26,13 +23,30 @@ const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) 
         id='form-modal'
       >
         <When condition={activeForm === 'Job'}>
-          <JobForm selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} setActiveForm={setActiveForm} />
+          <JobForm 
+          selectedJobId={selectedJobId} 
+          setSelectedJobId={setSelectedJobId} 
+          showForm={showForm} 
+          disable={disable} 
+          setDisable={setDisable} 
+          setShowForm={setShowForm} 
+          setActiveForm={setActiveForm} />
         </When>
         <When condition={activeForm === 'Company'}>
-          <CompanyForm selectedJobId={selectedJobId} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
+          <CompanyForm 
+          selectedJobId={selectedJobId} 
+          showForm={showForm} 
+          disable={disable} 
+          setDisable={setDisable} 
+          setShowForm={setShowForm} />
         </When>
         <When condition={activeForm === 'Contact'}>
-          <ContactForm selectedJobId={selectedJobId} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
+          <ContactForm 
+          selectedJobId={selectedJobId} 
+          showForm={showForm} 
+          disable={disable} 
+          setDisable={setDisable} 
+          setShowForm={setShowForm} />
         </When>
 
         <div className='button-group'>  
