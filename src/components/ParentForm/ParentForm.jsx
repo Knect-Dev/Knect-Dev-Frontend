@@ -9,7 +9,7 @@ import { initialState, reducer } from './FormReducer.jsx';
 
 import './ParentForm.scss';
 
-const Form = ({ showForm, setShowForm, selectedJob, setSelectedJob }) => {
+const ParentForm = ({ showForm, setShowForm, selectedJob, setSelectedJob }) => {
   // TODO This setState is what changes the state passed to the Job / Company / Contact forms
 
 
@@ -44,4 +44,4 @@ const Form = ({ showForm, setShowForm, selectedJob, setSelectedJob }) => {
   )
 }
 
-export default Form;
+export default ParentForm;

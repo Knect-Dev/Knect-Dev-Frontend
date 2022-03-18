@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 
 import './home.scss';
 
-import Form from '../../components/ParentForm/ParentForm.jsx';
+import ParentForm from '../../components/ParentForm/ParentForm.jsx';
 import AddFAB from '../../components/AddFab/AddFAB.jsx';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
@@ -42,8 +42,8 @@ const Home = () => {
       <PageHeader title={'Jorbs'} />
       <AddFAB showForm={showForm} setShowForm={setShowForm} />
       <IonContent fullscreen>
-        <Form showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
-        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} getJobs={getJobs} getCompanies={getCompanies}/>
+        <ParentForm showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} />
+        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJob={selectedJob} setSelectedJob={setSelectedJob} getJobs={getJobs} getCompanies={getCompanies} />
       </IonContent>
     </IonPage>
   );

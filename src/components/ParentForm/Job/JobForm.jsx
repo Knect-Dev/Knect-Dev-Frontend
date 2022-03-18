@@ -15,12 +15,17 @@ import './jobForm.scss';
 const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, selectedJob, setSelectedJob }) => {
 
 
+
+
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
 
+  // console.log('JOB ID FORM: ', jobState.job.id);
+  console.log('SELECTED JOB ID: ', selectedJob);
   let currentJob = jobState.find(job => job.id === selectedJob.id);
   const [values, setValues] = useState(currentJob ? currentJob : {});
 
+  console.log('CURRENT JOB: ', currentJob);
   const [lock, setLock] = useState(true);
 
   function handleChange(e) {
