@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
 
-import { closeOutline } from 'ionicons/icons';
+import { closeOutline, trashOutline } from 'ionicons/icons';
 
 import LockButton from '../../lockButton/LockButton.jsx';
 import { addJob } from '../../../store/jobs.js';
@@ -11,7 +11,7 @@ import { updateJob } from '../../../store/jobs.js';
 
 import './jobForm.scss';
 
-const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActiveForm }) => {
+const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm, deleteHandler }) => {
 
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
@@ -36,7 +36,7 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
   function toggleEditHandler(confirm) {
     if (confirm) {
       if (!id) {
-        values['company'] = 'Scuber';
+        values['company'] = 'Google';
         if (values.title && values.company) {
           dispatch(addJob(values));
           setDisable(!disable);
@@ -64,13 +64,13 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
     <>
       <IonContent>
         <IonGrid>
-          <When condition={lock}>
-            {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
             <IonRow class='ion-justify-content-between status-background'>
+            <IonIcon icon={trashOutline} onClick={() => deleteHandler({ type: 'JOB', id: currentJob?.id })}></IonIcon> 
               <IonItem class='status-item' >Application Status</IonItem>
               <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
             </IonRow>
-
+          <When condition={lock}>
+            {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
             <IonRow>
               <IonCol size='6' onClick={() => setActiveForm('Company')} style={{ cursor: 'pointer' }}>{ }</IonCol>
               <IonCol size='6'>Career Page</IonCol>
@@ -107,10 +107,6 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
 
           </When >
           <When condition={!lock}>
-            <IonRow class='ion-justify-content-between status-background'>
-              <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-            </IonRow>
 
             <IonRow>
               <IonCol size='6'>{ }</IonCol>
