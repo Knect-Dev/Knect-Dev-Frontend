@@ -6,16 +6,13 @@ import { When } from 'react-if';
 import JobForm from './Job/JobForm';
 import CompanyForm from './Company/CompanyForm';
 import ContactForm from './Contact/ContactForm';
-
 import { deleteJob } from '../../store/jobs.js';
-
 import './ParentForm.scss';
 
-const Form = ({ showForm, setShowForm }) => {
+const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) => {
+  // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
   const dispatch = useDispatch();
-
   const [activeForm, setActiveForm] = useState('Job');
-
   const [disable, setDisable] = useState(false);
 
   function deleteHandler(trgToDestroy) {
@@ -48,22 +45,60 @@ const Form = ({ showForm, setShowForm }) => {
         id='form-modal'
       >
         <When condition={activeForm === 'Job'}>
-          <JobForm showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} setActiveForm={setActiveForm} deleteHandler={deleteHandler} />
+          <JobForm 
+          selectedJobId={selectedJobId} 
+          setSelectedJobId={setSelectedJobId} 
+          showForm={showForm}
+          disable={disable}
+          setDisable={setDisable} 
+          setShowForm={setShowForm} 
+          setActiveForm={setActiveForm}
+          deleteHandler={deleteHandler} />
         </When>
         <When condition={activeForm === 'Company'}>
-          <CompanyForm showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
+          <CompanyForm 
+          selectedJobId={selectedJobId} 
+          showForm={showForm} 
+          disable={disable} 
+          setDisable={setDisable} 
+          setShowForm={setShowForm} />
         </When>
         <When condition={activeForm === 'Contact'}>
-          <ContactForm showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
+          <ContactForm 
+          selectedJobId={selectedJobId} 
+          showForm={showForm} 
+          disable={disable} 
+          setDisable={setDisable} 
+          setShowForm={setShowForm} />
         </When>
-        <div className='button-group'>
-          <IonButton class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Job' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Job')}>Job</IonButton>
-          <IonButton class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Company' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Company')}>Company</IonButton>
-          <IonButton class={`tab-button contact-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Contact' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Contact')}>Contacts</IonButton>
+
+        <div className='button-group'>  
+          <IonButton 
+            class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} 
+            id={(activeForm === 'Job' && !disable) && 'active'} 
+            disabled={disable} 
+            onClick={() => setActiveForm('Job')}>
+            Job
+          </IonButton>
+
+          <IonButton 
+            class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Company' && !disable) && 'active'} 
+            disabled={disable} 
+            onClick={() => setActiveForm('Company')}>
+            Company
+          </IonButton>
+          
+          <IonButton 
+            class={`tab-button contact-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} 
+            id={(activeForm === 'Contact' && !disable) && 'active'} 
+            disabled={disable} 
+            onClick={() => setActiveForm('Contact')}>
+            Contacts
+          </IonButton>
         </div>
       </IonModal>
     </>
   )
 }
 
-export default Form;
+export default ParentForm;

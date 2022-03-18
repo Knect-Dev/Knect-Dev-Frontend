@@ -11,14 +11,14 @@ import { updateJob } from '../../../store/jobs.js';
 
 import './jobForm.scss';
 
-const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm, deleteHandler }) => {
+// selectedJobId replaces what was previously id
+const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, selectedJobId, setSelectedJobId, deleteHandler }) => {
 
+  console.log('setSelectedJobId: ', setSelectedJobId);
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
-
-  let currentJob = jobState.find(job => job.id === id);
+  let currentJob = jobState.find(job => job.id === selectedJobId);
   const [values, setValues] = useState(currentJob ? currentJob : {});
-
   const [lock, setLock] = useState(true);
 
   const token = useSelector(state => state.user.user.token);
@@ -35,10 +35,15 @@ const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm
     });
   }
 
+  function handleCloseForm() {
+    setShowForm(!showForm);
+    setSelectedJobId({});
+  }
+
   function toggleEditHandler(confirm) {
     if (confirm) {
-      if (!id) {
-        values['company'] = 'Google';
+      if (!selectedJobId) {
+        values['company'] = 'Scuber';
         if (values.title && values.company) {
           dispatch(addJob(values, token));
           setDisable(!disable);
@@ -48,8 +53,8 @@ const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm
           setDisable(!disable);
           setLock(!lock);
         }
-      } else if (id) {
-        dispatch(updateJob(values, token))
+      } else if (selectedJobId) {
+        dispatch(updateJob(values))
         setDisable(!disable);
         setLock(!lock);
       }
@@ -69,12 +74,17 @@ const JobForm = ({ id, disable, setDisable, showForm, setShowForm, setActiveForm
             <IonRow class='ion-justify-content-between status-background'>
             <IonIcon icon={trashOutline} onClick={() => deleteHandler({ type: 'JOB', id: currentJob?.id })}></IonIcon> 
               <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
+              <IonButton 
+                class='job-button' 
+                color='danger' 
+                onClick={handleCloseForm}>
+                <IonIcon icon={closeOutline}></IonIcon>
+              </IonButton>
             </IonRow>
           <When condition={lock}>
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
             <IonRow>
-              <IonCol size='6' onClick={() => setActiveForm('Company')} style={{ cursor: 'pointer' }}>{ }</IonCol>
+              <IonCol size='6' onClick={() => setActiveForm('Company')} style={{ cursor: 'pointer' }}>{values?.company}</IonCol>
               <IonCol size='6'>Career Page</IonCol>
             </IonRow>
 

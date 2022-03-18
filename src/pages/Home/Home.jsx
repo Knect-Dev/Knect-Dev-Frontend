@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 
 import './home.scss';
 
-import Form from '../../components/ParentForm/ParentForm.jsx';
+import ParentForm from '../../components/ParentForm/ParentForm.jsx';
 import AddFAB from '../../components/AddFab/AddFAB.jsx';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
@@ -17,6 +17,8 @@ import { getCompanies } from '../../store/companies.js';
 const Home = () => {
 
   const [showForm, setShowForm] = useState(false);
+  const [selectedJobId, setSelectedJobId] = useState({});
+
   const token = useSelector(state => state.user.user.token);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -25,7 +27,7 @@ const Home = () => {
     dispatch(setCurrentPage(location.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
-  
+
   //on page load grab all of the jobs
   //need to send a token
   useEffect(() => {
@@ -37,10 +39,10 @@ const Home = () => {
   return (
     <IonPage>
       <PageHeader title={'Jorbs'} />
-      <IonContent fullscreen> 
-        <Form showForm={showForm} setShowForm={setShowForm} />
-        <AddFAB showForm={showForm} setShowForm={setShowForm} />
-        <JobsList getJobs={getJobs} getCompanies={getCompanies} />
+      <AddFAB showForm={showForm} setShowForm={setShowForm} />
+      <IonContent fullscreen>
+        <ParentForm showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} />
+        <JobsList showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} getJobs={getJobs} getCompanies={getCompanies} />
       </IonContent>
     </IonPage>
   );
