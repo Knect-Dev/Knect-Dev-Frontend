@@ -59,6 +59,7 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
     };
   }
 
+  console.log(`👽 ~ file: JobForm.jsx ~ line 63 ~ JobForm ~ values`, values);
   function toggleEditHandler(confirm) {
     if (confirm) {
       if (!selectedJobId) {
