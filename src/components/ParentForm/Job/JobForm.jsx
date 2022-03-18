@@ -111,9 +111,9 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
               <IonCol size='4'>Stage: <h5>{values?.stage}</h5></IonCol>
               <IonCol size='4'>Status:
                 {values?.status ?
-                  <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="success"><IonLabel color="success">ACTIVE</IonLabel></IonChip>
+                  <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="success"><IonLabel color="success">ACTIVE</IonLabel></IonChip>
                   :
-                  <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="danger"><IonLabel color="danger">INACTIVE</IonLabel></IonChip>}
+                  <IonChip style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="danger"><IonLabel color="danger">INACTIVE</IonLabel></IonChip>}
               </IonCol>
               <IonCol size='4'>Positions Open: <h5>{values?.openPositions}</h5></IonCol>
             </IonRow>
@@ -165,9 +165,9 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
               <IonCol size='4'>
                 <IonLabel>Status: </IonLabel>
                 {values?.status ?
-                  <IonChip onClick={e => toggleActive(e)} name='status' value={false} style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="success">ACTIVE</IonChip>
+                  <IonChip onClick={e => toggleActive(e)} name='status' value={false} style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="success">ACTIVE</IonChip>
                   :
-                  <IonChip onClick={e => toggleActive(e)} name='status' value={true} style={{ display: 'block', width: '6rem', textAlign: 'center' }} color="danger">INACTIVE</IonChip>}
+                  <IonChip onClick={e => toggleActive(e)} name='status' value={true} style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="danger">INACTIVE</IonChip>}
               </IonCol>
 
               <IonCol size='4'><IonLabel>Positions Open: </IonLabel>

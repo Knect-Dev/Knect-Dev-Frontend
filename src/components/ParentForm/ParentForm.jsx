@@ -9,10 +9,9 @@ import ContactForm from './Contact/ContactForm';
 import { deleteJob } from '../../store/jobs.js';
 import './ParentForm.scss';
 
-const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, selectedCompanyId, setSelectedCompanyId }) => {
+const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selectedJobId, setSelectedJobId, selectedCompanyId, setSelectedCompanyId }) => {
   // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
   const dispatch = useDispatch();
-  const [activeForm, setActiveForm] = useState('Job');
   const [disable, setDisable] = useState(false);
 
   function deleteHandler(trgToDestroy) {
@@ -79,7 +78,8 @@ const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, se
           </IonButton>
 
           <IonButton 
-            class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Company' && !disable) && 'active'} 
+            class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
+            id={(activeForm === 'Company' && !disable) && 'active'} 
             disabled={disable} 
             onClick={() => setActiveForm('Company')}>
             Company
