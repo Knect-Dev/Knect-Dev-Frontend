@@ -3,7 +3,6 @@ import { useLocation } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage } from '../../store/currentPage';
 import { useState, useEffect } from 'react';
-// import ExploreContainer from '../../components/ExploreContainer';
 
 import './home.scss';
 
@@ -35,11 +34,11 @@ const Home = () => {
   useEffect(() => {
     dispatch(getJobs(token));
     dispatch(getCompanies(token));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       tearDownJobs();
       tearDownCompanies();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

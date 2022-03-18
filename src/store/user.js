@@ -14,7 +14,7 @@ const userReducer = ( state = initialState, action) => {
   switch (type) {
 
     case 'SET_USER':
-      console.log('PAYLOAD', payload)
+
       const signedInUser = {
         id: payload.id,
         email: payload.email,
@@ -37,7 +37,7 @@ const userReducer = ( state = initialState, action) => {
 //get user
 const setUser = user => {
   reactLocalStorage.setObject('localUser', user);
-  console.log('setUser called')
+
   return {
     type: 'SET_USER',
     payload: user
@@ -45,7 +45,7 @@ const setUser = user => {
 }
 //set User via session data
 export const setLocalUser = user => dispatch => {
-  console.log('setLocalUser called')
+
   dispatch({
     type: 'SET_USER',
     payload: user
@@ -97,7 +97,6 @@ export const signUpUser = (credentials) => async dispatch => {
       data: credentials,
     });
     let data = response.data.user;
-    // console.log('RESPONSE2', data)
     dispatch(setUser(data));
   } catch (e) {
     console.log(e)

@@ -1,12 +1,9 @@
-import { IonLabel, IonContent, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonAlert, IonText } from '@ionic/react';
+import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonAlert, IonText } from '@ionic/react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
-
 import { closeOutline, trashOutline, openOutline } from 'ionicons/icons';
-
 import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
-
 import LockButton from '../../LockButton/LockButton.jsx';
 import { addJob } from '../../../store/jobs.js';
 import { updateJob } from '../../../store/jobs.js';
@@ -60,7 +57,6 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
     };
   }
 
-  console.log(`👽 ~ file: JobForm.jsx ~ line 63 ~ JobForm ~ values`, values);
   function toggleEditHandler(confirm) {
     if (confirm) {
       if (!selectedJobId) {
@@ -86,31 +82,10 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
     }
   }
 
-  // const stageChipBkgrds = {
-  //   'not applied': { background: '#80808099' },
-  //   'applied': { background: '#F2C70088' },
-  //   'phone screen': { background: '#8C00B080' },
-  //   'tech interview': { background: '#CB006399' },
-  //   'onsite': { background: '#6ADFC299' },
-  //   'offer': { background: 'linear-gradient(326deg, rgba(255,0,184,0.9682247899159664) 12%, rgba(74,175,252,1) 50%, rgba(74,252,129,1) 76%, rgba(252,248,69,1) 89%)' }
-  // }
-
-  // const stageBkgrds = {
-  //   'stage-not-applied': { background: '#80808099' },
-  //   'stage-applied': { background: '#F2C70088' },
-  //   'stage-phone-screen': { background: '#8C00B080' },
-  //   'stage-tech-interview': { background: '#CB006399' },
-  //   'stage-onsite': { background: '#6ADFC299' },
-  //   'stage-offer': { background: 'linear-gradient(326deg, rgba(255,0,184,0.9682247899159664) 12%, rgba(74,175,252,1) 50%, rgba(74,252,129,1) 76%, rgba(252,248,69,1) 89%)' }
-  // }
-
-
-
-
   const stageBackgrounds =['#80808099', '#F2C70088', '#8C00B080', '#CB006399','#6ADFC299', 'linear-gradient(326deg, rgba(255,0,184,0.9682247899159664) 12%, rgba(74,175,252,1) 50%, rgba(74,252,129,1) 76%, rgba(252,248,69,1) 89%)'];
   let options = ['Not Applied', 'Applied', 'Phone Screen', 'Tech Interview', 'Onsite', 'Offer'];
   let stageBackground = stageBackgrounds[options.findIndex( element => element === values.stage)];
-  console.log(stageBackground);
+
   return (
     <>
       <IonContent>

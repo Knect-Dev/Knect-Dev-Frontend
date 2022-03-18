@@ -18,6 +18,7 @@ const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, s
     if (fuzziedCompanies.length > 0) setDisplayComanies(fuzziedCompanies);
     else if (fuzziedCompanies.length === 0 && companySearch.length > 0) setDisplayComanies([]);
     else if (fuzziedCompanies.length === 0) setDisplayComanies(companies);
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [companySearch]);
 
   function handleClick() {

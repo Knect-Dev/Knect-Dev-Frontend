@@ -1,6 +1,6 @@
 import './profileContainer.scss';
 
-import { IonAvatar, IonIcon, IonContent, IonInput, IonItem, IonItemDivider,   IonCard,
+import { IonAvatar, IonIcon, IonInput, IonItem, IonItemDivider, IonCard,
   IonCardHeader,
   IonCardTitle,
   IonGrid,
@@ -17,10 +17,7 @@ const ProfileContainer = () => {
   const user = useSelector(state => state.user.user);
   const [editEnabled, setEditEnabled] = useState(false);
 
-  console.log('editEnabled, ', editEnabled);
-
   const toggleEditHandler = () => {
-    console.log('edit Handler triggered')
     editEnabled ? setEditEnabled(false) : setEditEnabled(true);
   }
 
@@ -35,7 +32,6 @@ const ProfileContainer = () => {
           <IonCol size="2" />
           <IonCol>
           <IonCardContent>
-  
       <IonAvatar class="avatar">
         <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" alt="User avatar"/>
       </IonAvatar>
