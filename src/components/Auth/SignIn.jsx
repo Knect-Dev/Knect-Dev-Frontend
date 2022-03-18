@@ -27,7 +27,6 @@ function SignIn({ toggle }) {
       dispatch(signInUser(credentials));
     }
   }
-  console.log(credentials);
 
   return(
     <IonCard>

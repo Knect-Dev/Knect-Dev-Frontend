@@ -20,12 +20,7 @@ const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selected
       case 'JOB':
         dispatch(deleteJob(id));
         return;
-      // case 'COMPANY':
-
-      //   return;
-      // case 'CONTACT':
-
-      //   return;
+        
       default:
         return;
     }

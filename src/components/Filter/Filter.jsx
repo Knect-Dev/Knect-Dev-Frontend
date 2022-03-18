@@ -1,11 +1,8 @@
 import {
-  IonContent, IonMenu, IonList, IonItem, IonHeader, IonTitle, IonToolbar, IonAccordion, IonLabel,
+  IonContent, IonMenu, IonList, IonItem, IonHeader, IonTitle, IonToolbar
 } from '@ionic/react';
 
 const Filter = () => {
-
-  // pull job status/stage options / companies from store
-  // pull 
 
   let jobFilters =
   {

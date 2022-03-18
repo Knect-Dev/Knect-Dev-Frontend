@@ -21,10 +21,8 @@ function SignUp({toggle}) {
   const handleSubmit = () => {
     if(credentials.name && credentials.email && credentials.password ){
       dispatch(signUpUser(credentials));
-      console.log(credentials);
     }
   }
-  console.log(credentials);
 
   return(
     <IonCard>

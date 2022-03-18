@@ -16,7 +16,6 @@ const currentPageReducer = (state = initialState, action) => {
 
 //get job
 export const setCurrentPage = (currentPage) => {
-  console.log(">>>>>>>>>>>>", currentPage)
   return {
     type: 'SET_CURRENT_PAGE',
     payload: currentPage,

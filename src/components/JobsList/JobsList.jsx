@@ -1,16 +1,11 @@
 import { IonContent, IonList, IonItem, IonLabel, IonRow, IonGrid, IonCol } from '@ionic/react';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import fuzzysort from 'fuzzysort';
 import JobItem from '../JobItems/JobItem';
 import './jobsList.scss';
 
-const JobsList = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, selectedCompanyId, setSelectedCompanyId, getJobs, getCompanies }) => {
+const JobsList = ({ showForm, setShowForm, setSelectedJobId, setSelectedCompanyId }) => {
 
-  // useEffect(() => {
-  //   getJobs();
-  //   getCompanies();
-  // });
 
   const jobState = useSelector(state => state.jobs.jobs);
   // get current search input from fuzzy search
@@ -32,20 +27,12 @@ const JobsList = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, sele
     ]
   });
 
-  // console.log('fuzzyResults type: ', typeof fuzzyResults);
-
-  // function handleClick(e) { // BUG more info: https://www.educative.io/edpresso/what-is-typeerror-converting-circular-structure-to-json
-  //   let something = JSON.stringify(e.target);
-  //   console.log(something);
-  // };
 
   // render fuzzy results if there is search input OR all jobs
   let jobResults = [];
   searchState.search ?
     jobResults = fuzzyResults :
     jobResults = jobState;
-
-  // console.log('jobResults', jobResults);
 
   /*onClick={handleClick}*/
   return (
