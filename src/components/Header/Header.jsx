@@ -35,8 +35,6 @@ const Header = ({user}) => {
     dispatch(removeUser);
   }
 
-  console.log(Object.keys(user).length)
-
   return (
     <IonHeader>
       <IonToolbar>
