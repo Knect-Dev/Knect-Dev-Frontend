@@ -14,9 +14,7 @@ import './jobForm.scss';
 // selectedJobId replaces what was previously id
 const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, selectedJobId, setSelectedJobId }) => {
 
-
-
-
+  console.log('setSelectedJobId: ', setSelectedJobId);
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
 
@@ -38,6 +36,11 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
     setValues(prev => {
       return { ...prev, status: e.target.value }
     });
+  }
+
+  function handleCloseForm() {
+    setShowForm(!showForm);
+    setSelectedJobId({});
   }
 
   function toggleEditHandler(confirm) {
@@ -75,7 +78,12 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
             <IonRow class='ion-justify-content-between status-background'>
               <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
+              <IonButton 
+                class='job-button' 
+                color='danger' 
+                onClick={handleCloseForm}>
+                <IonIcon icon={closeOutline}></IonIcon>
+              </IonButton>
             </IonRow>
 
             <IonRow>

@@ -26,7 +26,7 @@ const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) 
         id='form-modal'
       >
         <When condition={activeForm === 'Job'}>
-          <JobForm selectedJobId={selectedJobId} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} setActiveForm={setActiveForm} />
+          <JobForm selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} setActiveForm={setActiveForm} />
         </When>
         <When condition={activeForm === 'Company'}>
           <CompanyForm selectedJobId={selectedJobId} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
@@ -34,10 +34,30 @@ const ParentForm = ({ showForm, setShowForm, selectedJobId, setSelectedJobId }) 
         <When condition={activeForm === 'Contact'}>
           <ContactForm selectedJobId={selectedJobId} showForm={showForm} disable={disable} setDisable={setDisable} setShowForm={setShowForm} />
         </When>
-        <div className='button-group'>
-          <IonButton class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Job' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Job')}>Job</IonButton>
-          <IonButton class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Company' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Company')}>Company</IonButton>
-          <IonButton class={`tab-button contact-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Contact' && !disable) && 'active'} disabled={disable} onClick={() => setActiveForm('Contact')}>Contacts</IonButton>
+
+        <div className='button-group'>  
+          <IonButton 
+            class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} 
+            id={(activeForm === 'Job' && !disable) && 'active'} 
+            disabled={disable} 
+            onClick={() => setActiveForm('Job')}>
+            Job
+          </IonButton>
+
+          <IonButton 
+            class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} id={(activeForm === 'Company' && !disable) && 'active'} 
+            disabled={disable} 
+            onClick={() => setActiveForm('Company')}>
+            Company
+          </IonButton>
+          
+          <IonButton 
+            class={`tab-button contact-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} 
+            id={(activeForm === 'Contact' && !disable) && 'active'} 
+            disabled={disable} 
+            onClick={() => setActiveForm('Contact')}>
+            Contacts
+          </IonButton>
         </div>
       </IonModal>
     </>
