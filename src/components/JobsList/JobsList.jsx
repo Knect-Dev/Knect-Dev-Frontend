@@ -75,7 +75,7 @@ const JobsList = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, sele
             </IonCol>
 
             <IonCol size='1.25'>
-              <IonLabel>Status</IonLabel>
+              <IonLabel>Active?</IonLabel>
             </IonCol>
 
             <IonCol size='1.5'>
