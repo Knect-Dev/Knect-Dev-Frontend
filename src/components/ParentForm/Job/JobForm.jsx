@@ -37,24 +37,28 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
 
   function handleCloseForm() {
     setShowForm(!showForm);
-    setSelectedJobId({});
+    setSelectedJobId(null);
   }
-
+  console.log(`👽 ~ file: JobForm.jsx ~ line 43 ~ JobForm ~ selectedJobId`, selectedJobId);
   function toggleEditHandler(confirm) {
     if (confirm) {
       if (!selectedJobId) {
         values['company'] = 'Scuber';
         if (values.title && values.company) {
           dispatch(addJob(values, token));
+          setSelectedJobId(null);
           setDisable(!disable);
           setLock(!lock);
         } else if (!values.title || !values.company) {
           setValues(currentJob || {});
+          setSelectedJobId(null);
           setDisable(!disable);
           setLock(!lock);
         }
       } else if (selectedJobId) {
-        dispatch(updateJob(values))
+        console.log('update called')
+        dispatch(updateJob(values, token))
+        setSelectedJobId(null);
         setDisable(!disable);
         setLock(!lock);
       }
