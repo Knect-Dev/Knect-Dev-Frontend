@@ -198,7 +198,6 @@ export const deleteJob = (id) => async (dispatch, getState) => {
       headers: { 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3R1c2VyQHRlc3QuY29tIiwiaWF0IjoxNjQ3NDg4Njc0fQ.McFnceehlUQASOozJ7toBknPojl74cwsNrUTSEl7HD4' },
     });
 
-    console.log(response.data);
     dispatch({ type: 'REMOVE_JOB', payload: id });
   } catch (e) {
     console.log(e);
@@ -212,10 +211,7 @@ export const getJobs = (token) => async (dispatch) => {
       method: 'get',
       headers: { 'Authorization': token },
     });
-
-    // let response = await axios.get(JOB_URL);
     let data = response.data;
-    console.log(data);
     dispatch({ type: 'SET_JOBS', payload: data });
   } catch (e) {
     console.log(e);

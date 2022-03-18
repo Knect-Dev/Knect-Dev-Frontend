@@ -9,14 +9,8 @@ import {
 } from '@ionic/react';
 import { 
   magnetOutline, 
-  flashOutline, 
-  flashOffOutline,
-  locateOutline,
   pulseSharp,
   skullOutline,
-  removeOutline,
-  speedometerOutline
-
 } from 'ionicons/icons'; // placeholder for company logo
 import './jobItem.scss';
 

@@ -114,7 +114,6 @@ export const getCompanies = (token) => async (dispatch) => {
     });
 
     let data = response.data;
-    console.log('Companies: ', data)
     dispatch({ type: 'SET_COMPANIES', payload: data });
   } catch (e) {
     console.log(e);

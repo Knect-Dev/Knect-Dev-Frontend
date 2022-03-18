@@ -1,4 +1,4 @@
-import { IonSelect, IonSelectOption, IonCol, IonLabel, IonInput, IonSearchbar, IonList, IonItemOption } from '@ionic/react';
+import { IonSelect, IonSelectOption, IonCol, IonSearchbar} from '@ionic/react';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { When } from 'react-if';
@@ -17,6 +17,7 @@ const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, l
     let fuzziedCompanies = fuzzysort.go(companySearch, companies, { keys: ['name'] })
     if (fuzziedCompanies.length > 0) setDisplayComanies(fuzziedCompanies);
     else if (fuzziedCompanies.length === 0) setDisplayComanies(companies);
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [companySearch]);
 
   return (
