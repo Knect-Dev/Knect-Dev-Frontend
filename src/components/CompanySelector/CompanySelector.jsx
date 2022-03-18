@@ -1,10 +1,10 @@
-import { IonSelect, IonSelectOption, IonCol, IonLabel, IonInput, IonSearchbar, IonList, IonItemOption } from '@ionic/react';
+import { IonSelect, IonSelectOption, IonCol, IonChip, IonSearchbar } from '@ionic/react';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { When } from 'react-if';
 import fuzzysort from 'fuzzysort';
 
-const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, lock }) => {
+const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, setLock, setDisable, lock, disable }) => {
   const [companySearch, setCompanySearch] = useState('');
   const companies = useSelector(state => state.companies.companies);
   const [displayCompanies, setDisplayComanies] = useState(companies);
@@ -16,8 +16,15 @@ const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, l
   useEffect(() => {
     let fuzziedCompanies = fuzzysort.go(companySearch, companies, { keys: ['name'] })
     if (fuzziedCompanies.length > 0) setDisplayComanies(fuzziedCompanies);
+    else if (fuzziedCompanies.length === 0 && companySearch.length > 0) setDisplayComanies([]);
     else if (fuzziedCompanies.length === 0) setDisplayComanies(companies);
   }, [companySearch]);
+
+  function handleClick() {
+    setActiveForm('Company');
+    setLock(!lock);
+    setDisable(!disable);
+  };
 
   return (
     <>
@@ -27,23 +34,33 @@ const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, l
 
       <When condition={!lock}>
         <IonCol size='6'>
-          <IonSearchbar placeholder='search companies' onIonChange={handleInput}></IonSearchbar>
-          <IonSelect
-            placeholder={currentCompany.company}
-            multiple={false}
-            cancelText="Cancel"
-            okText="Okay"
-            onIonChange={e => handleCompanyChange(e.detail.value)}
-            name='CompanyId'>
-            {displayCompanies.map((company, idx) => {
-              return (
-                <IonSelectOption
-                  key={company + idx} 
-                  value={company.obj ? { id: company.obj.id, company: company.obj.name } : { id: company.id, company: company.name }}>
-                  {company.name || company.obj.name}
-                </IonSelectOption>)
-            })};
-          </IonSelect>
+          <IonSearchbar placeholder='Search Companies' onIonChange={handleInput}></IonSearchbar>
+          <When condition={displayCompanies.length > 0}>
+            <IonSelect
+              placeholder={`Select Company`}
+              multiple={false}
+              cancelText="Cancel"
+              okText="Okay"
+              onIonChange={e => handleCompanyChange(e.detail.value)}
+              name='CompanyId'>
+              {displayCompanies.map((company, idx) => {
+                return (
+                  <IonSelectOption
+                    key={company + idx}
+                    value={company.obj ? { id: company.obj.id, company: company.obj.name } : { id: company.id, company: company.name }}>
+                    {company.name || company.obj.name}
+                  </IonSelectOption>)
+              })};
+            </IonSelect>
+          </When>
+
+          <When condition={displayCompanies.length === 0}>
+            <IonChip
+              onClick={handleClick}
+              style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.2em' }}
+              color="secondary">CLICK to ADD</IonChip>
+          </When>
+
         </IonCol>
       </When>
     </>
