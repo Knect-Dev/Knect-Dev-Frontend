@@ -1,30 +1,43 @@
-import { IonLabel, IonContent, IonButton, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip } from '@ionic/react';
+import { IonLabel, IonContent, IonIcon, IonItem, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonAlert } from '@ionic/react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
 
-import { closeOutline } from 'ionicons/icons';
+import { closeOutline, trashOutline } from 'ionicons/icons';
 
-import LockButton from '../../lockButton/LockButton.jsx';
+import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
+
+import LockButton from '../../LockButton/LockButton.jsx';
 import { addJob } from '../../../store/jobs.js';
 import { updateJob } from '../../../store/jobs.js';
 
 import './jobForm.scss';
 
-const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActiveForm }) => {
+// selectedJobId replaces what was previously id
+const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, selectedJobId, setSelectedJobId, deleteHandler }) => {
 
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
-
-  let currentJob = jobState.find(job => job.id === id);
+  let currentJob = jobState.find(job => job.id === selectedJobId);
   const [values, setValues] = useState(currentJob ? currentJob : {});
-
   const [lock, setLock] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const token = useSelector(state => state.user.user.token);
 
   function handleChange(e) {
     setValues(prev => {
       return { ...prev, [e.target.name]: e.detail.value }
     });
+  }
+
+  function handleCompanyChange(change) {
+    let { id, company } = change;
+    console.log(`👽 ~ file: JobForm.jsx ~ line 35 ~ handleCompanyChange ~ company`, company);
+    console.log(`👽 ~ file: JobForm.jsx ~ line 35 ~ handleCompanyChange ~ id`, id);
+    setValues(prev => {
+      return { ...prev, CompanyId: id, company: company }
+    })
   }
 
   function toggleActive(e) {
@@ -33,21 +46,39 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
     });
   }
 
+  function handleCloseForm() {
+    setShowForm(!showForm);
+    setDisable(false);
+    setSelectedJobId(null);
+  }
+
+  function handleClick(e) {
+    setShowAlert(false);
+    if (e === 'confirm') {
+      deleteHandler({ type: 'JOB', id: currentJob?.id });
+      handleCloseForm();
+    };
+  }
+
   function toggleEditHandler(confirm) {
     if (confirm) {
-      if (!id) {
+      if (!selectedJobId) {
         values['company'] = 'Scuber';
         if (values.title && values.company) {
-          dispatch(addJob(values));
+          dispatch(addJob(values, token));
+          setSelectedJobId(null);
           setDisable(!disable);
           setLock(!lock);
         } else if (!values.title || !values.company) {
           setValues(currentJob || {});
+          setSelectedJobId(null);
           setDisable(!disable);
           setLock(!lock);
         }
-      } else if (id) {
-        dispatch(updateJob(values))
+      } else if (selectedJobId) {
+        console.log('update called')
+        dispatch(updateJob(values, token))
+        setSelectedJobId(null);
         setDisable(!disable);
         setLock(!lock);
       }
@@ -64,16 +95,15 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
     <>
       <IonContent>
         <IonGrid>
+            <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
+            <IonIcon class="header-icon" icon={trashOutline} onClick={() => setShowAlert(true)}></IonIcon> 
+              <IonItem class='status-item' >Application Status</IonItem>
+            <IonIcon class="header-icon" icon={closeOutline} onClick={() => handleCloseForm()}></IonIcon> 
+            </IonRow>
           <When condition={lock}>
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
-            <IonRow class='ion-justify-content-between status-background'>
-              <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-            </IonRow>
-
             <IonRow>
-              <IonCol size='6' onClick={() => setActiveForm('Company')} style={{ cursor: 'pointer' }}>{ }</IonCol>
-              <IonCol size='6'>Career Page</IonCol>
+              <CompanySelector currentCompany={{ company: values?.company, id: values?.CompanyId }} setActiveForm={setActiveForm} handleCompanyChange={handleCompanyChange} lock={lock} />
             </IonRow>
 
             <IonRow>
@@ -107,14 +137,9 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
 
           </When >
           <When condition={!lock}>
-            <IonRow class='ion-justify-content-between status-background'>
-              <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-            </IonRow>
 
             <IonRow>
-              <IonCol size='6'>{ }</IonCol>
-              <IonCol size='6'>Career Page</IonCol>
+              <CompanySelector currentCompany={{ company: values?.company, id: values?.CompanyId }} setActiveForm={setActiveForm} handleCompanyChange={handleCompanyChange} lock={lock} />
             </IonRow>
 
             <IonRow>
@@ -180,6 +205,31 @@ const JobForm = ({ id = 5, disable, setDisable, showForm, setShowForm, setActive
           </When >
           <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
         </IonGrid >
+        <IonAlert
+          isOpen={showAlert}
+          onDidDismiss={() => setShowAlert(false)}
+          cssClass='ion-text-center'
+          header={'CONFIRM DELETE'}
+          message={'Deleting this Job will be <strong>Permanent!</strong>'}
+          buttons={[
+            {
+              text: 'Cancel',
+              id: 'cancel',
+              cssClass: 'secondary',
+              handler: () => {
+                handleClick('cancel');
+              }
+            },
+            {
+              text: 'Confirm',
+              id: 'accept',
+              cssClass: 'success',
+              handler: () => {
+                handleClick('confirm');
+              }
+            },
+          ]}
+        />
       </IonContent>
     </>
   )

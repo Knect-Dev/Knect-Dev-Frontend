@@ -3,11 +3,10 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { When } from 'react-if';
-import {getCompanies} from '../../../store/companies'
 
-import { closeOutline } from 'ionicons/icons';
+import { closeOutline, trashOutline } from 'ionicons/icons';
 
-import LockButton from '../../lockButton/LockButton.jsx';
+import LockButton from '../../LockButton/LockButton.jsx';
 import { addCompany } from '../../../store/companies.js';
 import { updateCompany } from '../../../store/companies.js';
 
@@ -20,7 +19,8 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
   const [values, setValues] = useState(currentCompany ? currentCompany : {});
 
   const [lock, setLock] = useState(true);
-
+  
+  const token = useSelector(state => state.user.user.token);
 
   function handleChange(e) {
     setValues(prev => {
@@ -31,9 +31,8 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
   function toggleEditHandler(confirm) {
     if (confirm) {
       if (!id) {
-        // values['company'] = 'Scuber';
         if (values.title && values.company) {
-          dispatch(addCompany(values));
+          dispatch(addCompany(values, token));
           setDisable(!disable);
           setLock(!lock);
         } else if (!values.title || !values.company) {
@@ -42,7 +41,7 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
           setLock(!lock);
         }
       } else if (id) {
-        dispatch(updateCompany(values))
+        dispatch(updateCompany(values, token))
         setDisable(!disable);
         setLock(!lock);
       }
@@ -53,26 +52,20 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
     }
   }
 
-  // useEffect(() => {
-  //   console.log('useEffect called')
-  //   dispatch(getCompanies);
-  // });
-
-
   return (
     <>
       <IonContent>
         <IonGrid>
-          <When condition={lock}>
-
-            <IonRow class='ion-justify-content-between status-background'>
+            <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
               <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
+              <IonIcon class="header-icon" icon={closeOutline} onClick={() => setShowForm(!showForm)}></IonIcon> 
             </IonRow>
 
+          <When condition={lock}>
+
             <IonRow>
-              <IonCol size='6'>{values?.name || 'Company Name with link to Company website'}</IonCol>
-              <IonCol size='6'>{values?.careersURL || 'Career URL'}</IonCol>
+              <IonCol size='6'>{values?.name}</IonCol>
+              <IonCol size='6'>{values?.careersURL}</IonCol>
             </IonRow>
 
             <IonRow>
@@ -95,10 +88,6 @@ const CompanyForm = ({ id = 4, disable, setDisable, showForm, setShowForm }) => 
 
           </When >
           <When condition={!lock}>
-            <IonRow class='ion-justify-content-between status-background'>
-              <IonItem class='status-item' >Application Status</IonItem>
-              <IonButton class='job-button' color='danger' onClick={() => setShowForm(!showForm)}><IonIcon icon={closeOutline}></IonIcon></IonButton>
-            </IonRow>
 
             <IonRow>
               <IonCol size='6'>{'Company Name'}</IonCol>

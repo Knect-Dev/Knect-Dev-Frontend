@@ -2,12 +2,10 @@ import { IonContent, IonList, IonItem, IonLabel, IonRow, IonGrid, IonCol } from 
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import fuzzysort from 'fuzzysort';
-
 import JobItem from '../JobItems/JobItem';
-
 import './jobsList.scss';
 
-const JobsList = ({ getJobs, getCompanies }) => {
+const JobsList = ({ showForm, setShowForm, selectedJobId, setSelectedJobId, getJobs, getCompanies }) => {
 
   // useEffect(() => {
   //   getJobs();
@@ -34,7 +32,7 @@ const JobsList = ({ getJobs, getCompanies }) => {
     ]
   });
 
-  console.log('fuzzyResults type: ', typeof fuzzyResults);
+  // console.log('fuzzyResults type: ', typeof fuzzyResults);
 
   // function handleClick(e) { // BUG more info: https://www.educative.io/edpresso/what-is-typeerror-converting-circular-structure-to-json
   //   let something = JSON.stringify(e.target);
@@ -42,13 +40,12 @@ const JobsList = ({ getJobs, getCompanies }) => {
   // };
 
   // render fuzzy results if there is search input OR all jobs
-  let jobResults;
-  console.log(searchState);
+  let jobResults = [];
   searchState.search ?
     jobResults = fuzzyResults :
     jobResults = jobState;
 
-  console.log('jobResults', jobResults);
+  // console.log('jobResults', jobResults);
 
   /*onClick={handleClick}*/
   return (
@@ -92,8 +89,8 @@ const JobsList = ({ getJobs, getCompanies }) => {
             // fuzzy search returns results nested in an additional object
             return (
               job.obj ?
-                <JobItem job={job.obj} key={idx} /> :
-                <JobItem job={job} key={idx} />
+                <JobItem job={job.obj} key={idx} showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} /> :
+                <JobItem job={job} key={idx} showForm={showForm} setShowForm={setShowForm} selectedJobId={selectedJobId} setSelectedJobId={setSelectedJobId} />
             );
           })
         }

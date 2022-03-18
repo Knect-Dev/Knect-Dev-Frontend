@@ -59,7 +59,7 @@ function SignIn({ toggle }) {
               <span>Don't have an account?</span>
             </IonText>
             <IonText color="primary" onClick={toggle}>
-              <span> Sign-Up!</span>
+                <span style={{ cursor: 'pointer' }}> Sign-Up!</span>
             </IonText>
           </IonCardContent>
           </IonCol>
