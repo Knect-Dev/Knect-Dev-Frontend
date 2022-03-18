@@ -37,11 +37,11 @@ const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompa
   function toggleEditHandler(confirm) {
     if (confirm) {
       if (!selectedCompanyId) {
-        if (values.title && values.company) {
+        if (values.name) {
           dispatch(addCompany(values, token));
           setDisable(!disable);
           setLock(!lock);
-        } else if (!values.title || !values.company) {
+        } else if (!values.name) {
           setValues(currentCompany || {});
           setDisable(!disable);
           setLock(!lock);
@@ -100,9 +100,16 @@ const CompanyForm = ({ disable, setDisable, showForm, setShowForm, selectedCompa
 
           </When >
           <When condition={!lock}>
-
             <IonRow>
-              <IonCol size='6'>Company: <h5 style={{ display: 'inline' }}>{values?.name}</h5></IonCol>
+              <IonCol size='6'>
+                <When condition={selectedCompanyId}>
+                  Company: <h5 style={{ display: 'inline' }}>{values?.name}</h5>
+                </When>
+                <When condition={!selectedCompanyId}>
+                  <IonLabel>Company: </IonLabel>
+                  <IonTextarea value={values?.name} onIonChange={e => handleChange(e)} placeholder='Company Name' name='name' clearInput></IonTextarea>
+                </When>
+              </IonCol>
               <IonCol size='6'>
                 <IonLabel>Input Link to Job: </IonLabel>
                 <IonTextarea value={values?.careersUrl} onIonChange={e => handleChange(e)} placeholder='Career Page URL' name='careersUrl' clearInput></IonTextarea>
