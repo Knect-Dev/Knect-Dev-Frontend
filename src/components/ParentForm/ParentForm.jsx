@@ -1,6 +1,6 @@
 import { IonModal, IonButton } from '@ionic/react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
 
 import JobForm from './Job/JobForm';
@@ -12,13 +12,15 @@ import './ParentForm.scss';
 const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selectedJobId, setSelectedJobId, selectedCompanyId, setSelectedCompanyId }) => {
   // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
   const dispatch = useDispatch();
+  const token = useSelector(state => state.user.user.token);
+
   const [disable, setDisable] = useState(false);
 
   function deleteHandler(trgToDestroy) {
     let { id, type } = trgToDestroy;
     switch (type) {
       case 'JOB':
-        dispatch(deleteJob(id));
+        dispatch(deleteJob(id, token));
         return;
         
       default:
