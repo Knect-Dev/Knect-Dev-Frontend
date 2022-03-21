@@ -1,9 +1,10 @@
-import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonAlert, IonText } from '@ionic/react';
+import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText } from '@ionic/react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
-import { closeOutline, trashOutline, openOutline } from 'ionicons/icons';
+import { closeOutline, openOutline } from 'ionicons/icons';
 import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
+import TrashButton from '../../TrashButton/TrashButton.jsx';
 import LockButton from '../../LockButton/LockButton.jsx';
 import { addJob } from '../../../store/jobs.js';
 import { updateJob } from '../../../store/jobs.js';
@@ -16,9 +17,9 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
   let jobState = useSelector(state => state.jobs.jobs);
   let dispatch = useDispatch();
   let currentJob = jobState.find(job => job.id === selectedJobId);
+
   const [values, setValues] = useState(currentJob ? currentJob : {});
   const [lock, setLock] = useState(true);
-  const [showAlert, setShowAlert] = useState(false);
 
   const token = useSelector(state => state.user.user.token);
 
@@ -47,14 +48,6 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
     setDisable(false);
     setLock(true);
     setSelectedJobId(null);
-  }
-
-  function handleClick(e) {
-    setShowAlert(false);
-    if (e === 'confirm') {
-      deleteHandler({ type: 'JOB', id: currentJob?.id });
-      handleCloseForm();
-    };
   }
 
   function toggleEditHandler(confirm) {
@@ -91,8 +84,8 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
       <IonContent>
         <IonGrid>
             <IonRow class={'ion-justify-content-between ion-align-items-center'} style={{background: stageBackground}}>
-            <IonIcon class="header-icon" icon={trashOutline} onClick={() => setShowAlert(true)}></IonIcon>
-            <IonText class='status-item ion-padding-start' ><h3>{values?.stage || 'Application Status'}</h3></IonText>
+            <TrashButton currentJob={currentJob} deleteHandler={deleteHandler} handleCloseForm={handleCloseForm} />
+            <IonText class='status-item ion-padding-start'><h3>{values?.stage || 'Application Status'}</h3></IonText>
             <IonIcon class="header-icon" icon={closeOutline} onClick={handleCloseForm}></IonIcon> 
             </IonRow>
           <When condition={lock}>
@@ -142,9 +135,9 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
 
             <IonRow>
               <IonCol>Notes: <h5>{values?.notes}</h5></IonCol>
-            </IonRow >
+            </IonRow>
 
-          </When >
+          </When>
           <When condition={!lock}>
 
             <IonRow>
@@ -176,8 +169,8 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
               <IonCol size='4'>
                 <IonLabel>Date Applied: </IonLabel>
                 <IonInput value={values?.appliedDate?.slice(0, 10)} onIonChange={e => handleChange(e)} placeholder='yyyy-mm-dd' name='appliedDate' clearInput></IonInput>
-              </IonCol >
-            </IonRow >
+              </IonCol>
+            </IonRow>
 
             <IonRow>
               <IonCol size='4'>
@@ -206,50 +199,25 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
                 <IonLabel>Location: </IonLabel>
                 <IonInput value={values?.location} onIonChange={e => handleChange(e)} name='location' clearInput></IonInput>
               </IonCol>
-            </IonRow >
+            </IonRow>
 
             <IonRow>
               <IonCol>
                 <IonLabel>Technologies: </IonLabel>
                 <IonTextarea value={values?.technologies} onIonChange={e => handleChange(e)} name='technologies' auto-grow clearInput></IonTextarea>
               </IonCol>
-            </IonRow >
+            </IonRow>
 
             <IonRow>
               <IonCol size='12'>
                 <IonLabel>Notes: </IonLabel>
                 <IonTextarea value={values?.notes} onIonChange={e => handleChange(e)} name='notes' auto-grow clearInput></IonTextarea>
               </IonCol>
-            </IonRow >
+            </IonRow>
 
-          </When >
+          </When>
           <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
-        </IonGrid >
-        <IonAlert
-          isOpen={showAlert}
-          onDidDismiss={() => setShowAlert(false)}
-          cssClass='ion-text-center'
-          header={'CONFIRM DELETE'}
-          message={'Deleting this Job will be <strong>Permanent!</strong>'}
-          buttons={[
-            {
-              text: 'Cancel',
-              id: 'cancel',
-              cssClass: 'secondary',
-              handler: () => {
-                handleClick('cancel');
-              }
-            },
-            {
-              text: 'Confirm',
-              id: 'accept',
-              cssClass: 'success',
-              handler: () => {
-                handleClick('confirm');
-              }
-            },
-          ]}
-        />
+        </IonGrid>
       </IonContent>
     </>
   )
