@@ -35,7 +35,9 @@ const jobReducer = (state = initialState, action) => {
       return { jobs: [] };
 
     case 'SET_JOBS':
-      //payload is my array of jobs
+      //-- Upon rerender, this sets the jobs to a blank array so that it may be populated with new jobs --//
+      state.jobs = [];
+      //-- Payload here is an array of Jobs matching the User's ID --//
       return { ...state, jobs: [...state.jobs, ...payload] };
 
     default:

@@ -10,8 +10,8 @@ import ParentForm from '../../components/ParentForm/ParentForm.jsx';
 import AddFAB from '../../components/AddFab/AddFAB.jsx';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import JobsList from '../../components/JobsList/JobsList';
-import { getJobs, tearDownJobs } from '../../store/jobs.js';
-import { getCompanies, tearDownCompanies } from '../../store/companies.js';
+import { getJobs } from '../../store/jobs.js';
+import { getCompanies } from '../../store/companies.js';
 
 const Home = () => {
 
@@ -34,16 +34,12 @@ const Home = () => {
   useEffect(() => {
     dispatch(getJobs(token));
     dispatch(getCompanies(token));
-    return () => {
-      tearDownJobs();
-      tearDownCompanies();
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <IonPage>
-      <PageHeader title={'Jobs'} />
+      <PageHeader title='Jobs' />
       <AddFAB showForm={showForm}
         setShowForm={setShowForm}
         setSelectedJobId={setSelectedJobId}

@@ -1,8 +1,9 @@
 import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText } from '@ionic/react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { When } from 'react-if';
+import { If, Then, When, Else } from 'react-if';
 import { closeOutline, openOutline } from 'ionicons/icons';
+import KnectIcon from '../../../resources/Knect.dev.png';
 import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
 import TrashButton from '../../TrashButton/TrashButton.jsx';
 import LockButton from '../../LockButton/LockButton.jsx';
@@ -55,6 +56,7 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
       if (!selectedJobId) {
         if (values.title && values.company) {
           dispatch(addJob(values, token));
+          setShowForm(false);
           setDisable(!disable);
           setLock(!lock);
         } else if (!values.title || !values.company) {
@@ -84,8 +86,15 @@ const JobForm = ({ disable, setDisable, showForm, setShowForm, setActiveForm, se
       <IonContent>
         <IonGrid>
             <IonRow class={'ion-justify-content-between ion-align-items-center'} style={{background: stageBackground}}>
-            <TrashButton currentJob={currentJob} deleteHandler={deleteHandler} handleCloseForm={handleCloseForm} />
-            <IonText class='status-item ion-padding-start'><h3>{values?.stage || 'Application Status'}</h3></IonText>
+            <If condition={selectedJobId}>
+              <Then>
+                <TrashButton currentJob={currentJob} deleteHandler={deleteHandler} handleCloseForm={handleCloseForm} />
+              </Then>
+              <Else>
+                <img src={KnectIcon} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
+              </Else>
+            </If>
+            <IonText class='status-item ion-padding-start'><h3>{values?.stage || 'New Job'}</h3></IonText>
             <IonIcon class="header-icon" icon={closeOutline} onClick={handleCloseForm}></IonIcon> 
             </IonRow>
           <When condition={lock}>
