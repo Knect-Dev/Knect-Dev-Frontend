@@ -1,10 +1,17 @@
-import { IonFab, IonFabButton, IonIcon, IonPopover, IonContent, IonButton, IonItem, IonChip } from '@ionic/react';
+import { IonFab, IonFabButton, IonIcon, IonPopover, IonContent, IonItem } from '@ionic/react';
 import { addOutline } from 'ionicons/icons';
 
-const AddFAB = ({ showForm, setShowForm, setSelectedJobId, setSelectedCompanyId, setActiveForm }) => {
+const AddFAB = ({
+  setLock,
+  setShowForm,
+  setSelectedJobId,
+  setSelectedCompanyId,
+  setActiveForm
+}) => {
 
   const handleClick = (input) => {
     setActiveForm(input);
+    setLock(false);
     setSelectedCompanyId(null);
     setSelectedJobId(null);
     setShowForm(true);
@@ -13,7 +20,7 @@ const AddFAB = ({ showForm, setShowForm, setSelectedJobId, setSelectedCompanyId,
   return (
     <IonFab vertical="top" horizontal="end" slot="fixed">
       <IonFabButton id="add-trigger" color="success">
-        <IonPopover trigger="add-trigger">
+        <IonPopover trigger="add-trigger" dismissOnSelect={true}>
           <IonContent>
             <IonItem onClick={() => handleClick('Job')} button={true} detail={true}><h3 style={{ margin: 'auto' }}>Add Job</h3></IonItem>
             <IonItem onClick={() => handleClick('Company')} button={true} detail={true}><h3 style={{ margin: 'auto' }}>Add Company</h3></IonItem>
