@@ -24,6 +24,9 @@ const Home = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const [lock, setLock] = useState(true);
+  const [disable, setDisable] = useState(false);
+
   useEffect(() => {
     dispatch(setCurrentPage(location.pathname));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,13 +43,21 @@ const Home = () => {
   return (
     <IonPage>
       <PageHeader title='Jobs' />
-      <AddFAB showForm={showForm}
+      <AddFAB
+        lock={lock}
+        setLock={setLock}
+        disable={disable}
+        setDisable={setDisable}
         setShowForm={setShowForm}
         setSelectedJobId={setSelectedJobId}
         setSelectedCompanyId={setSelectedCompanyId}
         setActiveForm={setActiveForm} />
       <IonContent fullscreen>
         <ParentForm
+          lock={lock}
+          setLock={setLock}
+          disable={disable}
+          setDisable={setDisable}
           showForm={showForm}
           setShowForm={setShowForm}
           activeForm={activeForm}
