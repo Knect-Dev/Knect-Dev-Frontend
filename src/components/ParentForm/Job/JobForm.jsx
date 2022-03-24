@@ -13,7 +13,23 @@ import TrashButton from '../../TrashButton/TrashButton.jsx';
 import './jobForm.scss';
 
 // selectedJobId replaces what was previously id
-const JobForm = ({ lock, setLock, handleJobChange, changeCompany, currentJob, jobValues, disable, setDisable, showForm, setShowForm, setActiveForm, selectedJobId, setSelectedJobId, setSelectedCompanyId, deleteHandler }) => {
+const JobForm = ({
+  lock,
+  setLock,
+  handleJobChange,
+  changeCompany,
+  currentJob,
+  jobValues,
+  disable,
+  setDisable,
+  showForm,
+  setShowForm,
+  setActiveForm,
+  selectedJobId,
+  setSelectedJobId,
+  setSelectedCompanyId,
+  handleDelete
+}) => {
 
   function handleCloseForm() {
     setShowForm(!showForm)
@@ -36,7 +52,7 @@ const JobForm = ({ lock, setLock, handleJobChange, changeCompany, currentJob, jo
             <IonRow class={'ion-justify-content-between ion-align-items-center'} style={{background: stageBackground}}>
             <If condition={selectedJobId}>
               <Then>
-                <TrashButton currentJob={currentJob} deleteHandler={deleteHandler} handleCloseForm={handleCloseForm} />
+                <TrashButton currentJob={currentJob} handleDelete={handleDelete} handleCloseForm={handleCloseForm} />
               </Then>
               <Else>
                 <img src={KnectIcon} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />

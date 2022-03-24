@@ -103,10 +103,13 @@ const ParentForm = ({
         setDisable(!disable);
         setLock(!lock);
       }
+    } else if (confirm && type === 'Company') {
+      console.log('company added');
+    } else if (confirm && type === 'Contact') {
+      console.log('contact added');
     }
   }
 
-  console.log(activeForm);
   return (
     <>
       <IonModal

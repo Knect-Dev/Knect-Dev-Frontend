@@ -4,14 +4,14 @@ import { IonIcon, IonAlert } from '@ionic/react';
 import { trashOutline } from 'ionicons/icons';
 
 
-const TrashButton = ({ currentJob, deleteHandler, handleCloseForm }) => {
+const TrashButton = ({ currentJob, handleDelete, handleCloseForm }) => {
 
   const [showAlert, setShowAlert] = useState(false);
 
   function handleClick(e) {
     setShowAlert(false);
     if (e === 'confirm') {
-      deleteHandler({ type: 'JOB', id: currentJob?.id });
+      handleDelete({ type: 'JOB', id: currentJob?.id });
       handleCloseForm();
     };
   }
