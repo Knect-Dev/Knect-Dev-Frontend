@@ -1,14 +1,9 @@
-import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText, IonButton, IonItem } from '@ionic/react';
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText } from '@ionic/react';
 import { If, Then, When, Else } from 'react-if';
 import { closeOutline, openOutline } from 'ionicons/icons';
 import KnectIcon from '../../../resources/Knect.dev.png';
 import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
 import TrashButton from '../../TrashButton/TrashButton.jsx';
-// import LockButton from '../../LockButton/LockButton.jsx';
-// import { addJob } from '../../../store/jobs.js';
-// import { updateJob } from '../../../store/jobs.js';
 
 import './jobForm.scss';
 
@@ -65,7 +60,7 @@ const JobForm = ({
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
             <IonRow class="ion-padding-bottom">
               <IonCol size='auto'>
-                <a href={jobValues?.jobUrl}
+                <a href={jobValues?.jobUrl || null}
                   target="_blank"
                   rel="noreferrer"
                   style={{ textDecoration: 'none', color: 'black' }}>
@@ -77,14 +72,13 @@ const JobForm = ({
             </IonRow>
 
             <IonRow class="ion-padding-bottom">
-              {/* <IonCol size='4'><h5>{jobValues?.title}</h5></IonCol> */}
               <IonCol size='6'>Job ID: <h5 style={{ display: 'inline' }}>{jobValues?.jobId}</h5></IonCol>
               <IonCol size='6'>Applied: <h5 style={{ display: 'inline' }}>{jobValues?.appliedDate?.slice(0, 10)}</h5></IonCol>
             </IonRow>
 
             <IonRow class="ion-padding-bottom">
               <IonCol size='6'>Stage: <h5 style={{ display: 'inline' }}>{jobValues?.stage}</h5></IonCol>
-              <IonCol size='6'>Status:
+              <IonCol size='6'>Status: &nbsp;
                 {jobValues?.status ?
                   <IonChip style={{ display: 'inline', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="success"><IonLabel color="success">ACTIVE</IonLabel></IonChip>
                   :
@@ -101,13 +95,17 @@ const JobForm = ({
             </IonRow>
 
             <IonRow class="ion-padding-bottom">
-              <IonCol>Notes: <h5>{jobValues?.notes}</h5></IonCol>
+              <IonCol>Notes: <h5 style={{ display: 'inline' }}>{jobValues?.notes}</h5></IonCol>
             </IonRow>
 
           </When>
           <When condition={!lock}>
 
             <IonRow>
+              <IonCol size='6'>
+                <IonLabel>Job Title: </IonLabel>
+                <IonTextarea class='custom-input' value={jobValues?.title} onIonChange={e => handleJobChange(e)} placeholder='Job Title' name='title' auto-grow clearInput></IonTextarea>
+              </IonCol>
               <CompanySelector
                 currentCompany={{ company: jobValues?.company, id: jobValues?.CompanyId }}
                 setActiveForm={setActiveForm}
@@ -116,69 +114,70 @@ const JobForm = ({
                 setDisable={setDisable}
                 lock={lock}
                 disable={disable} />
-              <IonCol size='6'>
+            </IonRow>
+
+            <IonRow>
+              <IonCol size='12'>
                 <IonLabel>Input Link to Job: </IonLabel>
-                <IonTextarea value={jobValues?.jobUrl} onIonChange={e => handleJobChange(e)} placeholder='Job URL' name='jobUrl' auto-grow clearInput></IonTextarea>
+                <IonTextarea class='custom-input' value={jobValues?.jobUrl} onIonChange={e => handleJobChange(e)} placeholder='Job URL' name='jobUrl' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow>
 
             <IonRow>
+              <IonCol size='2'>
+                <IonLabel>Job ID: </IonLabel>
+              </IonCol>
               <IonCol size='4'>
-                <IonLabel>Job: </IonLabel>
-                <IonTextarea value={jobValues?.title} onIonChange={e => handleJobChange(e)} placeholder='Job Title' name='title' auto-grow clearInput></IonTextarea>
+                <IonInput class='custom-input' value={jobValues?.jobId} onIonChange={e => handleJobChange(e)} placeholder='Job ID' name='jobId' clearInput></IonInput>
               </IonCol>
 
-              <IonCol size='4'>
-                <IonLabel>ID: </IonLabel>
-                <IonInput value={jobValues?.jobId} onIonChange={e => handleJobChange(e)} placeholder='Job ID' name='jobId' clearInput></IonInput>
+              <IonCol size='2'>
+                <IonLabel>Applied: </IonLabel>
               </IonCol>
-
               <IonCol size='4'>
-                <IonLabel>Date Applied: </IonLabel>
-                <IonInput value={jobValues?.appliedDate?.slice(0, 10)} onIonChange={e => handleJobChange(e)} placeholder='yyyy-mm-dd' name='appliedDate' clearInput></IonInput>
+                <IonInput class='custom-input' value={jobValues?.appliedDate?.slice(0, 10)} onIonChange={e => handleJobChange(e)} placeholder='yyyy-mm-dd' name='appliedDate' clearInput></IonInput>
               </IonCol>
             </IonRow>
 
             <IonRow>
+              <IonCol size='2'>
+                <IonLabel style={{ display: 'inline' }}>Stage: </IonLabel>
+              </IonCol>
               <IonCol size='4'>
-                <IonLabel>Stage: </IonLabel>
-                <IonSelect value={jobValues?.stage} multiple={false} cancelText="Cancel" okText="Okay" onIonChange={e => handleJobChange(e)} name='stage'>
+                <IonSelect class='custom-input' value={jobValues?.stage} multiple={false} cancelText="Cancel" okText="Okay" onIonChange={e => handleJobChange(e)} name='stage'>
                   {options.map((e, idx) => <IonSelectOption key={e + idx}>{e}</IonSelectOption>)}
                 </IonSelect>
               </IonCol>
 
-              <IonCol size='4'>
+              <IonCol size='2'>
                 <IonLabel>Status: </IonLabel>
+              </IonCol>
+              <IonCol size='4'>
                 {jobValues?.status ?
                   <IonChip onClick={e => handleJobChange(e)} name='status' value={false} style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="success">ACTIVE</IonChip>
                   :
                   <IonChip onClick={e => handleJobChange(e)} name='status' value={true} style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="danger">INACTIVE</IonChip>}
               </IonCol>
-
-              <IonCol size='4'><IonLabel>Positions Open: </IonLabel>
-                <IonInput value={jobValues?.openPositions} type='number' min={0} onIonChange={e => handleJobChange(e)} placeholder='number' name='openPositions' clearInput></IonInput>
-              </IonCol>
-
             </IonRow>
 
             <IonRow>
               <IonCol>
                 <IonLabel>Location: </IonLabel>
-                <IonInput value={jobValues?.location} onIonChange={e => handleJobChange(e)} name='location' clearInput></IonInput>
+                <IonInput class='custom-input' value={jobValues?.location} onIonChange={e => handleJobChange(e)} name='location' clearInput></IonInput>
               </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol>
                 <IonLabel>Technologies: </IonLabel>
-                <IonTextarea value={jobValues?.technologies} onIonChange={e => handleJobChange(e)} name='technologies' auto-grow clearInput></IonTextarea>
+                <IonTextarea class='custom-input' value={jobValues?.technologies} onIonChange={e => handleJobChange(e)} name='technologies' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol size='12'>
                 <IonLabel>Notes: </IonLabel>
-                <IonTextarea value={jobValues?.notes} onIonChange={e => handleJobChange(e)} name='notes' auto-grow clearInput></IonTextarea>
+                <IonTextarea class='custom-input' value={jobValues?.notes} onIonChange={e => handleJobChange(e)} name='notes' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow>
 
