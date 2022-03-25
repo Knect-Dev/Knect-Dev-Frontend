@@ -1,4 +1,4 @@
-import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText, IonButton } from '@ionic/react';
+import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText, IonButton, IonItem } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { If, Then, When, Else } from 'react-if';
@@ -63,31 +63,26 @@ const JobForm = ({
             </IonRow>
           <When condition={lock}>
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
-            <IonRow>
-              <CompanySelector
-                currentCompany={{ company: jobValues?.company, id: jobValues?.CompanyId }}
-                setActiveForm={setActiveForm}
-                changeCompany={changeCompany}
-                setLock={setLock}
-                setDisable={setDisable}
-                lock={lock}
-                disable={disable} />
-              <IonCol size='6'><a href={jobValues?.jobUrl}
-                target="_blank"
-                rel="noreferrer"
-                style={{ textDecoration: 'none', color: 'black' }}>
-                Job Posting <IonIcon icon={openOutline}></IonIcon>
-              </a>
+            <IonRow class="ion-padding-bottom">
+              <IonCol size='auto'>
+                <a href={jobValues?.jobUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ textDecoration: 'none', color: 'black' }}>
+                  <h4 style={{ display: 'inline' }}>{jobValues?.title}</h4> <IonIcon icon={openOutline}></IonIcon>
+                </a>
+                &nbsp;at&nbsp;
+                <h4 style={{ display: 'inline', cursor: 'pointer' }} onClick={() => setActiveForm('Company')}>{jobValues?.company}</h4>
               </IonCol>
             </IonRow>
 
-            <IonRow>
-              <IonCol size='4'><h5>{jobValues?.title}</h5></IonCol>
-              <IonCol size='4'><h5>{jobValues?.jobId}</h5></IonCol>
-              <IonCol size='4'>Date Applied: <h5>{jobValues?.appliedDate?.slice(0, 10)}</h5></IonCol>
+            <IonRow class="ion-padding-bottom">
+              {/* <IonCol size='4'><h5>{jobValues?.title}</h5></IonCol> */}
+              <IonCol size='6'>Job ID: <h5 style={{ display: 'inline' }}>{jobValues?.jobId}</h5></IonCol>
+              <IonCol size='6'>Applied: <h5 style={{ display: 'inline' }}>{jobValues?.appliedDate?.slice(0, 10)}</h5></IonCol>
             </IonRow>
 
-            <IonRow>
+            <IonRow class="ion-padding-bottom">
               <IonCol size='6'>Stage: <h5 style={{ display: 'inline' }}>{jobValues?.stage}</h5></IonCol>
               <IonCol size='6'>Status:
                 {jobValues?.status ?
@@ -97,15 +92,15 @@ const JobForm = ({
               </IonCol>
             </IonRow>
 
-            <IonRow>
+            <IonRow class="ion-padding-bottom">
               <IonCol>Location: <h5 style={{ display: 'inline' }}>{jobValues?.location}</h5></IonCol>
             </IonRow>
 
-            <IonRow>
+            <IonRow class="ion-padding-bottom">
               <IonCol>Technologies: <h5 style={{ display: 'inline' }}>{jobValues?.technologies}</h5></IonCol>
             </IonRow>
 
-            <IonRow>
+            <IonRow class="ion-padding-bottom">
               <IonCol>Notes: <h5>{jobValues?.notes}</h5></IonCol>
             </IonRow>
 
