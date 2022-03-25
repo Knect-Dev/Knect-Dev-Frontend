@@ -1,12 +1,16 @@
-ion-label {
-  align-content: center;
-}
-
 .custom-list-item {
   cursor: pointer;
+
+  ion-grid {
+    ion-col {
+      display: flex;
+      align-items: center;
+    }
+  }
+  
   &:hover {
-    * {
-      background-color: rgb(245, 245, 245);
+    ion-grid {
+      background-color : rgba(138, 138, 138, 0.102); 
     }
   }
 }

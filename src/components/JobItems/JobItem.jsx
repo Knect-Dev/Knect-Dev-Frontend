@@ -47,11 +47,11 @@ const JobItem = ({ job, showForm, setShowForm, setSelectedJobId, setSelectedComp
       <IonGrid>
         <IonRow onClick={handleOnClick}>
 
-          <IonCol size='.3'>
+          <IonCol class='align-items-center' size='.3'>
             <IonIcon icon={magnetOutline} />
           </IonCol>
 
-          <IonCol size='2'>
+          <IonCol class='align-items-center' size='2'>
             <IonLabel >{job?.company}</IonLabel>
           </IonCol>
 
