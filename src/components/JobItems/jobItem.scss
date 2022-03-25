@@ -1,4 +1,12 @@
 ion-label {
   align-content: center;
+}
 
+.custom-list-item {
+  cursor: pointer;
+  &:hover {
+    * {
+      background-color: rgb(245, 245, 245);
+    }
+  }
 }

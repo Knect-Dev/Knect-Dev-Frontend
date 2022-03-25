@@ -185,7 +185,7 @@ const ParentForm = ({
               </IonButton>
             </Then>
             <Else>
-              <IonButton onClick={() => addToDatabase({ type: activeForm, confirm: true })}>Press Me</IonButton>
+              <IonButton onClick={() => addToDatabase({ type: activeForm, confirm: true })}>{`Add ${activeForm}`}</IonButton>
             </Else>
           </If>
         </div>
