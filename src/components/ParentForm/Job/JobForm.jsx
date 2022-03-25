@@ -124,14 +124,14 @@ const JobForm = ({
             </IonRow>
 
             <IonRow>
-              <IonCol size='2'>
+              <IonCol size='2' class='center-text'>
                 <IonLabel>Job ID: </IonLabel>
               </IonCol>
               <IonCol size='4'>
                 <IonInput class='custom-input' value={jobValues?.jobId} onIonChange={e => handleJobChange(e)} placeholder='Job ID' name='jobId' clearInput></IonInput>
               </IonCol>
 
-              <IonCol size='2'>
+              <IonCol size='2' class='center-text'>
                 <IonLabel>Applied: </IonLabel>
               </IonCol>
               <IonCol size='4'>
@@ -140,8 +140,8 @@ const JobForm = ({
             </IonRow>
 
             <IonRow>
-              <IonCol size='2'>
-                <IonLabel style={{ display: 'inline' }}>Stage: </IonLabel>
+              <IonCol size='2' class='center-text'>
+                <IonLabel>Stage: </IonLabel>
               </IonCol>
               <IonCol size='4'>
                 <IonSelect class='custom-input' value={jobValues?.stage} multiple={false} cancelText="Cancel" okText="Okay" onIonChange={e => handleJobChange(e)} name='stage'>
@@ -149,7 +149,7 @@ const JobForm = ({
                 </IonSelect>
               </IonCol>
 
-              <IonCol size='2'>
+              <IonCol size='2' class='center-text'>
                 <IonLabel>Status: </IonLabel>
               </IonCol>
               <IonCol size='4'>

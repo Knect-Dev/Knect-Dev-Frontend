@@ -13,6 +13,11 @@
   --background : rgba(138, 138, 138, 0.068); 
 }
 
+.center-text {
+  display: flex;
+  align-items: center;
+}
+
 .job-button{
   --box-shadow: 1px 1px 1px black;
   margin-right: 3%;
