@@ -1,5 +1,5 @@
-import { IonModal, IonButton } from '@ionic/react';
-import { useState, useEffect, useRef } from 'react';
+import { IonModal, IonButton, IonAlert } from '@ionic/react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { When, If, Then, Else } from 'react-if';
 
@@ -38,7 +38,9 @@ const ParentForm = ({
   let currentCompany = companyState.find(company => company.id === currentJob?.CompanyId);
   const [jobValues, setJobValues] = useState({});
   const [companyValues, setCompanyValues] = useState({});
-  const [contactValues, setContactValues] = useState({});
+  // const [contactValues, setContactValues] = useState({});
+
+  const [showAlert, setShowAlert] = useState({});
 
   useEffect(() => {
     setJobValues(currentJob || {});
@@ -122,6 +124,10 @@ const ParentForm = ({
       setJobValues(currentJob || {});
       setCompanyValues(currentCompany || {});
     }
+  }
+
+  function handleClick(confirm) {
+    addToDatabase(confirm);
   }
 
   function handleCloseForm() {
@@ -220,11 +226,36 @@ const ParentForm = ({
               </IonButton>
             </Then>
             <Else>
-              <IonButton onClick={() => addToDatabase(true)}>{`Add ${activeForm}`}</IonButton>
+              <IonButton expand='full' color='success' class='add-button' onClick={() => setShowAlert(true)}>{`Add ${activeForm}`}</IonButton>
             </Else>
           </If>
         </div>
       </IonModal>
+      <IonAlert
+        isOpen={showAlert}
+        onDidDismiss={() => setShowAlert(false)}
+        cssClass='my-custom-class'
+        header={`Add ${activeForm}`}
+        message={'Submit these changes and save to the database?'}
+        buttons={[
+          {
+            text: 'Discard',
+            id: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              handleClick(false);
+            }
+          },
+          {
+            text: 'Accept',
+            id: 'accept',
+            cssClass: 'success',
+            handler: () => {
+              handleClick(true);
+            }
+          }
+        ]}
+      />
     </>
   )
 }

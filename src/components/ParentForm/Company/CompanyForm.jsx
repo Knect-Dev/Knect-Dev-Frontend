@@ -75,29 +75,29 @@ const CompanyForm = ({
                 </When>
                 <When condition={!selectedCompanyId}>
                   <IonLabel>Company: </IonLabel>
-                  <IonTextarea class='custom-input' value={companyValues?.name} onIonChange={e => handleCompanyChange(e)} placeholder='Company Name' name='name' clearInput></IonTextarea>
+                  <IonTextarea class='custom-input' value={companyValues?.name} onIonChange={e => handleCompanyChange(e)} placeholder='madeup inc.' name='name' clearInput></IonTextarea>
                 </When>
               </IonCol>
               <IonCol size='6'>
-                <IonLabel>Input Link to Job: </IonLabel>
-                <IonTextarea class='custom-input' value={companyValues?.careersUrl} onIonChange={e => handleCompanyChange(e)} placeholder='Career Page URL' name='careersUrl' clearInput></IonTextarea>
+                <IonLabel>Career Page: </IonLabel>
+                <IonTextarea class='custom-input' value={companyValues?.careersUrl} onIonChange={e => handleCompanyChange(e)} placeholder='https://www.madeupinc.com/careers' name='careersUrl' clearInput></IonTextarea>
               </IonCol>
             </IonRow>
 
             <IonRow>
               <IonCol size='4'>
                 <IonLabel>Leader: </IonLabel>
-                <IonInput class='custom-input' value={companyValues?.leader} onIonChange={e => handleCompanyChange(e)} placeholder='Company Leader' name='leader' auto-grow clearInput></IonInput>
+                <IonInput class='custom-input' value={companyValues?.leader} onIonChange={e => handleCompanyChange(e)} placeholder='Jody Smith' name='leader' auto-grow clearInput></IonInput>
               </IonCol>
 
               <IonCol size='4'>
                 <IonLabel>HQ: </IonLabel>
-                <IonInput class='custom-input' value={companyValues?.hq} onIonChange={e => handleCompanyChange(e)} placeholder='HQ Location' name='hq' clearInput></IonInput>
+                <IonInput class='custom-input' value={companyValues?.hq} onIonChange={e => handleCompanyChange(e)} placeholder='San Fran, CA' name='hq' clearInput></IonInput>
               </IonCol>
 
               <IonCol size='4'>
                 <IonLabel>Size: </IonLabel>
-                <IonInput class='custom-input' value={companyValues?.size} type='number' step='1000' min='0' onIonChange={e => handleCompanyChange(e)} placeholder='# of employees' name='size' clearInput></IonInput>
+                <IonInput class='custom-input' value={companyValues?.size} type='number' step='1000' min='0' onIonChange={e => handleCompanyChange(e)} placeholder='at least 10' name='size' clearInput></IonInput>
               </IonCol>
             </IonRow>
 
