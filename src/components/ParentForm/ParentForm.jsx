@@ -45,6 +45,7 @@ const ParentForm = ({
   useEffect(() => {
     setJobValues(currentJob || {});
     setCompanyValues(currentCompany || {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedJobId]);
 
   function handleJobChange(e) {
