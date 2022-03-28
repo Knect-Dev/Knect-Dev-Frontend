@@ -3,7 +3,8 @@ import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, 
 import { If, Then, When, Else } from 'react-if';
 
 import { closeOutline, openOutline } from 'ionicons/icons';
-import KnectIcon from '../../../resources/Knect.dev.png';
+import BlackKnectIcon from '../../../resources/Knect.dev.png';
+import WhiteKnectIcon from '../../../resources/knect_dev_white.png';
 
 const CompanyForm = ({
   lock,
@@ -19,7 +20,7 @@ const CompanyForm = ({
       <IonContent>
         <IonGrid>
           <IonRow class='ion-justify-content-between ion-align-items-center' style={{ backgroundColor: lock ? 'rgb(213, 205, 205)' : 'white' }}>
-            <img src={KnectIcon} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
+            <img src={BlackKnectIcon} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
             <If condition={lock}>
               <Then>
                 <IonText class='status-item ion-padding-start'><h3>Company Information</h3></IonText>
