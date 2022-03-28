@@ -49,7 +49,7 @@ const Header = ({user}) => {
             :
             <IonIcon class='dark-icon' icon={moonOutline} onClick={themeToggleHandler}></IonIcon>}
         </IonButtons>
-        {currentPage === '/home' ?
+        { (Object.keys(user).length > 0) &&  currentPage === '/home' ?
           <IonButtons slot='end'>
             <IonSearchbar
               id='search-bar'
