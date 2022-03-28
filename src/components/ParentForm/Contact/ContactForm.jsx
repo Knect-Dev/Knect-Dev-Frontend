@@ -119,10 +119,6 @@ const ContactForm = ({ disable, setDisable, showForm, setShowForm, setSelectedJo
               })}
             </IonAccordionGroup>
           </When>
-          {lock ?
-            <IonIcon class="edit-form-icon-locked" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>
-            :
-            <IonIcon class="edit-form-icon-unlocked" icon={lockOpenOutline} onClick={toggleEditHandler} ></IonIcon>}
         </IonGrid >
       </IonContent>
     </>

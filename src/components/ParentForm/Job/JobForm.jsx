@@ -15,28 +15,15 @@ const JobForm = ({
   changeCompany,
   currentJob,
   jobValues,
+  handleCloseForm,
   disable,
   setDisable,
-  showForm,
-  setShowForm,
   setActiveForm,
   selectedJobId,
-  setSelectedJobId,
-  setSelectedCompanyId,
   handleDelete
 }) => {
 
-  function handleCloseForm() {
-    setShowForm(!showForm)
-    //-- Timeout is used to ensure fade of form when closing does not show blank form for split second --//
-    setTimeout(() => {
-      setDisable(false);
-      setLock(true);
-      setSelectedJobId(null);
-    }, 150)
-  }
-
-  const stageBackgrounds =['#80808099', '#F2C70088', '#8C00B080', '#CB006399','#6ADFC299', 'linear-gradient(326deg, rgba(255,0,184,0.9682247899159664) 12%, rgba(74,175,252,1) 50%, rgba(74,252,129,1) 76%, rgba(252,248,69,1) 89%)'];
+  const stageBackgrounds = ['#80808099', '#F2C70088', '#8C00B080', '#CB006399', '#6ADFC299', 'linear-gradient(320deg, #6ADFC290 15%, #CB006390, #8C00B070, #F2C70078 85% )'];
   let options = ['Not Applied', 'Applied', 'Phone Screen', 'Tech Interview', 'Onsite', 'Offer'];
   let stageBackground = stageBackgrounds[options.findIndex(element => element === jobValues.stage)];
 
@@ -64,7 +51,7 @@ const JobForm = ({
                   target="_blank"
                   rel="noreferrer"
                   style={{ textDecoration: 'none', color: 'black' }}>
-                  <h4 style={{ display: 'inline' }}>{jobValues?.title}</h4> <IonIcon icon={openOutline}></IonIcon>
+                  <IonText style={{ color: '--ion-text-color' }}><h4 style={{ display: 'inline' }}>{jobValues?.title}</h4> <IonIcon icon={openOutline}></IonIcon></IonText>
                 </a>
                 &nbsp;at&nbsp;
                 <h4 style={{ display: 'inline', cursor: 'pointer' }} onClick={() => setActiveForm('Company')}>{jobValues?.company}</h4>
@@ -180,7 +167,6 @@ const JobForm = ({
                 <IonTextarea class='custom-input' value={jobValues?.notes} onIonChange={e => handleJobChange(e)} name='notes' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow>
-
           </When>
         </IonGrid>
       </IonContent>
