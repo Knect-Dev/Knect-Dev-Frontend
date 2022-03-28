@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { When } from 'react-if';
 
 import { closeOutline } from 'ionicons/icons';
-import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 
 const ContactForm = ({ disable, setDisable, showForm, setShowForm, setSelectedJobId }) => {
   const [lock, setLock] = useState(true);
@@ -14,11 +13,6 @@ const ContactForm = ({ disable, setDisable, showForm, setShowForm, setSelectedJo
 
   function handleChange(e) {
     dispatch({ type: 'SET_CONTACTS', payload: { id: e.target.about, name: e.target.name, value: e.detail.value } });
-  }
-
-  function toggleEditHandler() {
-    setDisable(!disable);
-    setLock(!lock);
   }
 
   function handleCloseForm() {
