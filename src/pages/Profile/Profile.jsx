@@ -8,13 +8,11 @@ const Profile = () => {
     <IonPage>
       <IonContent>
           <PageHeader title={'Profile'} />
-        <IonGrid>
-        <IonRow>
-          <IonCol size="2"/>
-          <IonCol size="8">
+        <IonGrid style={{marginTop: '70px', padding: '10px'}}>
+        <IonRow class="ion-justify-content-center">
+          <IonCol size-xl='5' size-lg='7'  size-md='8' size-sm='10'>
           <ProfileContainer name='Profile page' />
           </IonCol>
-          <IonCol size="2"/>
           </IonRow>
         </IonGrid>
       </IonContent>

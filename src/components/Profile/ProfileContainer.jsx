@@ -29,7 +29,6 @@ const ProfileContainer = () => {
       </IonCardHeader>
       <IonGrid>
         <IonRow>
-          <IonCol size="2" />
           <IonCol>
           <IonCardContent>
       <IonAvatar class="avatar">
@@ -50,10 +49,8 @@ const ProfileContainer = () => {
         <IonIcon class="edit-profile-icon" icon={lockOpenOutline} onClick={toggleEditHandler}></IonIcon>
         :
         <IonIcon class="edit-profile-icon" icon={lockClosedOutline} onClick={toggleEditHandler}></IonIcon>}
-
           </IonCardContent>
           </IonCol>
-          <IonCol size="2" />
         </IonRow>
       </IonGrid>
     </IonCard>
