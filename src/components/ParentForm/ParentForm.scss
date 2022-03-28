@@ -5,16 +5,19 @@
   margin-left: 15%; 
   justify-content: space-between;
   .job-button {
-    --background: #A4F976;
+    --background: linear-gradient(320deg,#DAD7D3 85%, #FFB347 3%);
     --opacity: .70;
+    --border-width: 1px;
   }
   .company-button {
-    --background: #FEBB5D;
+    --background: linear-gradient(320deg,#DAD7D3 85%, #67AFE0 3%);
     --opacity: .70;
+    --border-width: 1px;
   }
   .contact-button {
-    --background: #54D0F2;
+    --background: linear-gradient(320deg,#DAD7D3 85%, #F43E5C 3%);
     --opacity: .70;
+    --border-width: 1px;
   }
   .tab-button {
     width: 10rem;
@@ -22,11 +25,11 @@
     font-weight: 600;
     margin: .1rem;
     height: 2.8rem;
-    --border-color: #0E4749;
+    --border-color: black;
     --border-width: 1px;
     --border-radius: 9px;
     --border-style: solid;
-    --ripple-color: #0E4749;
+    --ripple-color: black;
   }
   #active {
     --opacity: 1;

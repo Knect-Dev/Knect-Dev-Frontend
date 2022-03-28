@@ -211,7 +211,7 @@ const ParentForm = ({
               </IonButton>
 
               <IonButton
-                class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
+                class={`tab-button button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
                 id={(activeForm === 'Company' && !disable) && 'active'}
                 disabled={disable}
                 onClick={() => setActiveForm('Company')}>
