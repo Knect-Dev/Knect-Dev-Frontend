@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { When } from 'react-if';
 import fuzzysort from 'fuzzysort';
 
-const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, setLock, setDisable, lock, disable }) => {
+const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock, setDisable, lock, disable }) => {
   const [companySearch, setCompanySearch] = useState('');
   const companies = useSelector(state => state.companies.companies);
   const [displayCompanies, setDisplayComanies] = useState(companies);
@@ -24,7 +24,7 @@ const CompanySelector = ({ currentCompany, setActiveForm, handleCompanyChange, s
 
   function handleChange(value) {
     setSelectedCompany(value.company);
-    handleCompanyChange(value);
+    changeCompany(value);
   }
 
   function handleClick() {

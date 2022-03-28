@@ -1,22 +1,49 @@
 import { IonModal, IonButton } from '@ionic/react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { When } from 'react-if';
+import { When, If, Then, Else } from 'react-if';
 
 import JobForm from './Job/JobForm';
 import CompanyForm from './Company/CompanyForm';
 import ContactForm from './Contact/ContactForm';
-import { deleteJob } from '../../store/jobs.js';
+
+import LockButton from '../LockButton/LockButton.jsx';
+
+import { addJob, updateJob, deleteJob } from '../../store/jobs.js';
 import './ParentForm.scss';
 
-const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selectedJobId, setSelectedJobId, selectedCompanyId, setSelectedCompanyId }) => {
+const ParentForm = ({
+  lock,
+  setLock,
+  disable,
+  setDisable,
+  showForm,
+  setShowForm,
+  activeForm,
+  setActiveForm,
+  selectedJobId,
+  setSelectedJobId,
+  selectedCompanyId,
+  setSelectedCompanyId
+}) => {
   // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
-  const dispatch = useDispatch();
+  const jobState = useSelector(state => state.jobs.jobs);
   const token = useSelector(state => state.user.user.token);
+  const dispatch = useDispatch();
 
-  const [disable, setDisable] = useState(false);
+  let currentJob = jobState.find(job => job.id === selectedJobId);
+  const [jobValues, setJobValues] = useState({});
+  useEffect(() => {
+    setJobValues(currentJob || {});
+  }, [selectedJobId]);
 
-  function deleteHandler(trgToDestroy) {
+  function handleJobChange(e) {
+    setJobValues(prev => {
+      return { ...prev, [e.target.name]: e?.detail?.value || e?.target?.value }
+    });
+  }
+
+  function handleDelete(trgToDestroy) {
     let { id, type } = trgToDestroy;
     switch (type) {
       case 'JOB':
@@ -25,6 +52,61 @@ const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selected
         
       default:
         return;
+    }
+  }
+
+  function changeCompany(change) {
+    let { id, company } = change;
+    setJobValues(prev => {
+      return { ...prev, CompanyId: id, company: company }
+    })
+    setSelectedCompanyId(id);
+  }
+
+  function toggleEditHandler(confirm) {
+    if (confirm) {
+      if (!selectedJobId) {
+        if (jobValues.title && jobValues.company) {
+          dispatch(addJob(jobValues, token));
+          setShowForm(false);
+          setDisable(!disable);
+          setLock(!lock);
+        } else if (!jobValues.title || !jobValues.company) {
+          setJobValues(currentJob || {});
+          setSelectedJobId(null);
+          setDisable(!disable);
+          setLock(!lock);
+        }
+      } else if (selectedJobId) {
+        dispatch(updateJob(jobValues, token))
+        setDisable(!disable);
+        setLock(!lock);
+      }
+    } else if (!confirm) {
+      setJobValues(currentJob || {});
+      setDisable(!disable);
+      setLock(!lock);
+    }
+  }
+
+  function addToDatabase(payload) {
+    let { type, confirm } = payload;
+    if (confirm && type === 'Job') {
+      if (jobValues.title && jobValues.company) {
+        dispatch(addJob(jobValues, token));
+        setShowForm(false);
+        setDisable(!disable);
+        setLock(!lock);
+      } else if (!jobValues.title || !jobValues.company) {
+        setJobValues(currentJob || {});
+        setSelectedJobId(null);
+        setDisable(!disable);
+        setLock(!lock);
+      }
+    } else if (confirm && type === 'Company') {
+      console.log('company added');
+    } else if (confirm && type === 'Contact') {
+      console.log('contact added');
     }
   }
 
@@ -38,6 +120,13 @@ const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selected
       >
         <When condition={activeForm === 'Job'}>
           <JobForm 
+            lock={lock}
+            setLock={setLock}
+            handleJobChange={handleJobChange}
+            changeCompany={changeCompany}
+            currentJob={currentJob}
+            jobValues={jobValues}
+            setJobValues={setJobValues}
             disable={disable}
             setDisable={setDisable}
             showForm={showForm}
@@ -46,7 +135,7 @@ const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selected
             selectedJobId={selectedJobId}
             setSelectedJobId={setSelectedJobId}
             setSelectedCompanyId={setSelectedCompanyId}
-            deleteHandler={deleteHandler} />
+            handleDelete={handleDelete} />
         </When>
         <When condition={activeForm === 'Company'}>
           <CompanyForm 
@@ -68,29 +157,37 @@ const ParentForm = ({ showForm, setShowForm, activeForm, setActiveForm, selected
         </When>
 
         <div className='button-group'>  
-          <IonButton 
-            class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} 
-            id={(activeForm === 'Job' && !disable) && 'active'} 
-            disabled={disable} 
-            onClick={() => setActiveForm('Job')}>
-            Job
-          </IonButton>
+          <If condition={selectedJobId}>
+            <Then>
+              <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
+              <IonButton
+                class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
+                id={(activeForm === 'Job' && !disable) && 'active'}
+                disabled={disable}
+                onClick={() => setActiveForm('Job')}>
+                Job
+              </IonButton>
 
-          <IonButton 
-            class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
-            id={(activeForm === 'Company' && !disable) && 'active'} 
-            disabled={disable} 
-            onClick={() => setActiveForm('Company')}>
-            Company
-          </IonButton>
-          
-          <IonButton 
-            class={`tab-button contact-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`} 
-            id={(activeForm === 'Contact' && !disable) && 'active'} 
-            disabled={disable} 
-            onClick={() => setActiveForm('Contact')}>
-            Contacts
-          </IonButton>
+              <IonButton
+                class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
+                id={(activeForm === 'Company' && !disable) && 'active'}
+                disabled={disable}
+                onClick={() => setActiveForm('Company')}>
+                Company
+              </IonButton>
+
+              <IonButton
+                class={`tab-button contact-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
+                id={(activeForm === 'Contact' && !disable) && 'active'}
+                disabled={disable}
+                onClick={() => setActiveForm('Contact')}>
+                Contacts
+              </IonButton>
+            </Then>
+            <Else>
+              <IonButton onClick={() => addToDatabase({ type: activeForm, confirm: true })}>{`Add ${activeForm}`}</IonButton>
+            </Else>
+          </If>
         </div>
       </IonModal>
     </>
