@@ -35,7 +35,6 @@ function SignIn({ toggle }) {
       </IonCardHeader>
       <IonGrid>
         <IonRow>
-          <IonCol size="2" />
           <IonCol>
           <IonCardContent>
             <IonAvatar class="avatar">
@@ -62,7 +61,6 @@ function SignIn({ toggle }) {
             </IonText>
           </IonCardContent>
           </IonCol>
-          <IonCol size="2" />
         </IonRow>
       </IonGrid>
     </IonCard>
