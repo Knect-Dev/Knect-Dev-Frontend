@@ -31,7 +31,7 @@ const JobForm = ({
     <>
       <IonContent>
         <IonGrid>
-            <IonRow class={'ion-justify-content-between ion-align-items-center'} style={{background: stageBackground}}>
+          <IonRow class={'ion-justify-content-between ion-align-items-center'} style={{ background: stageBackground || 'rgb(150, 150, 150, .50)' }}>
             <If condition={selectedJobId}>
               <Then>
                 <TrashButton currentJob={currentJob} handleDelete={handleDelete} handleCloseForm={handleCloseForm} />
@@ -47,12 +47,15 @@ const JobForm = ({
             {/* We can modify status background, or use inline styling to adjust the background color of row to represent the status */}
             <IonRow class="ion-padding-bottom">
               <IonCol size='auto'>
-                <a href={jobValues?.jobUrl || null}
+                <h4 style={{ display: 'inline' }}>{jobValues?.title}</h4>
+                {jobValues?.jobUrl && <a href={jobValues?.jobUrl || null}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ textDecoration: 'none', color: 'black' }}>
-                  <IonText style={{ color: '--ion-text-color' }}><h4 style={{ display: 'inline' }}>{jobValues?.title}</h4> <IonIcon icon={openOutline}></IonIcon></IonText>
-                </a>
+                  style={{ textDecoration: 'none' }}>
+                  <IonText style={{ color: '--ion-text-color' }}>
+                    &nbsp;<IonIcon icon={openOutline}></IonIcon>
+                  </IonText>
+                </a>}
                 &nbsp;at&nbsp;
                 <h4 style={{ display: 'inline', cursor: 'pointer' }} onClick={() => setActiveForm('Company')}>{jobValues?.company}</h4>
               </IonCol>
@@ -91,7 +94,7 @@ const JobForm = ({
             <IonRow>
               <IonCol size='6'>
                 <IonLabel>Job Title: </IonLabel>
-                <IonTextarea class='custom-input' value={jobValues?.title} onIonChange={e => handleJobChange(e)} placeholder='Job Title' name='title' auto-grow clearInput></IonTextarea>
+                <IonTextarea class='custom-input' value={jobValues?.title} onIonChange={e => handleJobChange(e)} placeholder='Software Dev' name='title' auto-grow clearInput></IonTextarea>
               </IonCol>
               <CompanySelector
                 currentCompany={{ company: jobValues?.company, id: jobValues?.CompanyId }}
@@ -106,7 +109,7 @@ const JobForm = ({
             <IonRow>
               <IonCol size='12'>
                 <IonLabel>Input Link to Job: </IonLabel>
-                <IonTextarea class='custom-input' value={jobValues?.jobUrl} onIonChange={e => handleJobChange(e)} placeholder='Job URL' name='jobUrl' auto-grow clearInput></IonTextarea>
+                <IonTextarea class='custom-input' value={jobValues?.jobUrl} onIonChange={e => handleJobChange(e)} placeholder='https://www.madeupinc.com/jobs/2' name='jobUrl' auto-grow clearInput></IonTextarea>
               </IonCol>
             </IonRow>
 
@@ -115,7 +118,7 @@ const JobForm = ({
                 <IonLabel>Job ID: </IonLabel>
               </IonCol>
               <IonCol size='4'>
-                <IonInput class='custom-input' value={jobValues?.jobId} onIonChange={e => handleJobChange(e)} placeholder='Job ID' name='jobId' clearInput></IonInput>
+                <IonInput class='custom-input' value={jobValues?.jobId} onIonChange={e => handleJobChange(e)} placeholder='ID-12345' name='jobId' clearInput></IonInput>
               </IonCol>
 
               <IonCol size='2' class='center-text'>
@@ -131,7 +134,7 @@ const JobForm = ({
                 <IonLabel>Stage: </IonLabel>
               </IonCol>
               <IonCol size='4'>
-                <IonSelect class='custom-input' value={jobValues?.stage} multiple={false} cancelText="Cancel" okText="Okay" onIonChange={e => handleJobChange(e)} name='stage'>
+                <IonSelect class='custom-input' value={jobValues?.stage} placeholder='Select' multiple={false} cancelText="Cancel" okText="Okay" onIonChange={e => handleJobChange(e)} name='stage'>
                   {options.map((e, idx) => <IonSelectOption key={e + idx}>{e}</IonSelectOption>)}
                 </IonSelect>
               </IonCol>

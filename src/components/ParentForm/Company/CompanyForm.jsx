@@ -7,7 +7,6 @@ import KnectIcon from '../../../resources/Knect.dev.png';
 
 const CompanyForm = ({
   lock,
-  currentCompany,
   handleCompanyChange,
   handleCloseForm,
   companyValues,
@@ -18,7 +17,7 @@ const CompanyForm = ({
     <>
       <IonContent>
         <IonGrid>
-          <IonRow class='ion-justify-content-between ion-align-items-center' style={{ backgroundColor: lock ? 'rgb(213, 205, 205)' : 'white' }}>
+          <IonRow class='ion-justify-content-between ion-align-items-center' style={{ backgroundColor: 'rgb(150, 150, 150, .50)' }}>
             <img src={KnectIcon} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
             <If condition={lock}>
               <Then>
@@ -34,13 +33,15 @@ const CompanyForm = ({
           <When condition={lock}>
 
             <IonRow class="ion-padding-bottom">
-              <IonCol size='8'><h4 style={{ display: 'inline' }}>{companyValues?.name}</h4></IonCol>
-              <IonCol size='4'><a href={companyValues?.careersUrl}
-                target="_blank"
-                rel="noreferrer"
-                style={{ textDecoration: 'none', color: 'black' }}>
-                <h4 style={{ display: 'inline' }}>Career Page&nbsp;</h4><IonIcon icon={openOutline}></IonIcon>
-              </a>
+              <IonCol size='12' class='ion-text-center'>
+                <h3 style={{ display: 'inline' }}>&nbsp;{companyValues?.name}&nbsp;</h3>
+                {companyValues?.careersUrl && <a
+                  href={companyValues?.careersUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ textDecoration: 'none' }}>
+                  <IonIcon icon={openOutline}></IonIcon>
+                </a>}
               </IonCol>
             </IonRow>
 
