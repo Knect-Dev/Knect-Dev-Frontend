@@ -2,8 +2,6 @@ import { IonContent, IonIcon, IonAlert } from '@ionic/react';
 import { lockOpenOutline, lockClosedOutline } from 'ionicons/icons';
 import { useState } from 'react';
 
-import './lockButton.scss';
-
 function LockButton({ toggleEditHandler, lock }) {
 
   const [showAlert, setShowAlert] = useState(false);

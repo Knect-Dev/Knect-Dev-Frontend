@@ -5,16 +5,19 @@
   margin-left: 15%; 
   justify-content: space-between;
   .job-button {
-    --background: #A4F976;
+    --background: linear-gradient(320deg,#DAD7D3 88%, #FFB347 50%);
     --opacity: .70;
+    --ripple-color: #FFB347;
   }
   .company-button {
-    --background: #FEBB5D;
+    --background: linear-gradient(320deg,#DAD7D3 88%, #67AFE0 50%);
     --opacity: .70;
+    --ripple-color: #67AFE0;
   }
   .contact-button {
-    --background: #54D0F2;
+    --background: linear-gradient(320deg,#DAD7D3 88%, #F43E5C 50%);
     --opacity: .70;
+    --ripple-color: #F43E5C;
   }
   .tab-button {
     width: 10rem;
@@ -22,21 +25,38 @@
     font-weight: 600;
     margin: .1rem;
     height: 2.8rem;
-    --border-color: #0E4749;
+    --border-color: black;
     --border-width: 1px;
     --border-radius: 9px;
     --border-style: solid;
-    --ripple-color: #0E4749;
   }
   #active {
     --opacity: 1;
     --border-width: 2px;
   }
-  .locked {
-    --background: rgba(128, 128, 128, 0.479);
-  }
   .add-button {
     width: 100%;
+  }
+  .dark-job{
+    color: white;
+    --background: linear-gradient(320deg,#53514d 88%, #FFB347 50%);
+    --border-color: white;
+    --ripple-color: #FFB347;
+  }
+  .dark-company{
+    color: white;
+    --background: linear-gradient(320deg,#53514d 88%, #67AFE0 50%);
+    --border-color: white;
+    --ripple-color: #67AFE0;
+  }
+  .dark-contact{
+    color: white;
+    --background: linear-gradient(320deg,#53514d 88%, #F43E5C 50%);
+    --border-color: white;
+    --ripple-color: #F43E5C;
+  }
+  .locked {
+    --background: rgba(128, 128, 128, 0.479);
   }
 }
 
@@ -54,7 +74,7 @@
   bottom: 1rem;
   background-color: #f95838c0;
   border-radius: 50%;
-  border: solid white 2px;
+  border: solid rgba(130, 130, 130, 0.6) 2px;
   color: white;
   padding: .3rem;
 }
@@ -68,6 +88,6 @@
   left: .45rem;
   bottom: 1rem;
   border-radius: 50%;
-  border: solid rgba(0, 0, 0, 0.438) 2px;
+  border: solid rgba(130, 130, 130, 0.50) 2px;
   padding: .3rem;
 }

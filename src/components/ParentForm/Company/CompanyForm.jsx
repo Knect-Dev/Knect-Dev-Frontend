@@ -3,24 +3,24 @@ import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, 
 import { If, Then, When, Else } from 'react-if';
 
 import { closeOutline, openOutline } from 'ionicons/icons';
-import BlackKnectIcon from '../../../resources/Knect.dev.png';
-import WhiteKnectIcon from '../../../resources/knect_dev_white.png';
+
+import KnectIconLight from '../../../resources/Knect.dev.png';
+import KnectIconDark from '../../../resources/knect_dev_white.png';
 
 const CompanyForm = ({
+  theme,
   lock,
-  currentCompany,
   handleCompanyChange,
   handleCloseForm,
   companyValues,
   selectedCompanyId,
 }) => {
-
   return (
     <>
       <IonContent>
         <IonGrid>
-          <IonRow class='ion-justify-content-between ion-align-items-center' style={{ backgroundColor: lock ? 'rgb(213, 205, 205)' : 'white' }}>
-            <img src={BlackKnectIcon} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
+          <IonRow class='ion-justify-content-between ion-align-items-center' style={{ backgroundColor: 'rgb(150, 150, 150, .50)' }}>
+            <img src={theme ? KnectIconDark : KnectIconLight} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
             <If condition={lock}>
               <Then>
                 <IonText class='status-item ion-padding-start'><h3>Company Information</h3></IonText>
@@ -35,13 +35,15 @@ const CompanyForm = ({
           <When condition={lock}>
 
             <IonRow class="ion-padding-bottom">
-              <IonCol size='8'><h4 style={{ display: 'inline' }}>{companyValues?.name}</h4></IonCol>
-              <IonCol size='4'><a href={companyValues?.careersUrl}
-                target="_blank"
-                rel="noreferrer"
-                style={{ textDecoration: 'none', color: 'black' }}>
-                <h4 style={{ display: 'inline' }}>Career Page&nbsp;</h4><IonIcon icon={openOutline}></IonIcon>
-              </a>
+              <IonCol size='12' class='ion-text-center'>
+                <h3 style={{ display: 'inline' }}>&nbsp;{companyValues?.name}&nbsp;</h3>
+                {companyValues?.careersUrl && <a
+                  href={companyValues?.careersUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ textDecoration: 'none' }}>
+                  <IonIcon icon={openOutline}></IonIcon>
+                </a>}
               </IonCol>
             </IonRow>
 
@@ -98,7 +100,7 @@ const CompanyForm = ({
 
               <IonCol size='4'>
                 <IonLabel>Size: </IonLabel>
-                <IonInput class='custom-input' value={companyValues?.size} type='number' step='1000' min='0' onIonChange={e => handleCompanyChange(e)} placeholder='at least 10' name='size' clearInput></IonInput>
+                <IonInput class='custom-input' value={companyValues?.size} type='number' step='1000' min='0' onIonChange={e => handleCompanyChange(e)} placeholder='1000' name='size' clearInput></IonInput>
               </IonCol>
             </IonRow>
 

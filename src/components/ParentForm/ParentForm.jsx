@@ -39,7 +39,7 @@ const ParentForm = ({
   const [jobValues, setJobValues] = useState({});
   const [companyValues, setCompanyValues] = useState({});
   // const [contactValues, setContactValues] = useState({});
-
+  const theme = document.getElementsByClassName('dark').length > 0;
   const [showAlert, setShowAlert] = useState({});
 
   useEffect(() => {
@@ -154,6 +154,7 @@ const ParentForm = ({
       >
         <When condition={activeForm === 'Job'}>
           <JobForm 
+            theme={theme}
             lock={lock}
             setLock={setLock}
             handleJobChange={handleJobChange}
@@ -174,6 +175,7 @@ const ParentForm = ({
         </When>
         <When condition={activeForm === 'Company'}>
           <CompanyForm 
+            theme={theme}
             lock={lock}
             setLock={setLock}
             disable={disable}
@@ -203,7 +205,7 @@ const ParentForm = ({
             <Then>
               <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
               <IonButton
-                class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
+                class={`tab-button job-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'} ${theme && 'dark-job'}`}
                 id={(activeForm === 'Job' && !disable) && 'active'}
                 disabled={disable}
                 onClick={() => setActiveForm('Job')}>
@@ -211,7 +213,7 @@ const ParentForm = ({
               </IonButton>
 
               <IonButton
-                class={`tab-button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
+                class={`tab-button button company-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'} ${theme && 'dark-company'}`}
                 id={(activeForm === 'Company' && !disable) && 'active'}
                 disabled={disable}
                 onClick={() => setActiveForm('Company')}>
@@ -219,7 +221,7 @@ const ParentForm = ({
               </IonButton>
 
               <IonButton
-                class={`tab-button contact-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'}`}
+                class={`tab-button contact-button md button button-solid ion-activatable ion-focusable ${disable && 'locked'} ${theme && 'dark-contact'}`}
                 id={(activeForm === 'Contact' && !disable) && 'active'}
                 disabled={disable}
                 onClick={() => setActiveForm('Contact')}>

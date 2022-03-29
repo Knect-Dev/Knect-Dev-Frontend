@@ -4,34 +4,7 @@ import axios from 'axios';
 const COMPANY_URL = 'https://knect-dev.herokuapp.com/Companies/';
 
 const initialState = {
-  companies: [
-    // {
-    //   id: 1,
-    //   name: 'Microsoft',
-    //   leader: '',
-    //   size: 10000,
-    //   hq: 'Redmond, WA',
-    //   product: 'Software',
-    //   clients: 'Kellen, Daniel',
-    //   mission: '',
-    //   careersURL: '',
-    //   companyURL: '',
-    //   logo: '',
-    // },
-    // {
-    //   id: 2,
-    //   name: 'Uber',
-    //   leader: '',
-    //   size: 10000,
-    //   hq: 'Redmond, WA',
-    //   product: 'Software',
-    //   clients: 'Kellen, Daniel',
-    //   mission: '',
-    //   careersURL: '',
-    //   companyURL: '',
-    //   logo: '',
-    // },
-  ],
+  companies: [],
 };
 
 const companiesReducer = (state = initialState, action) => {
