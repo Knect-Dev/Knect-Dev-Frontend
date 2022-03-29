@@ -89,6 +89,10 @@ const ParentForm = ({
       dispatch(updateCompany(companyValues, token));
       setDisable(!disable);
       setLock(!lock);
+    } else if (confirm && activeForm === 'Contact') {
+      console.log('working on change')
+      setDisable(!disable);
+      setLock(!lock);
     } else if (!confirm) {
       setJobValues(currentJob || {});
       setDisable(!disable);
@@ -192,12 +196,10 @@ const ParentForm = ({
         </When>
         <When condition={activeForm === 'Contact'}>
           <ContactForm 
-            selectedJobId={selectedJobId}
-            showForm={showForm}
-            disable={disable}
-            setDisable={setDisable}
-            setShowForm={setShowForm}
-            setSelectedJobId={setSelectedJobId} />
+            handleCloseForm={handleCloseForm}
+            lock={lock}
+            currentCompany={currentCompany}
+            theme={theme} />
         </When>
 
         <div className='button-group'>  
