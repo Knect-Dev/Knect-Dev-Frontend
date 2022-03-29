@@ -1,7 +1,8 @@
 import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText } from '@ionic/react';
 import { If, Then, When, Else } from 'react-if';
 import { closeOutline, openOutline } from 'ionicons/icons';
-import KnectIcon from '../../../resources/Knect.dev.png';
+import KnectIconLight from '../../../resources/Knect.dev.png';
+import KnectIconDark from '../../../resources/knect_dev_white.png';
 import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
 import TrashButton from '../../TrashButton/TrashButton.jsx';
 
@@ -9,6 +10,7 @@ import './jobForm.scss';
 
 // selectedJobId replaces what was previously id
 const JobForm = ({
+  theme,
   lock,
   setLock,
   handleJobChange,
@@ -22,7 +24,6 @@ const JobForm = ({
   selectedJobId,
   handleDelete
 }) => {
-
   const stageBackgrounds = ['#80808099', '#F2C70088', '#8C00B080', '#CB006399', '#6ADFC299', 'linear-gradient(320deg, #6ADFC290 15%, #CB006390, #8C00B070, #F2C70078 85% )'];
   let options = ['Not Applied', 'Applied', 'Phone Screen', 'Tech Interview', 'Onsite', 'Offer'];
   let stageBackground = stageBackgrounds[options.findIndex(element => element === jobValues.stage)];
@@ -37,7 +38,7 @@ const JobForm = ({
                 <TrashButton currentJob={currentJob} handleDelete={handleDelete} handleCloseForm={handleCloseForm} />
               </Then>
               <Else>
-                <img src={KnectIcon} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
+                <img src={theme ? KnectIconDark : KnectIconLight} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
               </Else>
             </If>
             <IonText class='status-item ion-padding-start'><h3>{jobValues?.stage || 'New Job'}</h3></IonText>

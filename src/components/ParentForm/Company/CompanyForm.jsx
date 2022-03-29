@@ -3,22 +3,24 @@ import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, 
 import { If, Then, When, Else } from 'react-if';
 
 import { closeOutline, openOutline } from 'ionicons/icons';
-import KnectIcon from '../../../resources/Knect.dev.png';
+import KnectIconLight from '../../../resources/Knect.dev.png';
+import KnectIconDark from '../../../resources/knect_dev_white.png';
+
 
 const CompanyForm = ({
+  theme,
   lock,
   handleCompanyChange,
   handleCloseForm,
   companyValues,
   selectedCompanyId,
 }) => {
-
   return (
     <>
       <IonContent>
         <IonGrid>
           <IonRow class='ion-justify-content-between ion-align-items-center' style={{ backgroundColor: 'rgb(150, 150, 150, .50)' }}>
-            <img src={KnectIcon} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
+            <img src={theme ? KnectIconDark : KnectIconLight} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
             <If condition={lock}>
               <Then>
                 <IonText class='status-item ion-padding-start'><h3>Company Information</h3></IonText>
@@ -98,7 +100,7 @@ const CompanyForm = ({
 
               <IonCol size='4'>
                 <IonLabel>Size: </IonLabel>
-                <IonInput class='custom-input' value={companyValues?.size} type='number' step='1000' min='0' onIonChange={e => handleCompanyChange(e)} placeholder='at least 10' name='size' clearInput></IonInput>
+                <IonInput class='custom-input' value={companyValues?.size} type='number' step='1000' min='0' onIonChange={e => handleCompanyChange(e)} placeholder='1000' name='size' clearInput></IonInput>
               </IonCol>
             </IonRow>
 
