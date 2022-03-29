@@ -5,19 +5,19 @@
   margin-left: 15%; 
   justify-content: space-between;
   .job-button {
-    --background: linear-gradient(320deg,#DAD7D3 85%, #FFB347 3%);
+    --background: linear-gradient(320deg,#DAD7D3 88%, #FFB347 50%);
     --opacity: .70;
-    --border-width: 1px;
+    --ripple-color: #FFB347;
   }
   .company-button {
-    --background: linear-gradient(320deg,#DAD7D3 85%, #67AFE0 3%);
+    --background: linear-gradient(320deg,#DAD7D3 88%, #67AFE0 50%);
     --opacity: .70;
-    --border-width: 1px;
+    --ripple-color: #67AFE0;
   }
   .contact-button {
-    --background: linear-gradient(320deg,#DAD7D3 85%, #F43E5C 3%);
+    --background: linear-gradient(320deg,#DAD7D3 88%, #F43E5C 50%);
     --opacity: .70;
-    --border-width: 1px;
+    --ripple-color: #F43E5C;
   }
   .tab-button {
     width: 10rem;
@@ -29,7 +29,6 @@
     --border-width: 1px;
     --border-radius: 9px;
     --border-style: solid;
-    --ripple-color: black;
   }
   #active {
     --opacity: 1;
@@ -40,6 +39,24 @@
   }
   .add-button {
     width: 100%;
+  }
+  .dark-job{
+    color: white;
+    --background: linear-gradient(320deg,#53514d 88%, #FFB347 50%);
+    --border-color: white;
+    --ripple-color: #FFB347;
+  }
+  .dark-company{
+    color: white;
+    --background: linear-gradient(320deg,#53514d 88%, #67AFE0 50%);
+    --border-color: white;
+    --ripple-color: #67AFE0;
+  }
+  .dark-contact{
+    color: white;
+    --background: linear-gradient(320deg,#53514d 88%, #F43E5C 50%);
+    --border-color: white;
+    --ripple-color: #F43E5C;
   }
 }
 
