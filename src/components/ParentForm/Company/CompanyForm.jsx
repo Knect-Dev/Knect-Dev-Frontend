@@ -3,9 +3,9 @@ import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, 
 import { If, Then, When, Else } from 'react-if';
 
 import { closeOutline, openOutline } from 'ionicons/icons';
+
 import KnectIconLight from '../../../resources/Knect.dev.png';
 import KnectIconDark from '../../../resources/knect_dev_white.png';
-
 
 const CompanyForm = ({
   theme,

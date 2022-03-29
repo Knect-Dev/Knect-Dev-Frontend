@@ -11,13 +11,11 @@ function Auth(props) {
   };
 
   return (
-    <IonGrid style={{marginTop: '60px', padding: '40px'}}>
-      <IonRow>
-        <IonCol size='2' />
-        <IonCol>
+    <IonGrid style={{marginTop: '70px', padding: '10px'}}>
+      <IonRow class="ion-justify-content-center">
+        <IonCol size-xl='5' size-lg='7'  size-md='8' size-sm='10'>
           {signIn ? <SignIn toggle={toggle} /> : <SignUp toggle={toggle} />}
         </IonCol>
-        <IonCol size='2' />
       </IonRow>
     </IonGrid>
   );
