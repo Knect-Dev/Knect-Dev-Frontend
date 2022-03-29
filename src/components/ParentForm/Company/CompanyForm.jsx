@@ -30,7 +30,7 @@ const CompanyForm = ({
               </Else>
             </If>
             <IonIcon class="header-icon" icon={closeOutline} onClick={handleCloseForm}></IonIcon> 
-            </IonRow>
+          </IonRow>
 
           <When condition={lock}>
 

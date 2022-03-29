@@ -1,12 +1,18 @@
 import { IonLabel, IonContent, IonIcon, IonItem, IonInput, IonGrid, IonRow, IonCol, IonAccordionGroup, IonAccordion, IonList, IonText } from '@ionic/react';
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { When } from 'react-if';
+import { If, Then, When, Else } from 'react-if';
+
+import KnectIconLight from '../../../resources/Knect.dev.png';
+import KnectIconDark from '../../../resources/knect_dev_white.png';
 
 import { closeOutline } from 'ionicons/icons';
 
-const ContactForm = ({ disable, setDisable, showForm, setShowForm, setSelectedJobId }) => {
-  const [lock, setLock] = useState(true);
+const ContactForm = ({
+  handleCloseForm,
+  lock,
+  currentCompany,
+  theme,
+}) => {
 
   let contactState = useSelector(state => state.contacts.contacts);
   let dispatch = useDispatch();
@@ -14,32 +20,26 @@ const ContactForm = ({ disable, setDisable, showForm, setShowForm, setSelectedJo
   function handleChange(e) {
     dispatch({ type: 'SET_CONTACTS', payload: { id: e.target.about, name: e.target.name, value: e.detail.value } });
   }
-
-  function handleCloseForm() {
-    setShowForm(!showForm);
-    setDisable(false);
-    setLock(true);
-    setSelectedJobId(null);
-  }
   // needs to be worked on after Job and Company tab are being rendered
   // const currentContacts = contactState.find(contact => contact.JobId === jobId && contact.CompanyId === companyId)
   return (
     <>
       <IonContent>
         <IonGrid>
-          <IonRow class='ion-justify-content-between status-background ion-align-items-center'>
-            {/* <IonItem class='status-item' >Contacts at this Company</IonItem> */}
-            <IonText class='status-item ion-padding-start' ><h3>Contacts at this Company</h3></IonText>
+          <IonRow class='ion-justify-content-between ion-align-items-center' style={{ backgroundColor: 'rgb(150, 150, 150, .50)' }}>
+            <img src={theme ? KnectIconDark : KnectIconLight} alt='Knect Dev Small Icon' style={{ height: '2rem', paddingLeft: '.5rem' }} />
+            <If condition={lock}>
+              <Then>
+                <IonText class='status-item ion-padding-start'><h3>{`Contacts at ${currentCompany?.name}`}</h3></IonText>
+              </Then>
+              <Else>
+                <IonText class='status-item ion-padding-start'><h3>{'New Contact'}</h3></IonText>
+              </Else>
+            </If>
             <IonIcon class="header-icon" icon={closeOutline} onClick={handleCloseForm}></IonIcon>
           </IonRow>
+
           <When condition={lock}>
-
-
-            <IonRow>
-              <IonCol size='6'>{contactState.company || 'Company Name'}</IonCol>
-              <IonCol size='6'>Career Page</IonCol>
-            </IonRow>
-
             <IonAccordionGroup>
               {contactState.map(contact => {
                 return (
@@ -68,12 +68,6 @@ const ContactForm = ({ disable, setDisable, showForm, setShowForm, setSelectedJo
             </IonAccordionGroup>
           </When >
           <When condition={!lock}>
-
-            <IonRow>
-              <IonCol size='6'>{contactState.company}</IonCol>
-              <IonCol size='6'>Career Page</IonCol>
-            </IonRow>
-
             <IonAccordionGroup>
               {contactState.map(contact => {
                 return (
