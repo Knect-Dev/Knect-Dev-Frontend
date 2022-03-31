@@ -34,7 +34,6 @@ const JobsList = ({ showForm, setShowForm, setSelectedJobId, setSelectedCompanyI
     jobResults = fuzzyResults :
     jobResults = jobState;
 
-  /*onClick={handleClick}*/
   return (
     <IonContent>
 

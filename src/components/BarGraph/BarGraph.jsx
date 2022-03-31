@@ -6,27 +6,26 @@ import {
   HorizontalGridLines,
   VerticalBarSeriesCanvas,
 } from 'react-vis';
+import { useEffect } from 'react';
+import { IonText } from '@ionic/react';
 
+const BarGraph = ({jobData}) => {
 
-// This can be modified to take in data like the XYGrid, or the XYGrid can be modified to work like this.
-const blueData = [
-  { x: 'Applied', y: 30, color: '#32a852' },
-  { x: 'Phone Screen', y: 15, color: '#3261a8' },
-  { x: 'Tech Interview', y: 11, color: '#a89c32' },
-  { x: 'Onsite', y: 8, color: '#6332a8' },
-  { x: 'Offer', y: 4, color: '#a83e32' },
-];
+  useEffect(() => {
+    console.log("Hi", jobData)
+  }, [jobData])
 
-
-const BarGraph = () => {
   return (
+    jobData.length > 0 ? 
         <XYPlot xType='ordinal' width={600} height={400} >
           <VerticalGridLines />
-          <HorizontalGridLines />
+          <HorizontalGridLines/>
           <XAxis />
           <YAxis />
-          <VerticalBarSeriesCanvas colorType="literal" data={blueData} />
+          <VerticalBarSeriesCanvas colorType="literal" data={jobData} />
         </XYPlot>
+        :   
+        <IonText> No Data </IonText>
   );
 };
 
