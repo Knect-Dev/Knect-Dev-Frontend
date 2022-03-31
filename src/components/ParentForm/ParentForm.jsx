@@ -33,7 +33,7 @@ const ParentForm = ({
   const companyState = useSelector(state => state.companies.companies);
   const token = useSelector(state => state.user.user.token);
   const dispatch = useDispatch();
-  console.log(companyState);
+  // console.log(companyState);
   let currentJob = jobState.find(job => job.id === selectedJobId);
   let currentCompany = companyState.find(company => company.id === currentJob?.CompanyId);
   const [jobValues, setJobValues] = useState({});

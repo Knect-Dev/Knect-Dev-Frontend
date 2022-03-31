@@ -26,7 +26,7 @@ const companiesReducer = (state = initialState, action) => {
       //-- Second this filters the array to remove the contact we have updated, to prevent dupes --//
       state.companies.splice(updatedCompanyId, 1, updatedCompany);
 
-      return { companies: state.companies };
+      return { companies: state.companies, currentCompany: updatedCompany };
 
     case 'REMOVE_COMPANY':
       return { job: '' };
@@ -35,14 +35,14 @@ const companiesReducer = (state = initialState, action) => {
 
       return { companies: [] };
 
-    case 'SET_CURRENT':
+    case 'SET_CURRENT_COMPANY':
       let current = state.companies.find(elem => elem.id === payload);
 
       return { ...state, currentCompany: current };
 
     case 'SET_COMPANIES':
 
-      return { companies: payload };
+      return { ...state, companies: payload };
 
     default:
       return state;
@@ -51,7 +51,7 @@ const companiesReducer = (state = initialState, action) => {
 
 export const setCurrentCompany = (companyId) => (dispatch) => {
   console.log('called');
-  dispatch({ type: 'SET_CURRENT', payload: companyId })
+  dispatch({ type: 'SET_CURRENT_COMPANY', payload: companyId })
 }
 
 export const addCompany = (company, token) => async (dispatch, getState) => {

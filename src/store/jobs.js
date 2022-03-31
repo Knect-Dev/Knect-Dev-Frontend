@@ -5,7 +5,7 @@ const JOB_URL = 'https://knect-dev.herokuapp.com/Jobs/';
 
 const initialState = {
   jobs: [],
-  curentJob: {},
+  currentJob: {},
 };
 
 const jobReducer = (state = initialState, action) => {
@@ -14,7 +14,8 @@ const jobReducer = (state = initialState, action) => {
   switch (type) {
     case 'ADD_JOB':
       if (payload.errors) return state;
-      return { jobs: [...state.jobs, payload] };
+      return { jobs: [...state.jobs, payload], curentJob: payload };
+
     case 'UPDATE_JOB':
       //-- First we find the job we need to update, and make the changes --//
       let updatedJobId = state.jobs.indexOf(state.jobs.find(e => e.id === payload.id));
@@ -24,7 +25,7 @@ const jobReducer = (state = initialState, action) => {
       //-- Finally, we concat those two arrays together, resulting in our updated array --//
       state.jobs.splice(updatedJobId, 1, updatedJob);
 
-      return { jobs: state.jobs };
+      return { jobs: state.jobs, currentJob: updatedJob };
 
     case 'REMOVE_JOB':
       let newArr = state.jobs.filter(job => job.id !== payload);
@@ -34,6 +35,11 @@ const jobReducer = (state = initialState, action) => {
     case 'TEARDOWN_JOBS':
 
       return { jobs: [] };
+
+    case 'SET_CURRENT_JOB':
+      let current = state.jobs.find(elem => elem.id === payload);
+
+      return { ...state, currentJob: current };
 
     case 'SET_JOBS':
       //-- Upon rerender, this sets the jobs to a blank array so that it may be populated with new jobs --//
@@ -45,6 +51,11 @@ const jobReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const setCurrentJob = (jobId) => (dispatch) => {
+  console.log('called job');
+  dispatch({ type: 'SET_CURRENT_JOB', payload: jobId })
+}
 
 export const addJob = (job, token) => async (dispatch, getState) => {
   try {
