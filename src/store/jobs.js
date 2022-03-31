@@ -5,6 +5,7 @@ const JOB_URL = 'https://knect-dev.herokuapp.com/Jobs/';
 
 const initialState = {
   jobs: [],
+  curentJob: '',
 };
 
 const jobReducer = (state = initialState, action) => {
