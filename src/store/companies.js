@@ -5,6 +5,7 @@ const COMPANY_URL = 'https://knect-dev.herokuapp.com/Companies/';
 
 const initialState = {
   companies: [],
+  currentCompany: {},
 };
 
 const companiesReducer = (state = initialState, action) => {
