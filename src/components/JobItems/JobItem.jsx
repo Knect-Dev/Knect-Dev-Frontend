@@ -12,9 +12,14 @@ import {
   pulseSharp,
   skullOutline,
 } from 'ionicons/icons'; // placeholder for company logo
+import { useDispatch } from 'react-redux';
+import { setCurrentCompany } from '../../store/companies.js';
+
 import './jobItem.scss';
 
 const JobItem = ({ job, showForm, setShowForm, setSelectedJobId, setSelectedCompanyId }) => {
+
+  const dispatch = useDispatch();
 
   const stageChipBkgrds = {
     'not applied': { background: '#80808099' },
@@ -39,6 +44,7 @@ const JobItem = ({ job, showForm, setShowForm, setSelectedJobId, setSelectedComp
     // update id in job form, then show form
     setSelectedJobId(job.id);
     setSelectedCompanyId(job.CompanyId);
+    dispatch(setCurrentCompany(job.CompanyId));
     setShowForm(!showForm);
   }
 

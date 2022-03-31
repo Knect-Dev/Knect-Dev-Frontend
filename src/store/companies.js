@@ -15,7 +15,7 @@ const companiesReducer = (state = initialState, action) => {
 
     case 'ADD_COMPANY':
       if (payload.errors) return state;
-      return { companies: [...state.companies, payload] };
+      return { companies: [...state.companies, payload], currentCompany: payload };
 
     case 'UPDATE_COMPANY':
       //-- First we find the company we need to update, and make the changes --//
@@ -34,16 +34,25 @@ const companiesReducer = (state = initialState, action) => {
     case 'TEARDOWN_COMPANIES':
 
       return { companies: [] };
+
+    case 'SET_CURRENT':
+      let current = state.companies.find(elem => elem.id === payload);
+
+      return { ...state, currentCompany: current };
+
     case 'SET_COMPANIES':
 
-
-      return { companies: payload }
-
+      return { companies: payload };
 
     default:
       return state;
   }
 };
+
+export const setCurrentCompany = (companyId) => (dispatch) => {
+  console.log('called');
+  dispatch({ type: 'SET_CURRENT', payload: companyId })
+}
 
 export const addCompany = (company, token) => async (dispatch, getState) => {
   try {
