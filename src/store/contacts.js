@@ -27,6 +27,7 @@ const initialState = {
     notes: 'Give me snacks'
     }
   ],
+  currentContacts: null,
 }
 
 const contactsReducer = ( state = initialState, action) => {
