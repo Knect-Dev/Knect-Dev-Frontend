@@ -29,8 +29,8 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
 
   function handleClick() {
     setActiveForm('Company');
-    setLock(!lock);
-    setDisable(!disable);
+    setLock(false);
+    setDisable(true);
   };
 
   return (
