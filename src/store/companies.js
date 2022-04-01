@@ -5,7 +5,7 @@ const COMPANY_URL = 'https://knect-dev.herokuapp.com/Companies/';
 
 const initialState = {
   companies: [],
-  currentCompany: {},
+  currentCompany: null,
 };
 
 const companiesReducer = (state = initialState, action) => {
@@ -50,7 +50,6 @@ const companiesReducer = (state = initialState, action) => {
 };
 
 export const setCurrentCompany = (companyId) => (dispatch) => {
-  console.log('called');
   dispatch({ type: 'SET_CURRENT_COMPANY', payload: companyId })
 }
 

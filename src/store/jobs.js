@@ -5,7 +5,7 @@ const JOB_URL = 'https://knect-dev.herokuapp.com/Jobs/';
 
 const initialState = {
   jobs: [],
-  currentJob: {},
+  currentJob: null,
 };
 
 const jobReducer = (state = initialState, action) => {
@@ -14,7 +14,7 @@ const jobReducer = (state = initialState, action) => {
   switch (type) {
     case 'ADD_JOB':
       if (payload.errors) return state;
-      return { jobs: [...state.jobs, payload], curentJob: payload };
+      return { jobs: [...state.jobs, payload], currentJob: payload };
 
     case 'UPDATE_JOB':
       //-- First we find the job we need to update, and make the changes --//
@@ -53,7 +53,6 @@ const jobReducer = (state = initialState, action) => {
 };
 
 export const setCurrentJob = (jobId) => (dispatch) => {
-  console.log('called job');
   dispatch({ type: 'SET_CURRENT_JOB', payload: jobId })
 }
 
