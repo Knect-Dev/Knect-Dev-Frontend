@@ -103,7 +103,8 @@ const JobForm = ({
                 setLock={setLock}
                 setDisable={setDisable}
                 lock={lock}
-                disable={disable} />
+                disable={disable}
+              />
             </IonRow>
 
             <IonRow>

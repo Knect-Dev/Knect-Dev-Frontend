@@ -23,24 +23,26 @@ const ParentForm = ({
   setShowForm,
   activeForm,
   setActiveForm,
-  selectedJobId,
 }) => {
-  // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
-  // const jobState = useSelector(state => state.jobs.jobs);
-  const token = useSelector(state => state.user.user.token);
+
   const dispatch = useDispatch();
-  // console.log(companyState);
+
+  const token = useSelector(state => state.user.user.token);
   let currentJob = useSelector(state => state.jobs.currentJob);
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 39 ~ currentJob`, currentJob);
   let currentCompany = useSelector(state => state.companies.currentCompany);
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
+  let currentContacts = useSelector(state => state.contacts.currentContacts);
+  // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
 
-  // let currentCompany = companyState.find(company => company.id === currentJob?.CompanyId);
   const [jobValues, setJobValues] = useState({});
   const [companyValues, setCompanyValues] = useState({});
   // const [contactValues, setContactValues] = useState({});
+  
+  //-- This theme is used to make custom CSS properties for various form elements, by passing it into each form and used with conditional rendering --//
   const theme = document.getElementsByClassName('dark').length > 0;
   const [showAlert, setShowAlert] = useState({});
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     setJobValues(currentJob || {});
@@ -72,6 +74,7 @@ const ParentForm = ({
   }
 
   function changeCompany(change) {
+    console.log('called changeCompany');
     let { id, company } = change;
     setJobValues(prev => {
       return { ...prev, CompanyId: id, company: company }
@@ -100,26 +103,10 @@ const ParentForm = ({
 
   function addToDatabase(confirm) {
     if (confirm && activeForm === 'Job') {
-      if (jobValues.title && jobValues.company) {
-        dispatch(addJob(jobValues, token));
-        setShowForm(false);
-        setDisable(!disable);
-        setLock(!lock);
-      } else if (!jobValues.title || !jobValues.company) {
-        setJobValues(currentJob || {});
-        setDisable(!disable);
-        setLock(!lock);
-      }
+      dispatch(addJob(jobValues, token));
+      dispatch(setCurrentCompany(jobValues.CompanyId));
     } else if (confirm && activeForm === 'Company') {
-      if (companyValues.name) {
-        dispatch(addCompany(companyValues, token))
-        setDisable(!disable);
-        setLock(!lock);
-      } else if (!companyValues.name) {
-        setCompanyValues(currentCompany || {});
-        setDisable(!disable);
-        setLock(!lock);
-      }
+      dispatch(addCompany(companyValues, token));
     } else if (confirm && activeForm === 'Contact') {
       console.log('contact added');
     } else if (!confirm) {
@@ -128,8 +115,34 @@ const ParentForm = ({
     }
   }
 
-  function handleClick(confirm) {
-    addToDatabase(confirm);
+  function handleSubmit(confirm) {
+    switch (activeForm) {
+      case 'Job':
+        if(jobValues.title && jobValues.company) {
+          addToDatabase(confirm);
+          setShowForm(false);
+          setShowForm(true);
+          setDisable(false);
+          setLock(true);
+        } else if (!jobValues.title || !jobValues.company) {
+          console.log('this should be a toast to remind use to add job title and company');
+        }
+        break;
+      case 'Company':
+        if(companyValues.name) {
+          addToDatabase(confirm);
+          setShowForm(false);
+          setShowForm(true);
+          console.log('right here', currentCompany);
+          setDisable(false);
+          setLock(true);
+        } else if (!companyValues.name) {
+          console.log('this should be a toast to remind use to add company title');
+        }
+        break;
+      default:
+        console.log('nothing')
+    }
   }
 
   function handleCloseForm() {
@@ -195,7 +208,7 @@ const ParentForm = ({
         </When>
 
         <div className='button-group'>  
-          <If condition={currentJob}>
+          <If condition={currentJob || currentCompany || currentContacts}>
             <Then>
               <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
               <IonButton
@@ -240,7 +253,7 @@ const ParentForm = ({
             id: 'cancel',
             cssClass: 'secondary',
             handler: () => {
-              handleClick(false);
+              handleSubmit(false);
             }
           },
           {
@@ -248,7 +261,7 @@ const ParentForm = ({
             id: 'accept',
             cssClass: 'success',
             handler: () => {
-              handleClick(true);
+              handleSubmit(true);
             }
           }
         ]}
