@@ -43,8 +43,6 @@ const JobItem = ({ job, showForm, setShowForm, setSelectedJobId, setSelectedComp
 
   function handleOnClick() {
     // update id in job form, then show form
-    setSelectedJobId(job.id);
-    setSelectedCompanyId(job.CompanyId);
     dispatch(setCurrentJob(job.id));
     dispatch(setCurrentCompany(job.CompanyId));
     setShowForm(!showForm);

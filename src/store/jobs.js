@@ -37,7 +37,7 @@ const jobReducer = (state = initialState, action) => {
       return { jobs: [] };
 
     case 'SET_CURRENT_JOB':
-      let current = state.jobs.find(elem => elem.id === payload);
+      let current = payload ? state.jobs.find(elem => elem.id === payload) : null;
 
       return { ...state, currentJob: current };
 

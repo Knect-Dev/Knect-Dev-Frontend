@@ -9,8 +9,8 @@ import ContactForm from './Contact/ContactForm';
 
 import LockButton from '../LockButton/LockButton.jsx';
 
-import { addJob, updateJob, deleteJob } from '../../store/jobs.js';
-import { addCompany, updateCompany } from '../../store/companies.js';
+import { addJob, updateJob, deleteJob, setCurrentJob } from '../../store/jobs.js';
+import { addCompany, updateCompany, setCurrentCompany } from '../../store/companies.js';
 
 import './ParentForm.scss';
 
@@ -138,6 +138,8 @@ const ParentForm = ({
     setTimeout(() => {
       setDisable(false);
       setLock(true);
+      dispatch(setCurrentJob(null));
+      dispatch(setCurrentCompany(null));
     }, 150)
   }
 
@@ -193,7 +195,7 @@ const ParentForm = ({
         </When>
 
         <div className='button-group'>  
-          <If condition={selectedJobId}>
+          <If condition={currentJob}>
             <Then>
               <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
               <IonButton
