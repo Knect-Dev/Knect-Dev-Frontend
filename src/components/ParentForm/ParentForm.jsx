@@ -24,18 +24,18 @@ const ParentForm = ({
   activeForm,
   setActiveForm,
   selectedJobId,
-  setSelectedJobId,
-  selectedCompanyId,
-  setSelectedCompanyId
 }) => {
   // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
-  const jobState = useSelector(state => state.jobs.jobs);
-  const companyState = useSelector(state => state.companies.companies);
+  // const jobState = useSelector(state => state.jobs.jobs);
   const token = useSelector(state => state.user.user.token);
   const dispatch = useDispatch();
   // console.log(companyState);
-  let currentJob = jobState.find(job => job.id === selectedJobId);
-  let currentCompany = companyState.find(company => company.id === currentJob?.CompanyId);
+  let currentJob = useSelector(state => state.jobs.currentJob);
+  // console.log(`👽 ~ file: ParentForm.jsx ~ line 39 ~ currentJob`, currentJob);
+  let currentCompany = useSelector(state => state.companies.currentCompany);
+  // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
+
+  // let currentCompany = companyState.find(company => company.id === currentJob?.CompanyId);
   const [jobValues, setJobValues] = useState({});
   const [companyValues, setCompanyValues] = useState({});
   // const [contactValues, setContactValues] = useState({});
@@ -45,8 +45,7 @@ const ParentForm = ({
   useEffect(() => {
     setJobValues(currentJob || {});
     setCompanyValues(currentCompany || {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedJobId]);
+  }, [currentCompany, currentJob]);
 
   function handleJobChange(e) {
     setJobValues(prev => {
@@ -77,7 +76,6 @@ const ParentForm = ({
     setJobValues(prev => {
       return { ...prev, CompanyId: id, company: company }
     })
-    setSelectedCompanyId(id);
   }
 
   function toggleEditHandler(confirm) {
@@ -109,7 +107,6 @@ const ParentForm = ({
         setLock(!lock);
       } else if (!jobValues.title || !jobValues.company) {
         setJobValues(currentJob || {});
-        setSelectedJobId(null);
         setDisable(!disable);
         setLock(!lock);
       }
@@ -141,10 +138,6 @@ const ParentForm = ({
     setTimeout(() => {
       setDisable(false);
       setLock(true);
-      setSelectedJobId(null);
-      setSelectedCompanyId(null);
-      setJobValues({});
-      setCompanyValues({});
     }, 150)
   }
 
@@ -172,10 +165,8 @@ const ParentForm = ({
             showForm={showForm}
             setShowForm={setShowForm}
             setActiveForm={setActiveForm}
-            selectedJobId={selectedJobId}
-            setSelectedJobId={setSelectedJobId}
-            setSelectedCompanyId={setSelectedCompanyId}
-            handleDelete={handleDelete} />
+            handleDelete={handleDelete}
+          />
         </When>
         <When condition={activeForm === 'Company'}>
           <CompanyForm 
@@ -191,8 +182,7 @@ const ParentForm = ({
             setCompanyValues={setCompanyValues}
             showForm={showForm}
             setShowForm={setShowForm}
-            selectedCompanyId={selectedCompanyId}
-            setSelectedJobId={setSelectedJobId} />
+          />
         </When>
         <When condition={activeForm === 'Contact'}>
           <ContactForm 
