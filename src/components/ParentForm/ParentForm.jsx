@@ -17,6 +17,8 @@ import './ParentForm.scss';
 const ParentForm = ({
   lock,
   setLock,
+  adding,
+  setAdding,
   disable,
   setDisable,
   showForm,
@@ -29,9 +31,9 @@ const ParentForm = ({
 
   const token = useSelector(state => state.user.user.token);
   let currentJob = useSelector(state => state.jobs.currentJob);
-  // console.log(`👽 ~ file: ParentForm.jsx ~ line 39 ~ currentJob`, currentJob);
+  console.log(`👽 ~ file: ParentForm.jsx ~ line 39 ~ currentJob`, currentJob);
   let currentCompany = useSelector(state => state.companies.currentCompany);
-  // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
+  console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
   let currentContacts = useSelector(state => state.contacts.currentContacts);
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
 
@@ -121,6 +123,7 @@ const ParentForm = ({
         if(jobValues.title && jobValues.company) {
           addToDatabase(confirm);
           setShowForm(false);
+          setAdding(false);
           setShowForm(true);
           setDisable(false);
           setLock(true);
@@ -132,10 +135,17 @@ const ParentForm = ({
         if(companyValues.name) {
           addToDatabase(confirm);
           setShowForm(false);
-          setShowForm(true);
-          console.log('right here', currentCompany);
-          setDisable(false);
-          setLock(true);
+          dispatch(setCurrentCompany(null));
+          if (true) {
+            setTimeout(() => {
+              setShowForm(true);
+              setActiveForm('Job');
+              console.log('right here', currentCompany)
+              changeCompany({ id: companyValues.id, company: companyValues.name })
+              setDisable(false);
+              setLock(false);
+            }, 500);
+          };
         } else if (!companyValues.name) {
           console.log('this should be a toast to remind use to add company title');
         }
@@ -146,15 +156,19 @@ const ParentForm = ({
   }
 
   function handleCloseForm() {
-    setShowForm(!showForm)
+    setShowForm(!showForm);
     //-- Timeout is used to ensure fade of form when closing does not show blank form for split second --//
     setTimeout(() => {
+      setAdding(false);
       setDisable(false);
       setLock(true);
       dispatch(setCurrentJob(null));
       dispatch(setCurrentCompany(null));
     }, 150)
   }
+
+  console.log('CURRENTS', currentJob, currentCompany, currentContacts)
+  console.log('adding', adding);
 
   return (
     <>
@@ -208,7 +222,7 @@ const ParentForm = ({
         </When>
 
         <div className='button-group'>  
-          <If condition={currentJob || currentCompany || currentContacts}>
+          <If condition={!adding}>
             <Then>
               <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
               <IonButton

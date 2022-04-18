@@ -18,6 +18,7 @@ const Home = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState(null);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
+  const [adding, setAdding] = useState(false);
   const [activeForm, setActiveForm] = useState('Job');
 
   const token = useSelector(state => state.user.user.token);
@@ -47,6 +48,7 @@ const Home = () => {
         lock={lock}
         setLock={setLock}
         disable={disable}
+        setAdding={setAdding}
         setDisable={setDisable}
         setShowForm={setShowForm}
         setSelectedJobId={setSelectedJobId}
@@ -56,6 +58,8 @@ const Home = () => {
         <ParentForm
           lock={lock}
           setLock={setLock}
+          adding={adding}
+          setAdding={setAdding}
           disable={disable}
           setDisable={setDisable}
           showForm={showForm}
