@@ -136,7 +136,7 @@ const ParentForm = ({
           addToDatabase(confirm);
           setShowForm(false);
           dispatch(setCurrentCompany(null));
-          if (true) {
+          if (redirect) {
             setTimeout(() => {
               setShowForm(true);
               setActiveForm('Job');
@@ -144,6 +144,7 @@ const ParentForm = ({
               changeCompany({ id: companyValues.id, company: companyValues.name })
               setDisable(false);
               setLock(false);
+              setRedirect(false);
             }, 500);
           };
         } else if (!companyValues.name) {
@@ -167,9 +168,13 @@ const ParentForm = ({
     }, 150)
   }
 
+  function handleAdd() {
+    setShowAlert(true);
+  }
+
   console.log('CURRENTS', currentJob, currentCompany, currentContacts)
   console.log('adding', adding);
-
+  console.log('REDIRECT', redirect);
   return (
     <>
       <IonModal
@@ -183,6 +188,7 @@ const ParentForm = ({
             theme={theme}
             lock={lock}
             setLock={setLock}
+            setRedirect={setRedirect}
             handleJobChange={handleJobChange}
             changeCompany={changeCompany}
             handleCloseForm={handleCloseForm}
@@ -250,7 +256,7 @@ const ParentForm = ({
               </IonButton>
             </Then>
             <Else>
-              <IonButton expand='full' color='success' class='add-button' onClick={() => setShowAlert(true)}>{`Add ${activeForm}`}</IonButton>
+              <IonButton expand='full' color='success' class='add-button' onClick={handleAdd}>{`Add ${activeForm}`}</IonButton>
             </Else>
           </If>
         </div>

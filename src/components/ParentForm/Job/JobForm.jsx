@@ -13,6 +13,7 @@ const JobForm = ({
   theme,
   lock,
   setLock,
+  setRedirect,
   handleJobChange,
   changeCompany,
   currentJob,
@@ -98,6 +99,7 @@ const JobForm = ({
               </IonCol>
               <CompanySelector
                 currentCompany={{ company: jobValues?.company, id: jobValues?.CompanyId }}
+                setRedirect={setRedirect}
                 setActiveForm={setActiveForm}
                 changeCompany={changeCompany}
                 setLock={setLock}
