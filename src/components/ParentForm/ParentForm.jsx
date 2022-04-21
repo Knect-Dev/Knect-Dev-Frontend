@@ -31,9 +31,9 @@ const ParentForm = ({
 
   const token = useSelector(state => state.user.user.token);
   let currentJob = useSelector(state => state.jobs.currentJob);
-  console.log(`👽 ~ file: ParentForm.jsx ~ line 39 ~ currentJob`, currentJob);
+  // console.log(`👽 ~ file: ParentForm.jsx ~ line 39 ~ currentJob`, currentJob);
   let currentCompany = useSelector(state => state.companies.currentCompany);
-  console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
+  // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
   let currentContacts = useSelector(state => state.contacts.currentContacts);
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
 
@@ -76,7 +76,6 @@ const ParentForm = ({
   }
 
   function changeCompany(change) {
-    console.log('called changeCompany');
     let { id, company } = change;
     setJobValues(prev => {
       return { ...prev, CompanyId: id, company: company }
@@ -93,7 +92,7 @@ const ParentForm = ({
       setDisable(!disable);
       setLock(!lock);
     } else if (confirm && activeForm === 'Contact') {
-      console.log('working on change')
+      console.log('working on change');
       setDisable(!disable);
       setLock(!lock);
     } else if (!confirm) {
@@ -140,8 +139,6 @@ const ParentForm = ({
             setTimeout(() => {
               setShowForm(true);
               setActiveForm('Job');
-              console.log('right here', currentCompany)
-              changeCompany({ id: companyValues.id, company: companyValues.name })
               setDisable(false);
               setLock(false);
               setRedirect(false);
@@ -172,9 +169,6 @@ const ParentForm = ({
     setShowAlert(true);
   }
 
-  console.log('CURRENTS', currentJob, currentCompany, currentContacts)
-  console.log('adding', adding);
-  console.log('REDIRECT', redirect);
   return (
     <>
       <IonModal
