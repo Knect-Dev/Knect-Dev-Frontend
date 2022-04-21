@@ -95,9 +95,9 @@
 [Deployed Page](https://www.knect.dev/home)
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-This project currently implements phase one (backend) of a two phase project (full web application deployment).
+This repository implements phase two (frontend) of a two phase project (full web application deployment).
 
-The Goal of this project is to create a Targeted Companies & High-Volume Tracking List that allows those seeking jobs to effectively document the jobs they have applied for as well as thier most up to date interactions. Phase one, the backend of this project, focused on building and deploying a reliable backend with robust schemas and database models. Phase two, the frontend portion, focused on building a user-friendly interface in React with and Ionic framework to streamline data input as well as visualize metrics in real time of your job search.
+The goal of this project is to create a Targeted Companies & High-Volume Tracking List that allows those seeking jobs to effectively document the jobs they have applied for as well as thier most up to date interactions. Phase one, the backend of this project, focused on building and deploying a reliable backend with robust schemas and database models. Phase two, the frontend portion, focused on building a user-friendly interface in React with and Ionic framework to streamline data input as well as visualize metrics in real time of your job search.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
