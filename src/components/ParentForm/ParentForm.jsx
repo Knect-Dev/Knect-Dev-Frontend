@@ -140,8 +140,6 @@ const ParentForm = ({
             setTimeout(() => {
               setShowForm(true);
               setActiveForm('Job');
-              console.log('right here', currentCompany)
-              changeCompany({ id: companyValues.id, company: companyValues.name })
               setDisable(false);
               setLock(false);
               setRedirect(false);
