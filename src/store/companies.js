@@ -5,6 +5,7 @@ const COMPANY_URL = 'https://knect-dev.herokuapp.com/Companies/';
 
 const initialState = {
   companies: [],
+  currentCompany: null,
 };
 
 const companiesReducer = (state = initialState, action) => {
@@ -14,7 +15,7 @@ const companiesReducer = (state = initialState, action) => {
 
     case 'ADD_COMPANY':
       if (payload.errors) return state;
-      return { companies: [...state.companies, payload] };
+      return { companies: [...state.companies, payload], currentCompany: payload };
 
     case 'UPDATE_COMPANY':
       //-- First we find the company we need to update, and make the changes --//
@@ -25,7 +26,7 @@ const companiesReducer = (state = initialState, action) => {
       //-- Second this filters the array to remove the contact we have updated, to prevent dupes --//
       state.companies.splice(updatedCompanyId, 1, updatedCompany);
 
-      return { companies: state.companies };
+      return { companies: state.companies, currentCompany: updatedCompany };
 
     case 'REMOVE_COMPANY':
       return { job: '' };
@@ -33,16 +34,24 @@ const companiesReducer = (state = initialState, action) => {
     case 'TEARDOWN_COMPANIES':
 
       return { companies: [] };
+
+    case 'SET_CURRENT_COMPANY':
+      let current = state.companies.find(elem => elem.id === payload);
+
+      return { ...state, currentCompany: current };
+
     case 'SET_COMPANIES':
 
-
-      return { companies: payload }
-
+      return { ...state, companies: payload };
 
     default:
       return state;
   }
 };
+
+export const setCurrentCompany = (companyId) => (dispatch) => {
+  dispatch({ type: 'SET_CURRENT_COMPANY', payload: companyId })
+}
 
 export const addCompany = (company, token) => async (dispatch, getState) => {
   try {

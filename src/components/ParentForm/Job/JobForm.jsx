@@ -13,6 +13,7 @@ const JobForm = ({
   theme,
   lock,
   setLock,
+  setRedirect,
   handleJobChange,
   changeCompany,
   currentJob,
@@ -21,7 +22,6 @@ const JobForm = ({
   disable,
   setDisable,
   setActiveForm,
-  selectedJobId,
   handleDelete
 }) => {
   const stageBackgrounds = ['#80808099', '#F2C70088', '#8C00B080', '#CB006399', '#6ADFC299', 'linear-gradient(320deg, #6ADFC290 15%, #CB006390, #8C00B070, #F2C70078 85% )'];
@@ -33,7 +33,7 @@ const JobForm = ({
       <IonContent>
         <IonGrid>
           <IonRow class={'ion-justify-content-between ion-align-items-center'} style={{ background: stageBackground || 'rgb(150, 150, 150, .50)' }}>
-            <If condition={selectedJobId}>
+            <If condition={currentJob}>
               <Then>
                 <TrashButton currentJob={currentJob} handleDelete={handleDelete} handleCloseForm={handleCloseForm} />
               </Then>
@@ -99,12 +99,14 @@ const JobForm = ({
               </IonCol>
               <CompanySelector
                 currentCompany={{ company: jobValues?.company, id: jobValues?.CompanyId }}
+                setRedirect={setRedirect}
                 setActiveForm={setActiveForm}
                 changeCompany={changeCompany}
                 setLock={setLock}
                 setDisable={setDisable}
                 lock={lock}
-                disable={disable} />
+                disable={disable}
+              />
             </IonRow>
 
             <IonRow>

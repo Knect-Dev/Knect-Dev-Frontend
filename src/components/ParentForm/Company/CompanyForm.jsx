@@ -13,7 +13,7 @@ const CompanyForm = ({
   handleCompanyChange,
   handleCloseForm,
   companyValues,
-  selectedCompanyId,
+  currentCompany
 }) => {
   return (
     <>
@@ -73,10 +73,10 @@ const CompanyForm = ({
           <When condition={!lock}>
             <IonRow>
               <IonCol size='6'>
-                <When condition={selectedCompanyId}>
+                <When condition={currentCompany}>
                   Company: <h5 style={{ display: 'inline' }}>{companyValues?.name}</h5>
                 </When>
-                <When condition={!selectedCompanyId}>
+                <When condition={!currentCompany}>
                   <IonLabel>Company: </IonLabel>
                   <IonTextarea class='custom-input' value={companyValues?.name} onIonChange={e => handleCompanyChange(e)} placeholder='madeup inc.' name='name' clearInput></IonTextarea>
                 </When>

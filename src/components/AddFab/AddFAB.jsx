@@ -3,6 +3,7 @@ import { addOutline } from 'ionicons/icons';
 
 const AddFAB = ({
   setLock,
+  setAdding,
   setShowForm,
   setSelectedJobId,
   setSelectedCompanyId,
@@ -11,6 +12,7 @@ const AddFAB = ({
 
   const handleClick = (input) => {
     setActiveForm(input);
+    setAdding(true);
     setLock(false);
     setSelectedCompanyId(null);
     setSelectedJobId(null);

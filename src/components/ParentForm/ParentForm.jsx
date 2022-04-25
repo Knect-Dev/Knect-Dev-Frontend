@@ -9,44 +9,47 @@ import ContactForm from './Contact/ContactForm';
 
 import LockButton from '../LockButton/LockButton.jsx';
 
-import { addJob, updateJob, deleteJob } from '../../store/jobs.js';
-import { addCompany, updateCompany } from '../../store/companies.js';
+import { addJob, updateJob, deleteJob, setCurrentJob } from '../../store/jobs.js';
+import { addCompany, updateCompany, setCurrentCompany } from '../../store/companies.js';
 
 import './ParentForm.scss';
 
 const ParentForm = ({
   lock,
   setLock,
+  adding,
+  setAdding,
   disable,
   setDisable,
   showForm,
   setShowForm,
   activeForm,
   setActiveForm,
-  selectedJobId,
-  setSelectedJobId,
-  selectedCompanyId,
-  setSelectedCompanyId
 }) => {
-  // NOTE: setSelectedJobId is what changes the state passed to the Job / Company / Contact forms
-  const jobState = useSelector(state => state.jobs.jobs);
-  const companyState = useSelector(state => state.companies.companies);
-  const token = useSelector(state => state.user.user.token);
+
   const dispatch = useDispatch();
 
-  let currentJob = jobState.find(job => job.id === selectedJobId);
-  let currentCompany = companyState.find(company => company.id === currentJob?.CompanyId);
+  const token = useSelector(state => state.user.user.token);
+  let currentJob = useSelector(state => state.jobs.currentJob);
+  // console.log(`👽 ~ file: ParentForm.jsx ~ line 39 ~ currentJob`, currentJob);
+  let currentCompany = useSelector(state => state.companies.currentCompany);
+  // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
+  // let currentContacts = useSelector(state => state.contacts.currentContacts);
+  // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
+
   const [jobValues, setJobValues] = useState({});
   const [companyValues, setCompanyValues] = useState({});
   // const [contactValues, setContactValues] = useState({});
+  
+  //-- This theme is used to make custom CSS properties for various form elements, by passing it into each form and used with conditional rendering --//
   const theme = document.getElementsByClassName('dark').length > 0;
   const [showAlert, setShowAlert] = useState({});
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     setJobValues(currentJob || {});
     setCompanyValues(currentCompany || {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedJobId]);
+  }, [currentCompany, currentJob]);
 
   function handleJobChange(e) {
     setJobValues(prev => {
@@ -77,7 +80,6 @@ const ParentForm = ({
     setJobValues(prev => {
       return { ...prev, CompanyId: id, company: company }
     })
-    setSelectedCompanyId(id);
   }
 
   function toggleEditHandler(confirm) {
@@ -90,7 +92,7 @@ const ParentForm = ({
       setDisable(!disable);
       setLock(!lock);
     } else if (confirm && activeForm === 'Contact') {
-      console.log('working on change')
+      console.log('working on change');
       setDisable(!disable);
       setLock(!lock);
     } else if (!confirm) {
@@ -102,27 +104,10 @@ const ParentForm = ({
 
   function addToDatabase(confirm) {
     if (confirm && activeForm === 'Job') {
-      if (jobValues.title && jobValues.company) {
-        dispatch(addJob(jobValues, token));
-        setShowForm(false);
-        setDisable(!disable);
-        setLock(!lock);
-      } else if (!jobValues.title || !jobValues.company) {
-        setJobValues(currentJob || {});
-        setSelectedJobId(null);
-        setDisable(!disable);
-        setLock(!lock);
-      }
+      dispatch(addJob(jobValues, token));
+      dispatch(setCurrentCompany(jobValues.CompanyId));
     } else if (confirm && activeForm === 'Company') {
-      if (companyValues.name) {
-        dispatch(addCompany(companyValues, token))
-        setDisable(!disable);
-        setLock(!lock);
-      } else if (!companyValues.name) {
-        setCompanyValues(currentCompany || {});
-        setDisable(!disable);
-        setLock(!lock);
-      }
+      dispatch(addCompany(companyValues, token));
     } else if (confirm && activeForm === 'Contact') {
       console.log('contact added');
     } else if (!confirm) {
@@ -131,21 +116,57 @@ const ParentForm = ({
     }
   }
 
-  function handleClick(confirm) {
-    addToDatabase(confirm);
+  function handleSubmit(confirm) {
+    switch (activeForm) {
+      case 'Job':
+        if(jobValues.title && jobValues.company) {
+          addToDatabase(confirm);
+          setShowForm(false);
+          setAdding(false);
+          setShowForm(true);
+          setDisable(false);
+          setLock(true);
+        } else if (!jobValues.title || !jobValues.company) {
+          // console.log('this should be a toast to remind use to add job title and company');
+        }
+        break;
+      case 'Company':
+        if(companyValues.name) {
+          addToDatabase(confirm);
+          setShowForm(false);
+          dispatch(setCurrentCompany(null));
+          if (redirect) {
+            setTimeout(() => {
+              setShowForm(true);
+              setActiveForm('Job');
+              setDisable(false);
+              setLock(false);
+              setRedirect(false);
+            }, 500);
+          };
+        } else if (!companyValues.name) {
+          // console.log('this should be a toast to remind use to add company title');
+        }
+        break;
+      default:
+        // console.log('nothing');
+    }
   }
 
   function handleCloseForm() {
-    setShowForm(!showForm)
+    setShowForm(!showForm);
     //-- Timeout is used to ensure fade of form when closing does not show blank form for split second --//
     setTimeout(() => {
+      setAdding(false);
       setDisable(false);
       setLock(true);
-      setSelectedJobId(null);
-      setSelectedCompanyId(null);
-      setJobValues({});
-      setCompanyValues({});
+      dispatch(setCurrentJob(null));
+      dispatch(setCurrentCompany(null));
     }, 150)
+  }
+
+  function handleAdd() {
+    setShowAlert(true);
   }
 
   return (
@@ -161,6 +182,7 @@ const ParentForm = ({
             theme={theme}
             lock={lock}
             setLock={setLock}
+            setRedirect={setRedirect}
             handleJobChange={handleJobChange}
             changeCompany={changeCompany}
             handleCloseForm={handleCloseForm}
@@ -172,10 +194,8 @@ const ParentForm = ({
             showForm={showForm}
             setShowForm={setShowForm}
             setActiveForm={setActiveForm}
-            selectedJobId={selectedJobId}
-            setSelectedJobId={setSelectedJobId}
-            setSelectedCompanyId={setSelectedCompanyId}
-            handleDelete={handleDelete} />
+            handleDelete={handleDelete}
+          />
         </When>
         <When condition={activeForm === 'Company'}>
           <CompanyForm 
@@ -191,8 +211,7 @@ const ParentForm = ({
             setCompanyValues={setCompanyValues}
             showForm={showForm}
             setShowForm={setShowForm}
-            selectedCompanyId={selectedCompanyId}
-            setSelectedJobId={setSelectedJobId} />
+          />
         </When>
         <When condition={activeForm === 'Contact'}>
           <ContactForm 
@@ -203,7 +222,7 @@ const ParentForm = ({
         </When>
 
         <div className='button-group'>  
-          <If condition={selectedJobId}>
+          <If condition={!adding}>
             <Then>
               <LockButton toggleEditHandler={toggleEditHandler} lock={lock} />
               <IonButton
@@ -231,7 +250,7 @@ const ParentForm = ({
               </IonButton>
             </Then>
             <Else>
-              <IonButton expand='full' color='success' class='add-button' onClick={() => setShowAlert(true)}>{`Add ${activeForm}`}</IonButton>
+              <IonButton expand='full' color='success' class='add-button' onClick={handleAdd}>{`Add ${activeForm}`}</IonButton>
             </Else>
           </If>
         </div>
@@ -248,7 +267,7 @@ const ParentForm = ({
             id: 'cancel',
             cssClass: 'secondary',
             handler: () => {
-              handleClick(false);
+              handleSubmit(false);
             }
           },
           {
@@ -256,7 +275,7 @@ const ParentForm = ({
             id: 'accept',
             cssClass: 'success',
             handler: () => {
-              handleClick(true);
+              handleSubmit(true);
             }
           }
         ]}
