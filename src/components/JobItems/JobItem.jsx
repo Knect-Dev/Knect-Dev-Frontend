@@ -18,7 +18,7 @@ import { setCurrentCompany } from '../../store/companies.js';
 
 import './jobItem.scss';
 
-const JobItem = ({ job, showForm, setShowForm, setSelectedJobId, setSelectedCompanyId }) => {
+const JobItem = ({ job, showForm, setShowForm }) => {
 
   const dispatch = useDispatch();
 
@@ -74,13 +74,11 @@ const JobItem = ({ job, showForm, setShowForm, setSelectedJobId, setSelectedComp
           </IonCol>
 
           <IonCol size='1'>
-            {/* <IonItem style={statusStyle}> */}
               {
                 job?.status === true ?
                   <IonIcon style={statusStyle} icon={pulseSharp}/> :
                   <IonIcon style={statusStyle} icon={skullOutline}/>
-              }
-            {/* </IonItem> */}
+            }
           </IonCol>
 
           <IonCol size='1.5'>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { When } from 'react-if';
 import fuzzysort from 'fuzzysort';
 
-const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock, setDisable, lock, disable, setRedirect }) => {
+const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock, setDisable, lock, setRedirect }) => {
   const [companySearch, setCompanySearch] = useState('');
   const companies = useSelector(state => state.companies.companies);
   const [displayCompanies, setDisplayComanies] = useState(companies);
