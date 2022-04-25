@@ -127,7 +127,7 @@ const ParentForm = ({
           setDisable(false);
           setLock(true);
         } else if (!jobValues.title || !jobValues.company) {
-          console.log('this should be a toast to remind use to add job title and company');
+          // console.log('this should be a toast to remind use to add job title and company');
         }
         break;
       case 'Company':
@@ -145,11 +145,11 @@ const ParentForm = ({
             }, 500);
           };
         } else if (!companyValues.name) {
-          console.log('this should be a toast to remind use to add company title');
+          // console.log('this should be a toast to remind use to add company title');
         }
         break;
       default:
-        console.log('nothing')
+        // console.log('nothing');
     }
   }
 

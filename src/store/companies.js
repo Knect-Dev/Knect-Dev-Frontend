@@ -15,7 +15,6 @@ const companiesReducer = (state = initialState, action) => {
 
     case 'ADD_COMPANY':
       if (payload.errors) return state;
-      console.log('payload', payload);
       return { companies: [...state.companies, payload], currentCompany: payload };
 
     case 'UPDATE_COMPANY':
