@@ -34,7 +34,7 @@ const ParentForm = ({
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 39 ~ currentJob`, currentJob);
   let currentCompany = useSelector(state => state.companies.currentCompany);
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
-  let currentContacts = useSelector(state => state.contacts.currentContacts);
+  // let currentContacts = useSelector(state => state.contacts.currentContacts);
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
 
   const [jobValues, setJobValues] = useState({});
