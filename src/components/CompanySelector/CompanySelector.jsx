@@ -1,4 +1,4 @@
-import { IonSelect, IonSelectOption, IonCol, IonChip, IonSearchbar, IonList, IonItem } from '@ionic/react';
+import { IonSelect, IonSelectOption, IonCol, IonChip, IonSearchbar, IonList, IonItem, IonLabel } from '@ionic/react';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { When } from 'react-if';
@@ -24,10 +24,12 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [companySearch]);
 
-  // function handleChange(value) {
-  //   setSelectedCompany(value.company);
-  //   changeCompany(value);
-  // }
+  function handleChange(value) {
+    console.log('called');
+    console.log(value);
+    setSelectedCompany(value.company);
+    changeCompany(value);
+  }
 
   function handleClick() {
     setRedirect(true);
@@ -39,6 +41,9 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
   return (
     <>
       <IonCol size='6'>
+        <IonLabel>
+          Select Company:
+        </IonLabel>
         <IonSearchbar placeholder='Search Companies' onIonChange={handleInput}></IonSearchbar>
         <When condition={displayCompanies.length > 0}>
           {/* <IonSelect
@@ -46,13 +51,14 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
             multiple={false}
             cancelText="Cancel"
             okText="Okay"
-            onIonChange={e => handleChange(e.detail.value)}
+            
             name='CompanyId'> */}
           {companySearch &&
             <IonList className='custom-list'>
               {displayCompanies.map((company, idx) => {
                 return (
                   <IonItem
+                    onClick={e => handleChange(e)}
                     className='custom-item'
                     key={company + idx}
                     value={company.obj ? { id: company.obj.id, company: company.obj.name } : { id: company.id, company: company.name }}>
@@ -66,7 +72,7 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
         <When condition={displayCompanies.length === 0}>
           <IonChip
             onClick={handleClick}
-            style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.2em' }}
+            style={{ position: 'absolute', display: 'block', textAlign: 'center', fontSize: '1.2em', zIndex: '100', right: '.3rem' }}
             color="secondary">CLICK to ADD</IonChip>
         </When>
 
