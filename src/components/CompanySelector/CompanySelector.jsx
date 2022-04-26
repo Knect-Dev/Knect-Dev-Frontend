@@ -1,14 +1,15 @@
-import { IonSelect, IonSelectOption, IonCol, IonChip, IonSearchbar } from '@ionic/react';
+import { IonCol, IonChip, IonSearchbar, IonList, IonItem, IonLabel } from '@ionic/react';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { When } from 'react-if';
 import fuzzysort from 'fuzzysort';
 
-const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock, setDisable, lock, setRedirect }) => {
+import './companySelector.scss';
+
+const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock, setDisable, setRedirect }) => {
   const [companySearch, setCompanySearch] = useState('');
   const companies = useSelector(state => state.companies.companies);
   const [displayCompanies, setDisplayComanies] = useState(companies);
-  const [selectedCompany, setSelectedCompany] = useState(null);
 
   function handleInput(event) {
     setCompanySearch(event.target.value);
@@ -23,9 +24,9 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
   }, [companySearch]);
 
   function handleChange(value) {
-    setSelectedCompany(value.company);
     changeCompany(value);
-  }
+    setCompanySearch('');
+  };
 
   function handleClick() {
     setRedirect(true);
@@ -36,41 +37,36 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
 
   return (
     <>
-      <When condition={lock}>
-        <IonCol size='6' onClick={() => setActiveForm('Company')} style={{ cursor: 'pointer' }}>Company: <h5 style={{ display: 'inline' }}>{currentCompany.company}</h5></IonCol>
-      </When>
-
-      <When condition={!lock}>
-        <IonCol size='6'>
-          <IonSearchbar placeholder='Search Companies' onIonChange={handleInput}></IonSearchbar>
-          <When condition={displayCompanies.length > 0}>
-            <IonSelect
-              placeholder={selectedCompany || 'Select Company'}
-              multiple={false}
-              cancelText="Cancel"
-              okText="Okay"
-              onIonChange={e => handleChange(e.detail.value)}
-              name='CompanyId'>
+      <IonCol size='6'>
+        <IonLabel>
+          Select Company:
+        </IonLabel>
+        <IonSearchbar style={{ height: '4.5rem' }} placeholder={currentCompany.company || `Search Companies`} onIonChange={handleInput} value={companySearch}></IonSearchbar>
+        <When condition={displayCompanies.length > 0}>
+          {companySearch && 
+            <IonList className='custom-company-list' style={{ minHeight: 'auto', maxHeight: '10rem', overflowY: displayCompanies.length > 3 ? 'scroll' : null }}>
               {displayCompanies.map((company, idx) => {
                 return (
-                  <IonSelectOption
+                  <IonItem
+                    onClick={e => handleChange(e.target.name)}
+                    button={true}
+                    className='custom-item'
                     key={company + idx}
-                    value={company.obj ? { id: company.obj.id, company: company.obj.name } : { id: company.id, company: company.name }}>
+                    name={company.obj ? { id: company.obj.id, company: company.obj.name } : { id: company.id, company: company.name }}>
                     {company.name || company.obj.name}
-                  </IonSelectOption>)
-              })};
-            </IonSelect>
-          </When>
+                  </IonItem>)
+              })}
+            </IonList>}
+        </When>
 
-          <When condition={displayCompanies.length === 0}>
-            <IonChip
-              onClick={handleClick}
-              style={{ display: 'block', width: '6rem', textAlign: 'center', fontSize: '1.2em' }}
-              color="secondary">CLICK to ADD</IonChip>
-          </When>
+        <When condition={displayCompanies.length === 0}>
+          <IonChip
+            onClick={handleClick}
+            style={{ position: 'absolute', display: 'inline-block', fontSize: '1.2em', zIndex: '100', right: '.3rem' }}
+            color="secondary">CLICK to ADD</IonChip>
+        </When>
 
-        </IonCol>
-      </When>
+      </IonCol>
     </>
   )
 }
