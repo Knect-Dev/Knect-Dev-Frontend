@@ -34,7 +34,7 @@ const ParentForm = ({
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 39 ~ currentJob`, currentJob);
   let currentCompany = useSelector(state => state.companies.currentCompany);
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
-  let currentContacts = useSelector(state => state.contacts.currentContacts);
+  // let currentContacts = useSelector(state => state.contacts.currentContacts);
   // console.log(`👽 ~ file: ParentForm.jsx ~ line 41 ~ currentCompany`, currentCompany);
 
   const [jobValues, setJobValues] = useState({});
@@ -127,7 +127,7 @@ const ParentForm = ({
           setDisable(false);
           setLock(true);
         } else if (!jobValues.title || !jobValues.company) {
-          console.log('this should be a toast to remind use to add job title and company');
+          // console.log('this should be a toast to remind use to add job title and company');
         }
         break;
       case 'Company':
@@ -145,11 +145,11 @@ const ParentForm = ({
             }, 500);
           };
         } else if (!companyValues.name) {
-          console.log('this should be a toast to remind use to add company title');
+          // console.log('this should be a toast to remind use to add company title');
         }
         break;
       default:
-        console.log('nothing')
+        // console.log('nothing');
     }
   }
 
