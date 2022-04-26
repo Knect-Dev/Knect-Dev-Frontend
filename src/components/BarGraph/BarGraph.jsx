@@ -12,7 +12,7 @@ import { IonText } from '@ionic/react';
 const BarGraph = ({jobData}) => {
 
   useEffect(() => {
-    console.log("Hi", jobData)
+    console.log(">>>>>>> JOB DATA >>>>>>>", jobData)
   }, [jobData])
 
   return (
