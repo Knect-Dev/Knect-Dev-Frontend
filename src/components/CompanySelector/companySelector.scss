@@ -1,6 +1,7 @@
 .custom-list {
   position: absolute;
   z-index: 100;
-  height: 10rem;
+  min-height: auto;
+  max-height: 10rem;
   overflow-y: scroll;
 }

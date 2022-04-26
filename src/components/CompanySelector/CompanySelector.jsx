@@ -25,8 +25,6 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
   }, [companySearch]);
 
   function handleChange(value) {
-    console.log('called');
-    console.log(value);
     setSelectedCompany(value.company);
     changeCompany(value);
   }
@@ -44,35 +42,28 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
         <IonLabel>
           Select Company:
         </IonLabel>
-        <IonSearchbar placeholder='Search Companies' onIonChange={handleInput}></IonSearchbar>
+        <IonSearchbar placeholder={currentCompany.company || `Search Companies`} onIonChange={handleInput}></IonSearchbar>
         <When condition={displayCompanies.length > 0}>
-          {/* <IonSelect
-            placeholder={selectedCompany || 'Select Company'}
-            multiple={false}
-            cancelText="Cancel"
-            okText="Okay"
-            
-            name='CompanyId'> */}
-          {companySearch &&
+          {companySearch && 
             <IonList className='custom-list'>
               {displayCompanies.map((company, idx) => {
                 return (
                   <IonItem
-                    onClick={e => handleChange(e)}
+                    onClick={e => handleChange(e.target.name)}
+                    button={true}
                     className='custom-item'
                     key={company + idx}
-                    value={company.obj ? { id: company.obj.id, company: company.obj.name } : { id: company.id, company: company.name }}>
+                    name={company.obj ? { id: company.obj.id, company: company.obj.name } : { id: company.id, company: company.name }}>
                     {company.name || company.obj.name}
                   </IonItem>)
               })}
             </IonList>}
-          {/* </IonSelect> */}
         </When>
 
         <When condition={displayCompanies.length === 0}>
           <IonChip
             onClick={handleClick}
-            style={{ position: 'absolute', display: 'block', textAlign: 'center', fontSize: '1.2em', zIndex: '100', right: '.3rem' }}
+            style={{ position: 'absolute', display: 'inline-block', fontSize: '1.2em', zIndex: '100', right: '.3rem' }}
             color="secondary">CLICK to ADD</IonChip>
         </When>
 
