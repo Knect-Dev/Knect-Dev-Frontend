@@ -1,4 +1,4 @@
-import { IonSelect, IonSelectOption, IonCol, IonChip, IonSearchbar, IonList, IonItem, IonLabel } from '@ionic/react';
+import { IonCol, IonChip, IonSearchbar, IonList, IonItem, IonLabel } from '@ionic/react';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { When } from 'react-if';
@@ -6,11 +6,10 @@ import fuzzysort from 'fuzzysort';
 
 import './companySelector.scss';
 
-const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock, setDisable, lock, setRedirect }) => {
+const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock, setDisable, setRedirect }) => {
   const [companySearch, setCompanySearch] = useState('');
   const companies = useSelector(state => state.companies.companies);
   const [displayCompanies, setDisplayComanies] = useState(companies);
-  const [selectedCompany, setSelectedCompany] = useState(null);
 
   function handleInput(event) {
     setCompanySearch(event.target.value);
@@ -25,9 +24,9 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
   }, [companySearch]);
 
   function handleChange(value) {
-    setSelectedCompany(value.company);
     changeCompany(value);
-  }
+    setCompanySearch('');
+  };
 
   function handleClick() {
     setRedirect(true);
@@ -42,10 +41,10 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
         <IonLabel>
           Select Company:
         </IonLabel>
-        <IonSearchbar placeholder={currentCompany.company || `Search Companies`} onIonChange={handleInput}></IonSearchbar>
+        <IonSearchbar placeholder={currentCompany.company || `Search Companies`} onIonChange={handleInput} value={companySearch}></IonSearchbar>
         <When condition={displayCompanies.length > 0}>
           {companySearch && 
-            <IonList className='custom-list'>
+            <IonList className='custom-company-list'>
               {displayCompanies.map((company, idx) => {
                 return (
                   <IonItem
