@@ -1,7 +1,14 @@
 .custom-company-list {
   position: absolute;
   z-index: 100;
-  min-height: auto;
-  max-height: 10rem;
-  overflow-y: scroll;
+  width: 95%;
+  border-top: 1px solid rgba(0, 0, 0, 0.10);
+  border-right: 1px solid rgba(0, 0, 0, 0.10);
+  border-left: 1px solid rgba(0, 0, 0, 0.10);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.50);
+  
+  .custom-item {
+    width: 100%;
+  }
 }

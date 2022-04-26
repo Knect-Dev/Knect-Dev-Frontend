@@ -44,7 +44,7 @@ const CompanySelector = ({ currentCompany, setActiveForm, changeCompany, setLock
         <IonSearchbar style={{ height: '4.5rem' }} placeholder={currentCompany.company || `Search Companies`} onIonChange={handleInput} value={companySearch}></IonSearchbar>
         <When condition={displayCompanies.length > 0}>
           {companySearch && 
-            <IonList className='custom-company-list'>
+            <IonList className='custom-company-list' style={{ minHeight: 'auto', maxHeight: '10rem', overflowY: displayCompanies.length > 3 ? 'scroll' : null }}>
               {displayCompanies.map((company, idx) => {
                 return (
                   <IonItem
