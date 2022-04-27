@@ -60,6 +60,8 @@ const JobForm = ({
     handleJobChange(dateObj)
   }
 
+  console.log(popoverDate);
+
   return (
     <>
       <IonContent>
@@ -155,8 +157,8 @@ const JobForm = ({
               <IonCol size='4'>
 
 
-                <IonItem button={true} id='open-date-input' class='custom-input'>
-                <IonText slot='' id='popOverText' >{formatDate(popoverDate)}</IonText>
+                <IonItem button={true} id='open-date-input' class='custom-input' className={popoverDate !== '' ? 'date-populated' : 'date-notpopulated'}>
+                  <IonText slot='' id='popOverText' >{formatDate(popoverDate) || 'Select Date'}</IonText>
                   <IonPopover trigger='open-date-input' showBackdrop={false}>
                   <IonDatetime
                     showDefaultButtons={true}
@@ -164,9 +166,7 @@ const JobForm = ({
                     onIonChange={ev => handleDate(ev.detail.value)}
                   />
                 </IonPopover>
-              </IonItem>
-
-
+                </IonItem>
               </IonCol>
 
               <IonCol size='2' class='center-text'>
@@ -177,14 +177,12 @@ const JobForm = ({
               </IonCol>
             </IonRow>
 
-
-
             <IonRow>
               <IonCol size='2' class='center-text'>
                 <IonLabel>Stage: </IonLabel>
               </IonCol>
               <IonCol size='4' class='custom-input'>
-                <IonSelect class='custom-input' value={jobValues?.stage} placeholder='Select' multiple={false} cancelText='Cancel' okText='Okay' onIonChange={e => handleJobChange(e)} name='stage'>
+                <IonSelect class='custom-input' value={jobValues?.stage} placeholder='Select Stage' multiple={false} cancelText='Cancel' okText='Okay' onIonChange={e => handleJobChange(e)} name='stage'>
                   {options.map((e, idx) => <IonSelectOption key={e + idx}>{e}</IonSelectOption>)}
                 </IonSelect>
               </IonCol>
