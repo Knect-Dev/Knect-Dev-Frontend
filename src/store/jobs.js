@@ -103,6 +103,7 @@ export const deleteJob = (id, token) => async (dispatch, getState) => {
 }
 
 export const getJobs = (token) => async (dispatch) => {
+  console.log('dispatch called')
   try {
     let response = await axios({
       url: JOB_URL,

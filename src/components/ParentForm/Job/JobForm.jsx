@@ -1,10 +1,14 @@
-import { IonLabel, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText } from '@ionic/react';
+import { useState } from "react";
+import { IonDatetime, IonItem, IonLabel, IonPopover, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText } from '@ionic/react';
 import { If, Then, When, Else } from 'react-if';
 import { closeOutline, openOutline } from 'ionicons/icons';
 import KnectIconLight from '../../../resources/Knect.dev.png';
 import KnectIconDark from '../../../resources/knect_dev_white.png';
 import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
 import TrashButton from '../../TrashButton/TrashButton.jsx';
+
+
+import "react-datepicker/dist/react-datepicker.css";
 
 import './jobForm.scss';
 
@@ -27,6 +31,34 @@ const JobForm = ({
   const stageBackgrounds = ['#80808099', '#F2C70088', '#8C00B080', '#CB006399', '#6ADFC299', 'linear-gradient(320deg, #6ADFC290 15%, #CB006390, #8C00B070, #F2C70078 85% )'];
   let options = ['Not Applied', 'Applied', 'Phone Screen', 'Tech Interview', 'Onsite', 'Offer'];
   let stageBackground = stageBackgrounds[options.findIndex(element => element === jobValues.stage)];
+
+  // holds applied date value
+  const [popoverDate, setPopoverDate] = useState('');
+
+  // formats date int mm-dd-yyyy format
+  const formatDate = (date) => {
+    if(!date) return '';
+
+    let year = date.slice(0,4);
+    let month = date.slice(5, 7)
+    let day = date.slice(8, 10);
+
+    return `${month}-${day}-${year}`
+  }
+
+  // handles date input 
+  const handleDate = (date) => {
+
+    // acts as the event object
+    let dateObj = {
+      target: {
+        name: 'appliedDate',
+        value: date.slice(0,10),
+      }
+    }    
+    setPopoverDate(date.slice(0,10));
+    handleJobChange(dateObj)
+  }
 
   return (
     <>
@@ -73,7 +105,7 @@ const JobForm = ({
                 {jobValues?.status ?
                   <IonChip style={{ display: 'inline', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="success"><IonLabel color="success">ACTIVE</IonLabel></IonChip>
                   :
-                  <IonChip style={{ display: 'inline', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="danger"><IonLabel color="danger">INACTIVE</IonLabel></IonChip>}
+                  <IonChip style={{ display: 'inline', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="primary"><IonLabel color="primary">INACTIVE</IonLabel></IonChip>}
               </IonCol>
             </IonRow>
 
@@ -117,20 +149,35 @@ const JobForm = ({
             </IonRow>
 
             <IonRow>
+            <IonCol size='2' class='center-text'>
+                <IonLabel>Applied: </IonLabel>
+              </IonCol>
+              <IonCol size='4'>
+
+
+              <IonItem button={true} id="open-date-input">
+                <IonText slot='' id='popOverText' >{formatDate(popoverDate)}</IonText>
+                <IonPopover trigger="open-date-input" showBackdrop={false}>
+                  <IonDatetime
+                    showDefaultButtons={true}
+                    presentation="date"
+                    onIonChange={ev => handleDate(ev.detail.value)}
+                  />
+                </IonPopover>
+              </IonItem>
+
+
+              </IonCol>
+
               <IonCol size='2' class='center-text'>
                 <IonLabel>Job ID: </IonLabel>
               </IonCol>
               <IonCol size='4'>
                 <IonInput class='custom-input' value={jobValues?.jobId} onIonChange={e => handleJobChange(e)} placeholder='ID-12345' name='jobId' clearInput></IonInput>
               </IonCol>
-
-              <IonCol size='2' class='center-text'>
-                <IonLabel>Applied: </IonLabel>
-              </IonCol>
-              <IonCol size='4'>
-                <IonInput class='custom-input' value={jobValues?.appliedDate?.slice(0, 10)} onIonChange={e => handleJobChange(e)} placeholder='yyyy-mm-dd' name='appliedDate' clearInput></IonInput>
-              </IonCol>
             </IonRow>
+
+
 
             <IonRow>
               <IonCol size='2' class='center-text'>
