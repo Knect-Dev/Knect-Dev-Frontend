@@ -1,5 +1,5 @@
 import { useState} from "react";
-import { IonDatetime, IonItem, IonLabel, IonPopover, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText } from '@ionic/react';
+import { IonDatetime, IonItem, IonLabel, IonPopover, IonButton, IonButtons, IonContent, IonIcon, IonInput, IonTextarea, IonGrid, IonRow, IonCol, IonSelect, IonSelectOption, IonChip, IonText } from '@ionic/react';
 import { If, Then, When, Else } from 'react-if';
 import { closeOutline, openOutline } from 'ionicons/icons';
 import KnectIconLight from '../../../resources/Knect.dev.png';
@@ -34,6 +34,7 @@ const JobForm = ({
 
   // holds applied date value
   const [popoverDate, setPopoverDate] = useState('');
+  const [showPopOver, setShowPopOver] = useState(false);
 
   // formats date int mm-dd-yyyy format
   const formatDate = (date) => {
@@ -62,6 +63,7 @@ const JobForm = ({
 
   return (
     <>
+    {console.log(showPopOver)}
       <IonContent>
         <IonGrid>
           <IonRow class={'ion-justify-content-between ion-align-items-center'} style={{ background: stageBackground || 'rgb(150, 150, 150, .50)' }}>
@@ -155,14 +157,15 @@ const JobForm = ({
               <IonCol size='4'>
 
 
-              <IonItem button={true} id="open-date-input">
+              <IonItem button={true} onClick={() => !showPopOver  && setShowPopOver(true)}>
                 <IonText slot='' id='popOverText' >{formatDate(popoverDate)}</IonText>
-                <IonPopover trigger="open-date-input" dismissOnSelect={true}  showBackdrop={false}>
+                <IonPopover isOpen={showPopOver} alignment='center'  showBackdrop={false}>
                   <IonDatetime
+                    showDefaultButtons={true}
                     presentation="date"
                     onIonChange={ev => handleDate(ev.detail.value)}
-                  />
-
+                  >
+                  </ IonDatetime>
                 </IonPopover>
               </IonItem>
 
