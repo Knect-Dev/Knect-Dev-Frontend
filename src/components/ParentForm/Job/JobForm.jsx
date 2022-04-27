@@ -7,9 +7,6 @@ import KnectIconDark from '../../../resources/knect_dev_white.png';
 import CompanySelector from '../../CompanySelector/CompanySelector.jsx';
 import TrashButton from '../../TrashButton/TrashButton.jsx';
 
-
-import 'react-datepicker/dist/react-datepicker.css';
-
 import './jobForm.scss';
 
 // selectedJobId replaces what was previously id
@@ -59,8 +56,6 @@ const JobForm = ({
     setPopoverDate(date.slice(0,10));
     handleJobChange(dateObj)
   }
-
-  console.log(popoverDate);
 
   return (
     <>
