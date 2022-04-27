@@ -142,7 +142,7 @@ const ParentForm = ({
               setDisable(false);
               setLock(false);
               setRedirect(false);
-            }, 500);
+            }, 150);
           };
         } else if (!companyValues.name) {
           // console.log('this should be a toast to remind use to add company title');
@@ -160,6 +160,7 @@ const ParentForm = ({
       setAdding(false);
       setDisable(false);
       setLock(true);
+      setRedirect(false);
       dispatch(setCurrentJob(null));
       dispatch(setCurrentCompany(null));
     }, 150)
