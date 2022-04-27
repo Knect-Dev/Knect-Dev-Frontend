@@ -7,11 +7,19 @@
   border-left: 1px solid rgba(0, 0, 0, 0.10);
   border-bottom: 1px solid rgba(0, 0, 0, 0.10);
   box-shadow: 2px 2px rgba(0, 0, 0, 0.25);
-  
+
   .custom-item {
     width: 100%;
   }
 }
-input {
+.populated {
+  --background: rgba(138, 138, 138, 0.068);
+  --placeholder-color: black;
+  --placeholder-opacity: 1;
+
+}
+
+
+.notpopulated {
   --background: rgba(138, 138, 138, 0.068);
 }
