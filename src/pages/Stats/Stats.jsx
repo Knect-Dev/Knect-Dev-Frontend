@@ -54,9 +54,9 @@ const Stats = () => {
           break;
         case 'Onsite':
           console.log("o")
-          console.log(jobData[3].y)
+          // console.log(jobData[3].y)
           jobData[3].y += 1;
-          console.log(jobData[3].y)
+          // console.log(jobData[3].y)
           break;
         case 'Offer':
           jobData[4].y += 1;
