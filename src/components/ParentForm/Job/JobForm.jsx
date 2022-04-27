@@ -105,7 +105,7 @@ const JobForm = ({
                 {jobValues?.status ?
                   <IonChip style={{ display: 'inline', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="success"><IonLabel color="success">ACTIVE</IonLabel></IonChip>
                   :
-                  <IonChip style={{ display: 'inline', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="primary"><IonLabel color="primary">INACTIVE</IonLabel></IonChip>}
+                  <IonChip style={{ display: 'inline', width: '6rem', textAlign: 'center', fontSize: '1.3em' }} color="danger"><IonLabel color="danger">INACTIVE</IonLabel></IonChip>}
               </IonCol>
             </IonRow>
 
