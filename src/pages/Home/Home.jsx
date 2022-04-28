@@ -76,6 +76,7 @@ const Home = () => {
           selectedJobId={selectedJobId}
           setSelectedJobId={setSelectedJobId}
           selectedCompanyId={selectedCompanyId}
+          setActiveForm={setActiveForm}
           setSelectedCompanyId={setSelectedCompanyId}
           getJobs={getJobs}
           getCompanies={getCompanies} />
