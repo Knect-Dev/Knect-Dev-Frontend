@@ -4,7 +4,7 @@ import fuzzysort from 'fuzzysort';
 import JobItem from '../JobItems/JobItem';
 import './jobsList.scss';
 
-const JobsList = ({ showForm, setShowForm, setSelectedJobId, setSelectedCompanyId }) => {
+const JobsList = ({ showForm, setShowForm, setSelectedJobId, setSelectedCompanyId, setActiveForm }) => {
 
 
   const jobState = useSelector(state => state.jobs.jobs);
@@ -81,14 +81,18 @@ const JobsList = ({ showForm, setShowForm, setSelectedJobId, setSelectedCompanyI
                   showForm={showForm}
                   setShowForm={setShowForm}
                   setSelectedJobId={setSelectedJobId}
-                  setSelectedCompanyId={setSelectedCompanyId} /> :
+                  setSelectedCompanyId={setSelectedCompanyId}
+                  setActiveForm={setActiveForm}
+                /> :
                 <JobItem
                   job={job}
                   key={idx}
                   showForm={showForm}
                   setShowForm={setShowForm}
                   setSelectedJobId={setSelectedJobId}
-                  setSelectedCompanyId={setSelectedCompanyId} />
+                  setSelectedCompanyId={setSelectedCompanyId}
+                  setActiveForm={setActiveForm}
+                />
             );
           })
         }

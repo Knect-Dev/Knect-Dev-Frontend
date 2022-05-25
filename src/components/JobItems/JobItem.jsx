@@ -18,7 +18,7 @@ import { setCurrentCompany } from '../../store/companies.js';
 
 import './jobItem.scss';
 
-const JobItem = ({ job, showForm, setShowForm }) => {
+const JobItem = ({ job, showForm, setShowForm, setActiveForm }) => {
 
   const dispatch = useDispatch();
 
@@ -45,6 +45,7 @@ const JobItem = ({ job, showForm, setShowForm }) => {
     // update id in job form, then show form
     dispatch(setCurrentJob(job.id));
     dispatch(setCurrentCompany(job.CompanyId));
+    setActiveForm('Job');
     setShowForm(!showForm);
   }
 
