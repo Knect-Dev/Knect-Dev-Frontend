@@ -467,6 +467,10 @@ Distributed under the MIT License. See [`LICENSE`](/LICENSE) for more informatio
 
 Spencer Tower - [Github](https://github.com/SpencerTower) - [Linkedin](https://linkedin.com/in/spencertower/)
 
+Andrew Enyeart - [Github](https://github.com/aenyeart) - [Linkedin](https://linkedin.com/in/andrewenyeart/)
+
+Daniel Jackson - [Github](https://github.com/daniel-jacks) - [Linkedin](https://linkedin.com/in/daniel-jacks/)
+
 Kellen Linse - [Github](https://github.com/Kellen-Linse) - [Linkedin](https://www.linkedin.com/in/kellen-linse/)
 
 Matt Miguel - [Github](https://github.com/jamiguel23) - [Linkedin](https://www.linkedin.com/in/jamiguel23/)
