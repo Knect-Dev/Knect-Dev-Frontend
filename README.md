@@ -24,7 +24,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Knect-Dev/Knect-Dev-Backend">
-    <img src="img/knect-logo.png" alt="Logo" width="300" height="220">
+    <img src="src/resources/Knect.dev.png" alt="Logo" height="220">
   </a>
 
 <h3 align="center">Knect.Dev</h3>
